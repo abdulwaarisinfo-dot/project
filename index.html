@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PHPTRAVELS — Integrated Suppliers (Hub, restructured)</title>
+<title>PHPTRAVELS — Global Reach</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -18,11 +18,11 @@
   .wrap{ position:relative; }
   .canvas{
     width:1440px; height:810px; background:#F7F6F3;
-    position:relative; transform-origin:top left; overflow:hidden;
+    position:relative; transform-origin:top left;
     padding:40px 64px 40px; display:flex; flex-direction:column;
   }
 
-  .topbar{ display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:3; }
+  .topbar{ display:flex; justify-content:space-between; align-items:flex-start; }
   .idx{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#161616; line-height:1.6; }
   .topmid{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#161616; display:flex; gap:40px; }
   .mark{
@@ -31,85 +31,34 @@
     font-family:'JetBrains Mono',monospace; font-size:14px; color:#111; letter-spacing:-1px;
   }
 
-  .headrow{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px; position:relative; z-index:3; }
-  .headrow h1{
-    font-family:'Archivo',sans-serif; font-weight:900; font-size:48px; line-height:0.9;
+  .divider{ height:1px; background:#111; opacity:0.5; margin-top:16px; }
+
+  .body{ margin-top:0; display:grid; grid-template-columns:280px 1fr; gap:44px; flex:1; min-height:0; }
+
+  .left{ display:flex; flex-direction:column; height:100%; padding-top:6px; }
+  .left h1{
+    font-family:'Archivo',sans-serif; font-weight:900; font-size:40px; line-height:1.0;
     color:#0C0C0C; letter-spacing:-0.01em;
   }
-  .headrow .sub{ font-family:'Inter',sans-serif; font-size:13.5px; color:#5a5a5a; margin-top:10px; }
-  .headrow .pagenum{
-    font-family:'Archivo',sans-serif; font-weight:900; font-size:56px; color:#0C0C0C; line-height:0.9;
+  .left .lead{ font-family:'Inter',sans-serif; font-size:12.5px; color:#3a3a3a; line-height:1.6; margin-top:22px; max-width:230px; }
+  .left .pagenum{
+    margin-top:auto; font-family:'Archivo',sans-serif; font-weight:900; font-size:64px; color:#0C0C0C; line-height:0.85;
   }
 
-  .divider{ height:1px; background:#111; opacity:0.5; margin-top:16px; position:relative; z-index:3; }
+  .cols{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
+  .col{ display:flex; flex-direction:column; height:100%; border-left:1px solid rgba(17,17,17,0.14); padding-left:26px; }
+  .col:first-child{ border-left:none; padding-left:0; }
 
-  .stage{ flex:1; display:flex; align-items:center; justify-content:center; min-height:0; position:relative; margin-top:6px; }
-  .diagram{ position:relative; width:1312px; height:600px; }
+  .num{ font-family:'Archivo',sans-serif; font-weight:900; font-size:44px; color:#0C0C0C; letter-spacing:-0.01em; line-height:1; }
+  .label{ font-family:'Inter',sans-serif; font-weight:700; font-size:14.5px; color:#111; margin-top:12px; text-transform:uppercase; letter-spacing:0.02em; }
+  .desc{ font-family:'Inter',sans-serif; font-size:11.5px; color:#5a5a5a; margin-top:8px; line-height:1.5; }
 
-  /* quadrant structure grid — the actual layout fix */
-  .quad{
-    position:absolute; width:656px; height:300px; display:flex; align-items:center;
-    padding:0 46px;
-  }
-  .q-tl{ left:0;   top:0;   justify-content:flex-start; }
-  .q-tr{ left:656px; top:0;   justify-content:flex-end; }
-  .q-bl{ left:0;   top:300px; justify-content:flex-start; }
-  .q-br{ left:656px; top:300px; justify-content:flex-end; }
-
-  .cross{
-    position:absolute; background:rgba(17,17,17,0.09);
-  }
-  .cross.v{ left:656px; top:0; width:1px; height:100%; }
-  .cross.h{ left:0; top:300px; width:100%; height:1px; }
-
-  svg.lines{ position:absolute; inset:0; width:100%; height:100%; z-index:1; }
-  svg.lines .spoke{ stroke:rgba(12,12,12,0.24); stroke-width:1.3; }
-  svg.lines .node-dot{ fill:#0C0C0C; }
-  svg.lines .node-ring{ fill:none; stroke:#0C0C0C; stroke-width:1.3; opacity:0.35; }
-  svg.lines .mid-dot{ fill:#3B7CF6; }
-
-  .ring{
-    position:absolute; left:656px; top:300px; transform:translate(-50%,-50%);
-    border-radius:50%; border:1px solid rgba(59,124,246,0.28);
-  }
-  .r1{ width:200px; height:200px; }
-  .r2{ width:248px; height:248px; border-color:rgba(59,124,246,0.16); }
-
-  .glow{
-    position:absolute; left:656px; top:300px; transform:translate(-50%,-50%);
-    width:270px; height:270px; border-radius:50%;
-    background:radial-gradient(circle, rgba(59,124,246,0.26), transparent 68%);
-    filter:blur(6px); z-index:1;
-  }
-
-  .hub{
-    position:absolute; left:656px; top:300px; transform:translate(-50%,-50%); z-index:2;
-    width:160px; height:160px; border-radius:50%;
-    background:radial-gradient(circle at 34% 28%, #2E2E2E, #0C0C0C 62%);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    box-shadow:0 24px 46px rgba(12,12,12,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
-  }
-  .hub .t1{ font-family:'Archivo',sans-serif; font-weight:900; font-size:21px; color:#F7F6F3; letter-spacing:-0.01em; }
-  .hub .t2{ font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#9AA0AC; letter-spacing:0.1em; margin-top:6px; }
-  .hub .led{
-    width:6px; height:6px; border-radius:50%; background:#3B7CF6; margin-top:9px;
-    box-shadow:0 0 6px 2px rgba(59,124,246,0.9);
-  }
-
-  .node{ width:280px; z-index:2; }
-  .q-tr .node, .q-br .node{ text-align:right; }
-  .node .head{ display:flex; align-items:baseline; gap:10px; }
-  .q-tr .node .head, .q-br .node .head{ justify-content:flex-end; }
-  .node .no{ font-family:'JetBrains Mono',monospace; font-size:12px; color:#8a8a84; }
-  .node .cat{ font-family:'Inter',sans-serif; font-weight:700; font-size:16px; color:#111; text-transform:uppercase; letter-spacing:0.02em; }
-  .node .rule{ height:1px; background:rgba(17,17,17,0.2); margin-top:12px; }
-  .node .tags{ margin-top:14px; display:flex; flex-wrap:wrap; gap:7px; }
-  .q-tr .node .tags, .q-br .node .tags{ justify-content:flex-end; }
-  .tag{
-    font-family:'JetBrains Mono',monospace; font-size:10px; border:1px solid rgba(12,12,12,0.32);
-    border-radius:100px; padding:5px 12px; color:#2a2a2a; white-space:nowrap;
-  }
-  .tag.lead{ background:#0C0C0C; border-color:#0C0C0C; color:#F7F6F3; }
+  .barwrap{ margin-top:auto; height:260px; display:flex; align-items:flex-end; }
+  .bar{ width:100%; border-radius:2px 2px 0 0; }
+  .bar.b1{ height:150px; background:#2952E3; }
+  .bar.b2{ height:190px; background-image: repeating-linear-gradient(90deg, #C7C6C0 0 3px, transparent 3px 7px); background-color:rgba(12,12,12,0.03); }
+  .bar.b3{ height:225px; background-image: repeating-linear-gradient(90deg, #8C8B85 0 3px, transparent 3px 7px); background-color:rgba(12,12,12,0.03); }
+  .bar.b4{ height:260px; background:#0C0C0C; }
 </style>
 </head>
 <body>
@@ -117,101 +66,44 @@
 <div class="wrap" id="wrap">
   <div class="canvas">
     <div class="topbar">
-      <div class="idx">SYS_REF: 05.0<br>STATUS: CONNECTED</div>
-      <div class="topmid"><span>SUPPLIERS_PAGE</span><span>05</span></div>
+      <div class="idx">SYS_REF: 06.1<br>STATUS: ACTIVE</div>
+      <div class="topmid"><span>MARKET_PAGE</span><span>09</span></div>
       <div class="mark">()</div>
-    </div>
-
-    <div class="headrow">
-      <div>
-        <h1>INTEGRATED SUPPLIERS</h1>
-        <div class="sub">Every category plugs into one booking engine.</div>
-      </div>
-      <div class="pagenum">5.0</div>
     </div>
 
     <div class="divider"></div>
 
-    <div class="stage">
-      <div class="diagram">
-        <div class="cross v"></div>
-        <div class="cross h"></div>
+    <div class="body">
+      <div class="left">
+        <h1>GLOBAL<br>REACH</h1>
+        <div class="lead">PHPTRAVELS' network continues to expand globally, powering travel businesses from initial pilots to full-scale enterprise deployments.</div>
+        <div class="pagenum">6.1</div>
+      </div>
 
-        <svg class="lines" viewBox="0 0 1312 600">
-          <line class="spoke" x1="656" y1="300" x2="420" y2="150"/>
-          <line class="spoke" x1="656" y1="300" x2="892" y2="150"/>
-          <line class="spoke" x1="656" y1="300" x2="420" y2="450"/>
-          <line class="spoke" x1="656" y1="300" x2="892" y2="450"/>
-
-          <circle class="mid-dot" cx="538" cy="225" r="3.5"/>
-          <circle class="mid-dot" cx="774" cy="225" r="3.5"/>
-          <circle class="mid-dot" cx="538" cy="375" r="3.5"/>
-          <circle class="mid-dot" cx="774" cy="375" r="3.5"/>
-
-          <circle class="node-ring" cx="420" cy="150" r="9"/>
-          <circle class="node-ring" cx="892" cy="150" r="9"/>
-          <circle class="node-ring" cx="420" cy="450" r="9"/>
-          <circle class="node-ring" cx="892" cy="450" r="9"/>
-          <circle class="node-dot" cx="420" cy="150" r="4"/>
-          <circle class="node-dot" cx="892" cy="150" r="4"/>
-          <circle class="node-dot" cx="420" cy="450" r="4"/>
-          <circle class="node-dot" cx="892" cy="450" r="4"/>
-        </svg>
-
-        <div class="ring r2"></div>
-        <div class="ring r1"></div>
-        <div class="glow"></div>
-
-        <div class="hub">
-          <div class="t1">21+</div>
-          <div class="t2">CONNECTED</div>
-          <div class="led"></div>
+      <div class="cols">
+        <div class="col">
+          <div class="num">230K</div>
+          <div class="label">Pilot Phase</div>
+          <div class="desc">Initial tests with partner agencies.</div>
+          <div class="barwrap"><div class="bar b1"></div></div>
         </div>
-
-        <div class="quad q-tl">
-          <div class="node">
-            <div class="head"><span class="no">01</span><span class="cat">Booking Channels</span></div>
-            <div class="rule"></div>
-            <div class="tags">
-              <span class="tag lead">SABRE</span><span class="tag">TRAVELPORT</span><span class="tag">AMADEUS</span>
-              <span class="tag">PKFARE</span><span class="tag">TRAVELPAYOUTS</span><span class="tag">DUFFEL</span>
-              <span class="tag">KIWI</span><span class="tag">KAYAK</span><span class="tag">SEERU</span><span class="tag">TBO</span>
-            </div>
-          </div>
+        <div class="col">
+          <div class="num">520K</div>
+          <div class="label">Adoption Stage</div>
+          <div class="desc">Early integration within core booking systems.</div>
+          <div class="barwrap"><div class="bar b2"></div></div>
         </div>
-
-        <div class="quad q-tr">
-          <div class="node">
-            <div class="head"><span class="cat">Hotel Providers</span><span class="no">02</span></div>
-            <div class="rule"></div>
-            <div class="tags">
-              <span class="tag lead">RATEHAWK</span><span class="tag">HOTELBEDS</span><span class="tag">HOTELSTON</span>
-              <span class="tag">STUBA</span><span class="tag">AGODA</span><span class="tag">TIQETS</span>
-              <span class="tag">VIATOR</span><span class="tag">CARTRAWLER</span><span class="tag">DISCOVERCARS</span>
-            </div>
-          </div>
+        <div class="col">
+          <div class="num">890K</div>
+          <div class="label">Enterprise Scale</div>
+          <div class="desc">Broad deployment across regional networks.</div>
+          <div class="barwrap"><div class="bar b3"></div></div>
         </div>
-
-        <div class="quad q-bl">
-          <div class="node">
-            <div class="head"><span class="no">03</span><span class="cat">Manual Modules</span></div>
-            <div class="rule"></div>
-            <div class="tags">
-              <span class="tag lead">MANUAL FLIGHTS</span><span class="tag">MANUAL HOTELS</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="quad q-br">
-          <div class="node">
-            <div class="head"><span class="cat">Additional Categories</span><span class="no">04</span></div>
-            <div class="rule"></div>
-            <div class="tags">
-              <span class="tag lead">FLIGHTS</span><span class="tag">HOTELS</span><span class="tag">TOURS</span>
-              <span class="tag">CARS</span><span class="tag">eSIM</span><span class="tag">PAYMENTS</span>
-              <span class="tag">MAPS</span><span class="tag">CUSTOM</span>
-            </div>
-          </div>
+        <div class="col">
+          <div class="num">1.4M</div>
+          <div class="label">Global Integration</div>
+          <div class="desc">Unified booking network powered by PHPTRAVELS.</div>
+          <div class="barwrap"><div class="bar b4"></div></div>
         </div>
       </div>
     </div>
