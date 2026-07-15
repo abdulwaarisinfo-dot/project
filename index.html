@@ -4,230 +4,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Flintel — Your report</title>
+<title>Flintel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fustat:wght@400..800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;background:#FAFAF9;color:#171717;overflow-x:clip;}
 h1,.logo{font-family:"Fustat","Inter",sans-serif;}
 :root{
-  --ink:#171717;--g1:rgba(23,23,23,.8);--g2:rgba(23,23,23,.55);--g3:rgba(23,23,23,.38);--g4:rgba(23,23,23,.14);--g5:rgba(23,23,23,.06);
-  --hair:rgba(23,23,23,.09);--bluedeep:#4B46D6;--limedeep:#8FCC00;--ease:cubic-bezier(.25,.1,.25,1);--font-num:"Fustat",sans-serif;--navh:72px;
+  --ink:#171717;--g1:rgba(23,23,23,.8);--g2:rgba(23,23,23,.55);--g3:rgba(23,23,23,.38);--g4:rgba(23,23,23,.14);
+  --hair:rgba(23,23,23,.08);--blue:#6863FC;--bluedeep:#4B46D6;--lime:#B6FF1E;--limedeep:#8FCC00;
+  --ease:cubic-bezier(.25,.1,.25,1);--navh:72px;
 }
 
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;height:var(--navh);padding:0 max(24px,4vw);background:rgba(250,250,249,.7);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--hair);}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;height:var(--navh);padding:0 max(24px,4vw);background:rgba(250,250,249,.7);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--hair);}
 .logo{display:flex;align-items:center;gap:9px;font-size:15.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink);}
 .logo-icon{width:27px;height:27px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(23,23,23,.25),inset 0 1px 1px rgba(255,255,255,.15);}
-.logo-icon svg{width:13px;height:13px;fill:#B6FF1E;}
+.logo-icon svg{width:13px;height:13px;fill:var(--lime);}
+.nav-login{font-size:13.5px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--g4);padding:9px 18px;border-radius:980px;cursor:pointer;transition:transform .15s var(--ease),box-shadow .15s var(--ease),border-color .15s;box-shadow:0 1px 2px rgba(0,0,0,.03);}
+.nav-login:hover{border-color:var(--g3);transform:translateY(-1px);box-shadow:0 6px 14px rgba(0,0,0,.08);}
+.nav-login:active{transform:translateY(0);}
 
-.page{max-width:960px;margin:0 auto;padding:calc(var(--navh) + 36px) 24px 80px;}
-.rep-head{margin-bottom:8px;}
-.rep-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g3);margin-bottom:10px;}
-.rep-eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--limedeep);position:relative;}
-.rep-eyebrow .live-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--limedeep);animation:pulseRing 2s ease-out infinite;}
-@keyframes pulseRing{0%{transform:scale(.6);opacity:1;}100%{transform:scale(2.4);opacity:0;}}
-.rep-title{font-size:clamp(22px,2.8vw,28px);font-weight:600;letter-spacing:-.025em;color:var(--ink);margin-bottom:6px;}
-.rep-title b{font-weight:700;}
-.rep-sub{font-size:13.5px;color:var(--g2);margin-bottom:40px;}
+.stage{min-height:100vh;padding-top:var(--navh);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:24px;padding-right:24px;padding-bottom:24px;text-align:center;}
 
-.plat-section{margin-bottom:38px;}
-.plat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-.plat-title{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:700;color:var(--ink);}
-.plat-title-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.plat-title-icon svg{width:13px;height:13px;}
-.plat-badge{font-size:11px;font-weight:600;color:var(--g3);background:var(--g5);padding:5px 11px;border-radius:980px;white-space:nowrap;}
-.plat-nav{display:flex;gap:6px;}
-.plat-nav-btn{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;color:var(--g2);cursor:pointer;transition:background .15s,border-color .15s;}
-.plat-nav-btn:hover{background:var(--g5);border-color:var(--g4);}
-.plat-nav-btn svg{width:14px;height:14px;}
+/* ═══ SIDEBAR (added alongside the existing top nav) ═══ */
+.shell-body{display:flex;padding-top:var(--navh);min-height:100vh;}
+.sidebar{width:264px;flex-shrink:0;background:#F4F2EC;border-right:1px solid var(--hair);height:calc(100vh - var(--navh));position:sticky;top:var(--navh);padding:20px 20px 16px;display:flex;flex-direction:column;}
+.side-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+.side-header-logo{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:var(--ink);}
+.side-header-logo svg{width:100%;height:100%;fill:var(--ink);}
+.side-header-collapse{width:26px;height:26px;background:none;border:none;display:flex;align-items:center;justify-content:center;color:var(--g2);cursor:pointer;opacity:.75;transition:opacity .15s;}
+.side-header-collapse:hover{opacity:1;}
+.side-header-collapse svg{width:20px;height:20px;}
 
-.row-wrap{position:relative;}
-.row-wrap::before,.row-wrap::after{content:'';position:absolute;top:0;bottom:8px;width:36px;z-index:2;pointer-events:none;}
-.row-wrap::before{left:0;background:linear-gradient(to right,#FAFAF9,transparent);}
-.row-wrap::after{right:0;background:linear-gradient(to left,#FAFAF9,transparent);}
-.sig-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none;}
-.sig-row::-webkit-scrollbar{display:none;}
+.side-new{display:flex;align-items:center;gap:11px;background:rgba(23,23,23,.065);border:none;border-radius:980px;padding:13px 16px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;margin-bottom:14px;transition:background .15s;text-align:left;width:100%;}
+.side-new:hover{background:rgba(23,23,23,.1);}
+.side-new-icon{width:24px;height:24px;border-radius:50%;background:rgba(23,23,23,.1);color:var(--g1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.side-new-icon svg{width:13px;height:13px;}
 
-.sig-card{flex-shrink:0;width:270px;scroll-snap-align:start;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:16px 18px;transition:border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease);}
-.sig-card:hover{border-color:var(--g4);box-shadow:0 10px 26px rgba(0,0,0,.06);transform:translateY(-2px);}
+.side-nav{display:flex;flex-direction:column;margin-bottom:6px;}
+.side-item{display:flex;align-items:center;gap:13px;padding:10px 8px;border-radius:9px;font-size:16px;font-weight:400;color:var(--g1);cursor:pointer;transition:background .15s;}
+.side-item:hover{background:rgba(23,23,23,.05);}
+.side-item svg{width:19px;height:19px;color:var(--g1);flex-shrink:0;}
 
-.sig-top{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
-.sig-icon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.sig-icon svg{width:16px;height:16px;}
-.sig-id{flex:1;min-width:0;}
-.sig-name{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sig-meta{font-size:11px;color:var(--g3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sig-score{font-family:var(--font-num);font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:980px;flex-shrink:0;}
-.sig-score.hi{background:rgba(182,255,30,.28);color:#4A7A00;}
-.sig-score.mid{background:rgba(104,99,252,.14);color:var(--bluedeep);}
+.side-label{display:none;}
+.side-sub{display:flex;flex-direction:column;margin-bottom:20px;}
+.side-sub-item{padding:8px 8px 8px 40px;font-size:15px;font-weight:400;color:rgba(23,23,23,.55);cursor:pointer;transition:color .15s;border-radius:9px;}
+.side-sub-item:hover{color:var(--ink);}
 
-.sig-title{font-size:13px;color:var(--g1);line-height:1.5;margin-bottom:13px;min-height:58px;}
+.side-history-label{display:flex;align-items:center;gap:13px;padding:10px 8px;font-size:16px;font-weight:400;color:var(--g1);margin-bottom:2px;}
+.side-history-label svg{width:19px;height:19px;color:var(--g1);}
+.side-history-empty{padding:4px 8px 4px 40px;font-size:14.5px;color:rgba(23,23,23,.4);}
 
-.sig-stats{display:flex;align-items:center;gap:12px;font-size:11.5px;color:var(--g3);margin-bottom:2px;}
-.sig-stats span{display:flex;align-items:center;gap:4px;}
-.sig-stats svg{width:13px;height:13px;}
+.side-bottom{margin-top:auto;padding-top:16px;border-top:1px solid var(--hair);}
+.side-signin{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:8px;cursor:pointer;border-radius:9px;transition:background .15s;}
+.side-signin:hover{background:rgba(23,23,23,.05);}
+.side-signin-left{display:flex;align-items:center;gap:11px;}
+.side-signin-avatar{width:28px;height:28px;border-radius:50%;background:#0F6E56;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.side-signin-avatar svg{width:15px;height:15px;color:#fff;}
+.side-signin-text{font-size:16px;font-weight:500;color:var(--ink);}
+.side-signin svg.chev{width:17px;height:17px;color:var(--g2);flex-shrink:0;}
+.main{flex:1;min-width:0;}
 
-.sig-enrich{position:relative;margin:10px 0;border-radius:10px;overflow:hidden;background:var(--g5);}
-.sig-enrich-blur{filter:blur(5px);user-select:none;pointer-events:none;padding:9px 11px;font-size:11px;color:var(--g3);line-height:1.6;}
-.sig-enrich-cta{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(250,250,249,0),rgba(250,250,249,.7) 40%);}
-.sig-unlock{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:#fff;background:var(--ink);border:none;padding:6px 11px;border-radius:980px;cursor:pointer;}
-.sig-unlock svg{width:10px;height:10px;}
+.icon-row-wrap{position:relative;display:inline-block;margin-bottom:26px;opacity:0;animation:riseIn .7s var(--ease) forwards;}
+.icon-row-glow{position:absolute;inset:-36px -20px;background:radial-gradient(ellipse at center,rgba(104,99,252,.22),rgba(182,255,30,.14) 55%,transparent 78%);filter:blur(28px);z-index:0;pointer-events:none;}
+.icon-row{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px;}
+.icon-tile{width:54px;height:54px;border-radius:17px;display:flex;align-items:center;justify-content:center;position:relative;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.55);transition:transform .22s var(--ease),box-shadow .22s var(--ease);}
+.icon-tile:hover{transform:translateY(-5px) scale(1.06);}
+.icon-tile svg{width:34px;height:34px;position:relative;z-index:1;}
+.icon-tile::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.55),rgba(255,255,255,0) 45%);pointer-events:none;}
+.icon-tile.reddit{background:#FF4500;}
+.icon-tile.x{background:#0A0A0A;}
+.icon-tile.linkedin{background:#0A66C2;}
+.icon-tile.facebook{background:#1877F2;}
 
-.sig-foot{display:flex;align-items:center;justify-content:flex-end;padding-top:11px;border-top:1px dashed var(--hair);}
-.sig-link{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--g2);text-decoration:none;transition:color .15s;}
-.sig-link:hover{color:var(--ink);}
-.sig-link svg{width:12px;height:12px;transition:transform .15s var(--ease);}
-.sig-link:hover svg{transform:translateX(2px);}
+.greeting{font-size:clamp(24px,3.4vw,34px);font-weight:600;letter-spacing:-.03em;color:var(--ink);margin-bottom:32px;opacity:0;animation:riseIn .7s var(--ease) forwards;animation-delay:.1s;}
+.greeting span{color:var(--g3);font-weight:400;}
 
-@media(max-width:600px){
-  .sig-card{width:240px;}
-  .plat-nav{display:none;}
+.query-wrap{width:100%;max-width:640px;opacity:0;animation:riseIn .8s var(--ease) forwards;animation-delay:.25s;}
+.query-box{background:#fff;border:1px solid var(--hair);border-radius:26px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 12px 32px rgba(0,0,0,.06);padding:6px;transition:border-color .2s,box-shadow .2s;}
+.query-box:focus-within{border-color:var(--g4);box-shadow:0 1px 2px rgba(0,0,0,.03),0 16px 40px rgba(0,0,0,.09);}
+.query-input-row{display:flex;align-items:center;gap:10px;padding:14px 10px 14px 20px;}
+.query-icon{width:18px;height:18px;color:var(--g3);flex-shrink:0;}
+.query-input-row input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:16px;color:var(--ink);font-family:inherit;}
+.query-input-row input::placeholder{color:var(--g3);}
+.query-actions{display:flex;align-items:center;justify-content:space-between;padding:2px 8px 8px 20px;}
+.query-hint{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--g3);}
+.query-hint svg{width:13px;height:13px;}
+.query-submit{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5c5c5c 0%,#1c1c1c 45%,#000 100%);border:1px solid rgba(255,255,255,.06);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s var(--ease),box-shadow .15s var(--ease);flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,.35),inset 0 1px 2px rgba(255,255,255,.28),inset 0 -4px 6px rgba(0,0,0,.55);}
+.query-submit:hover{transform:translateY(-1px) scale(1.04);box-shadow:0 6px 14px rgba(0,0,0,.4),inset 0 1px 2px rgba(255,255,255,.32),inset 0 -4px 6px rgba(0,0,0,.55);}
+.query-submit:active{transform:scale(.94);}
+.query-submit svg{width:16px;height:16px;color:#fff;}
+
+.chip-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px;opacity:0;animation:riseIn .8s var(--ease) forwards;animation-delay:.4s;}
+.chip{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--g2);background:#fff;border:1px solid var(--hair);padding:8px 14px;border-radius:980px;cursor:pointer;transition:border-color .15s,color .15s;}
+.chip:hover{border-color:var(--g3);color:var(--ink);}
+.chip svg{width:12px;height:12px;flex-shrink:0;}
+
+.foot-note{margin-top:26px;font-size:12px;color:var(--g3);opacity:0;animation:riseIn .8s var(--ease) forwards;animation-delay:.5s;}
+
+@keyframes riseIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+@media(max-width:900px){
+  .sidebar{display:none;}
 }
+@media(max-width:560px){
+  .query-input-row{padding:12px 6px 12px 16px;}
+  .query-input-row input{font-size:15px;}
+  .chip-row{gap:6px;}
+  .chip{padding:7px 12px;font-size:12px;}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important;}}
 </style>
 </head>
 <body>
 
 <nav>
   <a class="logo" href="#"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2.5c.5 4.2 2.8 6.5 7 7-4.2.5-6.5 2.8-7 7-.5-4.2-2.8-6.5-7-7 4.2-.5 6.5-2.8 7-7z"/></svg></div>Flintel</a>
+  <button class="nav-login">Log in</button>
 </nav>
 
-<div class="page">
-  <div class="rep-head">
-    <div class="rep-eyebrow"><span class="live-dot"></span>Live report · generated just now</div>
-    <h1 class="rep-title">Buyer signals for <b id="rep-domain">yourwebsite.com</b></h1>
-    <p class="rep-sub">Reddit, X, LinkedIn, and Facebook — scanned for people actively discussing alternatives to what you sell.</p>
+<div class="stage">
+  <div class="icon-row-wrap">
+    <div class="icon-row-glow"></div>
+    <div class="icon-row">
+      <div class="icon-tile reddit"><svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="1.6" fill="#fff"/><circle cx="15" cy="13" r="1.6" fill="#fff"/><path d="M8.4 15.8c.9.8 2.2 1.3 3.6 1.3s2.7-.5 3.6-1.3" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.1" fill="#fff"/><line x1="12" y1="8.5" x2="12" y2="10" stroke="#fff" stroke-width="1.2"/></svg></div>
+      <div class="icon-tile x"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+      <div class="icon-tile linkedin"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.8" fill="#fff"/><rect x="6.4" y="11.5" width="3.2" height="9" rx="0.6" fill="#fff"/><path d="M12.3 11.5h3v1.5c.6-1 1.7-1.7 3-1.7 2.3 0 3.6 1.5 3.6 4.3v5h-3v-4.4c0-1.1-.4-2-1.6-2-.9 0-1.5.6-1.8 1.2-.1.2-.1.6-.1.9v4.3h-3V11.5z" fill="#fff"/></svg></div>
+      <div class="icon-tile facebook"><svg viewBox="0 0 24 24"><path d="M13.6 21v-7.2h2.2l.3-2.6h-2.5V9.5c0-.7.2-1.2 1.3-1.2h1.3V6c-.2 0-1-.1-1.9-.1-1.9 0-3.1 1.1-3.1 3.2v2.1H9v2.6h2.2V21h2.4z" fill="#fff"/></svg></div>
+    </div>
+  </div>
+  <h1 class="greeting">Where's your next customer <span>talking?</span></h1>
+
+  <div class="query-wrap">
+    <div class="query-box">
+      <div class="query-input-row">
+        <svg class="query-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+        <input id="query-input" type="text" placeholder="yourwebsite.com" autofocus onkeydown="if(event.key==='Enter')submitQuery()">
+      </div>
+      <div class="query-actions">
+        <div class="query-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Ready in seconds</div>
+        <button class="query-submit" onclick="submitQuery()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chip-row">
+      <div class="chip" onclick="tryExample('acmepay.com')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Try acmepay.com</div>
+      <div class="chip" onclick="tryExample('shieldsec.io')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>Try shieldsec.io</div>
+      <div class="chip" onclick="tryExample('crmflow.com')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>Try crmflow.com</div>
+    </div>
   </div>
 
-  <div id="sections"></div>
+  <div class="foot-note">Free report · No card required · Built for six industries</div>
 </div>
 
 <script>
 'use strict';
-const ICONS = {
-  reddit: '<svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="1.6" fill="#fff"/><circle cx="15" cy="13" r="1.6" fill="#fff"/><path d="M8.4 15.8c.9.8 2.2 1.3 3.6 1.3s2.7-.5 3.6-1.3" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.1" fill="#fff"/><line x1="12" y1="8.5" x2="12" y2="10" stroke="#fff" stroke-width="1.2"/></svg>',
-  x: '<svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>',
-  linkedin: '<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.8" fill="#fff"/><rect x="6.4" y="11.5" width="3.2" height="9" rx="0.6" fill="#fff"/><path d="M12.3 11.5h3v1.5c.6-1 1.7-1.7 3-1.7 2.3 0 3.6 1.5 3.6 4.3v5h-3v-4.4c0-1.1-.4-2-1.6-2-.9 0-1.5.6-1.8 1.2-.1.2-.1.6-.1.9v4.3h-3V11.5z" fill="#fff"/></svg>',
-  facebook: '<svg viewBox="0 0 24 24"><path d="M13.6 21v-7.2h2.2l.3-2.6h-2.5V9.5c0-.7.2-1.2 1.3-1.2h1.3V6c-.2 0-1-.1-1.9-.1-1.9 0-3.1 1.1-3.1 3.2v2.1H9v2.6h2.2V21h2.4z" fill="#fff"/></svg>'
-};
-const COLORS = {reddit:'#FF4500', x:'#0A0A0A', linkedin:'#0A66C2', facebook:'#1877F2'};
-
-const platforms = [
-  {
-    key:'reddit', label:'Reddit', badge:'Google top-1 threads only',
-    data:[
-      {name:'r/fintech', meta:'6h ago', score:92, title:'"Best alternative to our current payment processor for cross-border fees?"', votes:'1.2k', comments:84},
-      {name:'r/smallbusiness', meta:'1d ago', score:87, title:'"Anyone switched processors this year — was the migration worth it?"', votes:'840', comments:52},
-      {name:'r/personalfinance', meta:'2d ago', score:81, title:'"Recurring fees are killing my margins — cheaper alternatives?"', votes:'610', comments:37},
-      {name:'r/Entrepreneur', meta:'3d ago', score:74, title:'"Payment processor recommendations for a new SaaS launch?"', votes:'395', comments:21},
-      {name:'r/fintech_startups', meta:'4d ago', score:69, title:'"Comparing invoicing and payments bundles for a 10-person team"', votes:'280', comments:14},
-      {name:'r/Payments', meta:'5d ago', score:63, title:"\"What's everyone using for instant payouts to contractors abroad?\"", votes:'204', comments:9}
-    ]
-  },
-  {
-    key:'x', label:'X / Twitter', badge:'Sorted by Flintel Intent Score',
-    data:[
-      {name:'Kelly T.', meta:'Ops Lead · 2h ago', score:95, title:"Asking for a payments API that doesn't add surprise FX markups.", enrich:'kelly.t@company.com'},
-      {name:'Marcus B.', meta:'Founder · 4h ago', score:89, title:'Venting about a failed integration, asking for a replacement vendor.', enrich:'marcus@startup.io'},
-      {name:'Reema K.', meta:'Finance · 6h ago', score:83, title:'Comparing two named vendors, asking for real switching experience.', enrich:'reema.k@financeco.com'},
-      {name:'Dan R.', meta:'Founder · 9h ago', score:76, title:'Noting checkout drop-off, asking if a payments switch is the cause.', enrich:'dan.r@dtcbrand.com'},
-      {name:'Sam L.', meta:'Growth · 11h ago', score:71, title:'Asking the timeline for migrating payment providers mid-quarter.', enrich:'sam.l@growthco.com'},
-      {name:'Jamie W.', meta:'CTO · 13h ago', score:65, title:'Asking which processors handle high-volume subscription billing best.', enrich:'jamie.w@subscaletech.com'}
-    ]
-  },
-  {
-    key:'linkedin', label:'LinkedIn', badge:'Sorted by Flintel Intent Score',
-    data:[
-      {name:'Priya S.', meta:'VP Finance', score:90, title:'Publicly evaluating new payment vendors this quarter, requesting referrals.', enrich:'priya.s@fintechco.com'},
-      {name:'James O.', meta:'Ops Director', score:85, title:'Commenting with specific pain points about their current provider.', enrich:'james.o@retailbrand.com'},
-      {name:'Alina M.', meta:'CFO', score:78, title:'Asking network for infrastructure recommendations ahead of a raise.', enrich:'alina.m@raisedstartup.com'},
-      {name:'Tom H.', meta:'Growth Lead', score:70, title:'Mentioning frustration with billing infrastructure in a comment thread.', enrich:'tom.h@growthlead.com'},
-      {name:'Divya K.', meta:'Head of Payments', score:62, title:'Sharing an article on processor fees with a pointed caption.', enrich:'divya.k@paymentshead.com'},
-      {name:'Ben W.', meta:'RevOps', score:57, title:'Asking peers how long a provider migration typically takes.', enrich:'ben.w@revops.com'}
-    ]
-  },
-  {
-    key:'facebook', label:'Facebook', badge:'Sorted by Flintel Intent Score',
-    data:[
-      {name:'Chris L.', meta:'SaaS Founders group', score:80, title:'Asking for provider suggestions after an unresolved support escalation.', enrich:'chris.l@brandco.com'},
-      {name:'Nadia F.', meta:'E-commerce Owners group', score:72, title:'Comparing checkout providers after failed transactions during a sale.', enrich:'nadia.f@shopbrand.com'},
-      {name:'Owen P.', meta:'Fintech Builders group', score:68, title:'Asking which payments API has the most reliable webhook delivery.', enrich:'owen.p@fintechbuilders.com'},
-      {name:'Sara V.', meta:'Agency Owners group', score:64, title:'Asking peers what they bill clients for payment integration work.', enrich:'sara.v@agencyowners.com'},
-      {name:'Rafi T.', meta:'DTC Brands group', score:59, title:'Asking if anyone has cut their processing fees below 2.5%.', enrich:'rafi.t@dtcbrands.com'},
-      {name:'Elena M.', meta:'Startup Founders group', score:54, title:'Asking for onboarding-time benchmarks when switching providers.', enrich:'elena.m@startupfounders.com'}
-    ]
-  }
-];
-
-function cardHtml(plat, item) {
-  const scoreClass = item.score >= 80 ? 'hi' : 'mid';
-  const isReddit = plat.key === 'reddit';
-
-  const statsOrEnrich = isReddit
-    ? `<div class="sig-stats">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>${item.votes}</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.5 8.5 0 0 1-4-1L3 20l1.3-3.9a8.4 8.4 0 1 1 16.7-4.6z"/></svg>${item.comments}</span>
-      </div>`
-    : `<div class="sig-enrich">
-        <div class="sig-enrich-blur">${item.enrich}<br>linkedin.com/in/••••••••</div>
-        <div class="sig-enrich-cta"><button class="sig-unlock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>Unlock</button></div>
-      </div>`;
-
-  return `
-    <div class="sig-card">
-      <div class="sig-top">
-        <div class="sig-icon" style="background:${COLORS[plat.key]}">${ICONS[plat.key]}</div>
-        <div class="sig-id">
-          <div class="sig-name">${item.name}</div>
-          <div class="sig-meta">${item.meta}</div>
-        </div>
-        <span class="sig-score ${scoreClass}">${item.score}%</span>
-      </div>
-      <p class="sig-title">${item.title}</p>
-      ${statsOrEnrich}
-      <div class="sig-foot">
-        <a class="sig-link" href="#">View post<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>`;
+function normalizeDomain(raw) {
+  let v = String(raw || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split(/[/?#]/)[0];
+  return /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(v) ? v : null;
 }
-
-function sectionHtml(plat) {
-  return `
-    <div class="plat-section">
-      <div class="plat-head">
-        <div class="plat-title">
-          <span class="plat-title-icon" style="background:${COLORS[plat.key]}">${ICONS[plat.key]}</span>
-          ${plat.label}
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span class="plat-badge">${plat.badge}</span>
-          <div class="plat-nav">
-            <button class="plat-nav-btn" onclick="scrollRow('${plat.key}',-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-            <button class="plat-nav-btn" onclick="scrollRow('${plat.key}',1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
-          </div>
-        </div>
-      </div>
-      <div class="row-wrap">
-        <div class="sig-row" id="row-${plat.key}">
-          ${plat.data.map(item => cardHtml(plat, item)).join('')}
-        </div>
-      </div>
-    </div>`;
+function submitQuery() {
+  const input = document.getElementById('query-input');
+  const domain = normalizeDomain(input.value);
+  if (!domain) { input.focus(); return; }
+  alert('Would proceed to scanning: ' + domain);
 }
-
-document.getElementById('sections').innerHTML = platforms.map(sectionHtml).join('');
-
-function scrollRow(key, dir) {
-  const row = document.getElementById('row-' + key);
-  row.scrollBy({left: dir * 300, behavior: 'smooth'});
+function tryExample(domain) {
+  document.getElementById('query-input').value = domain;
+  submitQuery();
 }
-
-(function(){
-  const params = new URLSearchParams(location.search);
-  const site = params.get('site');
-  if (site) document.getElementById('rep-domain').textContent = site;
-})();
 </script>
 </body>
 </html>
