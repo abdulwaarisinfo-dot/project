@@ -3,163 +3,231 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PHPTRAVELS — Modules v5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Flintel — Your report</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fustat:wght@400..800&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html,body{ height:100%; }
-  body{
-    background:#EFEEEA; font-family:'Inter',sans-serif;
-    display:flex; align-items:center; justify-content:center;
-    min-height:100vh; padding:16px;
-  }
-  .wrap{ position:relative; }
-  .canvas{
-    width:1440px; height:810px; background:#F7F6F3;
-    position:relative; transform-origin:top left; overflow:hidden;
-    padding:40px 64px 0; display:flex; flex-direction:column;
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;background:#FAFAF9;color:#171717;overflow-x:clip;}
+h1,.logo{font-family:"Fustat","Inter",sans-serif;}
+:root{
+  --ink:#171717;--g1:rgba(23,23,23,.8);--g2:rgba(23,23,23,.55);--g3:rgba(23,23,23,.38);--g4:rgba(23,23,23,.14);--g5:rgba(23,23,23,.06);
+  --hair:rgba(23,23,23,.09);--bluedeep:#4B46D6;--limedeep:#8FCC00;--ease:cubic-bezier(.25,.1,.25,1);--font-num:"Fustat",sans-serif;--navh:72px;
+}
 
-  .topbar{ display:flex; justify-content:space-between; align-items:flex-start; position:relative; z-index:5; }
-  .idx{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#161616; line-height:1.6; }
-  .topmid{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#161616; display:flex; gap:40px; }
-  .mark{
-    width:34px; height:34px; border:1.4px solid #111; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'JetBrains Mono',monospace; font-size:14px; color:#111; letter-spacing:-1px;
-  }
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;height:var(--navh);padding:0 max(24px,4vw);background:rgba(250,250,249,.7);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--hair);}
+.logo{display:flex;align-items:center;gap:9px;font-size:15.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink);}
+.logo-icon{width:27px;height:27px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(23,23,23,.25),inset 0 1px 1px rgba(255,255,255,.15);}
+.logo-icon svg{width:13px;height:13px;fill:#B6FF1E;}
 
-  .headrow{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px; position:relative; z-index:5; }
-  .headrow h1{
-    font-family:'Archivo',sans-serif; font-weight:900; font-size:48px; line-height:0.9;
-    color:#0C0C0C; letter-spacing:-0.01em;
-  }
-  .headrow .sub{ font-family:'Inter',sans-serif; font-size:13px; color:#5a5a5a; margin-top:10px; max-width:520px; }
-  .headrow .right{ text-align:right; }
-  .headrow .pagenum{ font-family:'Archivo',sans-serif; font-weight:900; font-size:56px; color:#0C0C0C; line-height:0.9; }
-  .headrow .total{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#5a5a5a; margin-top:8px; }
-  .headrow .total b{ color:#0C0C0C; font-family:'Archivo',sans-serif; font-size:16px; }
+.page{max-width:960px;margin:0 auto;padding:calc(var(--navh) + 36px) 24px 80px;}
+.rep-head{margin-bottom:8px;}
+.rep-eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g3);margin-bottom:10px;}
+.rep-eyebrow .live-dot{width:6px;height:6px;border-radius:50%;background:var(--limedeep);position:relative;}
+.rep-eyebrow .live-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--limedeep);animation:pulseRing 2s ease-out infinite;}
+@keyframes pulseRing{0%{transform:scale(.6);opacity:1;}100%{transform:scale(2.4);opacity:0;}}
+.rep-title{font-size:clamp(22px,2.8vw,28px);font-weight:600;letter-spacing:-.025em;color:var(--ink);margin-bottom:6px;}
+.rep-title b{font-weight:700;}
+.rep-sub{font-size:13.5px;color:var(--g2);margin-bottom:40px;}
 
-  .divider{ height:1px; background:#111; opacity:0.5; margin-top:16px; position:relative; z-index:5; }
+.plat-section{margin-bottom:38px;}
+.plat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.plat-title{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:700;color:var(--ink);}
+.plat-title-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.plat-title-icon svg{width:13px;height:13px;}
+.plat-badge{font-size:11px;font-weight:600;color:var(--g3);background:var(--g5);padding:5px 11px;border-radius:980px;white-space:nowrap;}
+.plat-nav{display:flex;gap:6px;}
+.plat-nav-btn{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--hair);display:flex;align-items:center;justify-content:center;color:var(--g2);cursor:pointer;transition:background .15s,border-color .15s;}
+.plat-nav-btn:hover{background:var(--g5);border-color:var(--g4);}
+.plat-nav-btn svg{width:14px;height:14px;}
 
-  .stage{ flex:1; position:relative; margin-top:20px; }
+.row-wrap{position:relative;}
+.row-wrap::before,.row-wrap::after{content:'';position:absolute;top:0;bottom:8px;width:36px;z-index:2;pointer-events:none;}
+.row-wrap::before{left:0;background:linear-gradient(to right,#FAFAF9,transparent);}
+.row-wrap::after{right:0;background:linear-gradient(to left,#FAFAF9,transparent);}
+.sig-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none;}
+.sig-row::-webkit-scrollbar{display:none;}
 
-  .card{
-    position:absolute; top:20px; left:50%; width:300px; height:454px;
-    margin-left:-150px;
-    border-radius:14px; padding:28px 25px;
-    display:flex; flex-direction:column;
-    border:1px solid rgba(255,255,255,0.10);
-  }
-  .card .icon{
-    width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.08);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .card .icon svg{ width:16px; height:16px; stroke:#F7F6F3; fill:none; stroke-width:1.8; }
-  .card .grp{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#8992A3; letter-spacing:0.08em; margin-top:14px; }
-  .card h3{ font-family:'Archivo',sans-serif; font-weight:900; font-size:24px; color:#F7F6F3; margin-top:8px; letter-spacing:-0.01em; line-height:1.08; }
-  .card .rule{ height:1px; background:rgba(255,255,255,0.14); margin:18px 0; }
-  .card .items{ display:flex; flex-direction:column; gap:12px; flex:1; }
-  .item{ display:flex; align-items:baseline; gap:10px; }
-  .item .n{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#5B6472; width:18px; }
-  .item .t{ font-family:'Inter',sans-serif; font-weight:600; font-size:15px; color:#F0F1F3; }
-  .card .badge{
-    margin-top:auto; align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:10.5px;
-    color:#0C0C0C; background:#F7F6F3; border-radius:100px; padding:6px 14px; letter-spacing:0.03em;
-  }
+.sig-card{flex-shrink:0;width:270px;scroll-snap-align:start;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:16px 18px;transition:border-color .18s var(--ease),box-shadow .18s var(--ease),transform .18s var(--ease);}
+.sig-card:hover{border-color:var(--g4);box-shadow:0 10px 26px rgba(0,0,0,.06);transform:translateY(-2px);}
 
-  .c1{ background:#1C1F26; transform:translate(-320px,14px) rotate(-5deg); z-index:1; box-shadow:0 24px 46px rgba(12,12,12,0.24); }
-  .c2{ background:#0C0C0C; transform:translate(0,-6px) rotate(0deg); z-index:3; box-shadow:0 34px 64px rgba(12,12,12,0.38); }
-  .c3{ background:#1C1F26; transform:translate(320px,14px) rotate(5deg); z-index:1; box-shadow:0 24px 46px rgba(12,12,12,0.24); }
+.sig-top{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sig-icon{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sig-icon svg{width:16px;height:16px;}
+.sig-id{flex:1;min-width:0;}
+.sig-name{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sig-meta{font-size:11px;color:var(--g3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sig-score{font-family:var(--font-num);font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:980px;flex-shrink:0;}
+.sig-score.hi{background:rgba(182,255,30,.28);color:#4A7A00;}
+.sig-score.mid{background:rgba(104,99,252,.14);color:var(--bluedeep);}
+
+.sig-title{font-size:13px;color:var(--g1);line-height:1.5;margin-bottom:13px;min-height:58px;}
+
+.sig-stats{display:flex;align-items:center;gap:12px;font-size:11.5px;color:var(--g3);margin-bottom:2px;}
+.sig-stats span{display:flex;align-items:center;gap:4px;}
+.sig-stats svg{width:13px;height:13px;}
+
+.sig-enrich{position:relative;margin:10px 0;border-radius:10px;overflow:hidden;background:var(--g5);}
+.sig-enrich-blur{filter:blur(5px);user-select:none;pointer-events:none;padding:9px 11px;font-size:11px;color:var(--g3);line-height:1.6;}
+.sig-enrich-cta{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(250,250,249,0),rgba(250,250,249,.7) 40%);}
+.sig-unlock{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:#fff;background:var(--ink);border:none;padding:6px 11px;border-radius:980px;cursor:pointer;}
+.sig-unlock svg{width:10px;height:10px;}
+
+.sig-foot{display:flex;align-items:center;justify-content:flex-end;padding-top:11px;border-top:1px dashed var(--hair);}
+.sig-link{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--g2);text-decoration:none;transition:color .15s;}
+.sig-link:hover{color:var(--ink);}
+.sig-link svg{width:12px;height:12px;transition:transform .15s var(--ease);}
+.sig-link:hover svg{transform:translateX(2px);}
+
+@media(max-width:600px){
+  .sig-card{width:240px;}
+  .plat-nav{display:none;}
+}
 </style>
 </head>
 <body>
 
-<div class="wrap" id="wrap">
-  <div class="canvas">
-    <div class="topbar">
-      <div class="idx">SYS_REF: 07.0<br>STATUS: ACTIVE</div>
-      <div class="topmid"><span>MODULES_PAGE</span><span>07</span></div>
-      <div class="mark">()</div>
-    </div>
+<nav>
+  <a class="logo" href="#"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2.5c.5 4.2 2.8 6.5 7 7-4.2.5-6.5 2.8-7 7-.5-4.2-2.8-6.5-7-7 4.2-.5 6.5-2.8 7-7z"/></svg></div>Flintel</a>
+</nav>
 
-    <div class="headrow">
-      <div>
-        <h1>MODULES</h1>
-        <div class="sub">Explored from the website, enabled or disabled based on business requirements.</div>
-      </div>
-      <div class="right">
-        <div class="pagenum">7.0</div>
-        <div class="total">TOTAL &mdash; <b>13</b> MODULES</div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="stage">
-      <div class="card c1">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M2 16l20-7-7 20-3-8-8-3z"/></svg></div>
-        <div class="grp">GROUP 01 / 03</div>
-        <h3>Core Travel</h3>
-        <div class="rule"></div>
-        <div class="items">
-          <div class="item"><span class="n">01</span><span class="t">Flight</span></div>
-          <div class="item"><span class="n">02</span><span class="t">Hotel</span></div>
-          <div class="item"><span class="n">03</span><span class="t">Tour</span></div>
-          <div class="item"><span class="n">04</span><span class="t">Bus</span></div>
-        </div>
-        <div class="badge">4 MODULES</div>
-      </div>
-
-      <div class="card c2">
-        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="8" rx="2"/><path d="M5 10l2-5h10l2 5"/></svg></div>
-        <div class="grp">GROUP 02 / 03</div>
-        <h3>Additional Travel</h3>
-        <div class="rule"></div>
-        <div class="items">
-          <div class="item"><span class="n">05</span><span class="t">Car</span></div>
-          <div class="item"><span class="n">06</span><span class="t">Train</span></div>
-          <div class="item"><span class="n">07</span><span class="t">Rail</span></div>
-          <div class="item"><span class="n">08</span><span class="t">Ferries</span></div>
-        </div>
-        <div class="badge">4 MODULES</div>
-      </div>
-
-      <div class="card c3">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11l18-7-6 18-3-8-9-3z"/><path d="M9 13l9-9"/></svg></div>
-        <div class="grp">GROUP 03 / 03</div>
-        <h3>Marketing &amp; Content</h3>
-        <div class="rule"></div>
-        <div class="items">
-          <div class="item"><span class="n">09</span><span class="t">Offers</span></div>
-          <div class="item"><span class="n">10</span><span class="t">Blogs</span></div>
-          <div class="item"><span class="n">11</span><span class="t">Newsletter</span></div>
-          <div class="item"><span class="n">12</span><span class="t">CMS</span></div>
-          <div class="item"><span class="n">13</span><span class="t">Umrah</span></div>
-        </div>
-        <div class="badge">5 MODULES</div>
-      </div>
-    </div>
+<div class="page">
+  <div class="rep-head">
+    <div class="rep-eyebrow"><span class="live-dot"></span>Live report · generated just now</div>
+    <h1 class="rep-title">Buyer signals for <b id="rep-domain">yourwebsite.com</b></h1>
+    <p class="rep-sub">Reddit, X, LinkedIn, and Facebook — scanned for people actively discussing alternatives to what you sell.</p>
   </div>
+
+  <div id="sections"></div>
 </div>
 
 <script>
-  function fit(){
-    var wrap = document.getElementById('wrap');
-    var canvas = wrap.querySelector('.canvas');
-    var maxW = window.innerWidth - 32;
-    var maxH = window.innerHeight - 32;
-    var scale = Math.min(maxW/1440, maxH/810, 1);
-    canvas.style.transform = 'scale(' + scale + ')';
-    wrap.style.width = (1440*scale) + 'px';
-    wrap.style.height = (810*scale) + 'px';
-  }
-  window.addEventListener('resize', fit);
-  window.addEventListener('load', fit);
-  fit();
-</script>
+'use strict';
+const ICONS = {
+  reddit: '<svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="1.6" fill="#fff"/><circle cx="15" cy="13" r="1.6" fill="#fff"/><path d="M8.4 15.8c.9.8 2.2 1.3 3.6 1.3s2.7-.5 3.6-1.3" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.1" fill="#fff"/><line x1="12" y1="8.5" x2="12" y2="10" stroke="#fff" stroke-width="1.2"/></svg>',
+  x: '<svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.8" fill="#fff"/><rect x="6.4" y="11.5" width="3.2" height="9" rx="0.6" fill="#fff"/><path d="M12.3 11.5h3v1.5c.6-1 1.7-1.7 3-1.7 2.3 0 3.6 1.5 3.6 4.3v5h-3v-4.4c0-1.1-.4-2-1.6-2-.9 0-1.5.6-1.8 1.2-.1.2-.1.6-.1.9v4.3h-3V11.5z" fill="#fff"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24"><path d="M13.6 21v-7.2h2.2l.3-2.6h-2.5V9.5c0-.7.2-1.2 1.3-1.2h1.3V6c-.2 0-1-.1-1.9-.1-1.9 0-3.1 1.1-3.1 3.2v2.1H9v2.6h2.2V21h2.4z" fill="#fff"/></svg>'
+};
+const COLORS = {reddit:'#FF4500', x:'#0A0A0A', linkedin:'#0A66C2', facebook:'#1877F2'};
 
+const platforms = [
+  {
+    key:'reddit', label:'Reddit', badge:'Google top-1 threads only',
+    data:[
+      {name:'r/fintech', meta:'6h ago', score:92, title:'"Best alternative to our current payment processor for cross-border fees?"', votes:'1.2k', comments:84},
+      {name:'r/smallbusiness', meta:'1d ago', score:87, title:'"Anyone switched processors this year — was the migration worth it?"', votes:'840', comments:52},
+      {name:'r/personalfinance', meta:'2d ago', score:81, title:'"Recurring fees are killing my margins — cheaper alternatives?"', votes:'610', comments:37},
+      {name:'r/Entrepreneur', meta:'3d ago', score:74, title:'"Payment processor recommendations for a new SaaS launch?"', votes:'395', comments:21},
+      {name:'r/fintech_startups', meta:'4d ago', score:69, title:'"Comparing invoicing and payments bundles for a 10-person team"', votes:'280', comments:14},
+      {name:'r/Payments', meta:'5d ago', score:63, title:"\"What's everyone using for instant payouts to contractors abroad?\"", votes:'204', comments:9}
+    ]
+  },
+  {
+    key:'x', label:'X / Twitter', badge:'Sorted by Flintel Intent Score',
+    data:[
+      {name:'Kelly T.', meta:'Ops Lead · 2h ago', score:95, title:"Asking for a payments API that doesn't add surprise FX markups.", enrich:'kelly.t@company.com'},
+      {name:'Marcus B.', meta:'Founder · 4h ago', score:89, title:'Venting about a failed integration, asking for a replacement vendor.', enrich:'marcus@startup.io'},
+      {name:'Reema K.', meta:'Finance · 6h ago', score:83, title:'Comparing two named vendors, asking for real switching experience.', enrich:'reema.k@financeco.com'},
+      {name:'Dan R.', meta:'Founder · 9h ago', score:76, title:'Noting checkout drop-off, asking if a payments switch is the cause.', enrich:'dan.r@dtcbrand.com'},
+      {name:'Sam L.', meta:'Growth · 11h ago', score:71, title:'Asking the timeline for migrating payment providers mid-quarter.', enrich:'sam.l@growthco.com'},
+      {name:'Jamie W.', meta:'CTO · 13h ago', score:65, title:'Asking which processors handle high-volume subscription billing best.', enrich:'jamie.w@subscaletech.com'}
+    ]
+  },
+  {
+    key:'linkedin', label:'LinkedIn', badge:'Sorted by Flintel Intent Score',
+    data:[
+      {name:'Priya S.', meta:'VP Finance', score:90, title:'Publicly evaluating new payment vendors this quarter, requesting referrals.', enrich:'priya.s@fintechco.com'},
+      {name:'James O.', meta:'Ops Director', score:85, title:'Commenting with specific pain points about their current provider.', enrich:'james.o@retailbrand.com'},
+      {name:'Alina M.', meta:'CFO', score:78, title:'Asking network for infrastructure recommendations ahead of a raise.', enrich:'alina.m@raisedstartup.com'},
+      {name:'Tom H.', meta:'Growth Lead', score:70, title:'Mentioning frustration with billing infrastructure in a comment thread.', enrich:'tom.h@growthlead.com'},
+      {name:'Divya K.', meta:'Head of Payments', score:62, title:'Sharing an article on processor fees with a pointed caption.', enrich:'divya.k@paymentshead.com'},
+      {name:'Ben W.', meta:'RevOps', score:57, title:'Asking peers how long a provider migration typically takes.', enrich:'ben.w@revops.com'}
+    ]
+  },
+  {
+    key:'facebook', label:'Facebook', badge:'Sorted by Flintel Intent Score',
+    data:[
+      {name:'Chris L.', meta:'SaaS Founders group', score:80, title:'Asking for provider suggestions after an unresolved support escalation.', enrich:'chris.l@brandco.com'},
+      {name:'Nadia F.', meta:'E-commerce Owners group', score:72, title:'Comparing checkout providers after failed transactions during a sale.', enrich:'nadia.f@shopbrand.com'},
+      {name:'Owen P.', meta:'Fintech Builders group', score:68, title:'Asking which payments API has the most reliable webhook delivery.', enrich:'owen.p@fintechbuilders.com'},
+      {name:'Sara V.', meta:'Agency Owners group', score:64, title:'Asking peers what they bill clients for payment integration work.', enrich:'sara.v@agencyowners.com'},
+      {name:'Rafi T.', meta:'DTC Brands group', score:59, title:'Asking if anyone has cut their processing fees below 2.5%.', enrich:'rafi.t@dtcbrands.com'},
+      {name:'Elena M.', meta:'Startup Founders group', score:54, title:'Asking for onboarding-time benchmarks when switching providers.', enrich:'elena.m@startupfounders.com'}
+    ]
+  }
+];
+
+function cardHtml(plat, item) {
+  const scoreClass = item.score >= 80 ? 'hi' : 'mid';
+  const isReddit = plat.key === 'reddit';
+
+  const statsOrEnrich = isReddit
+    ? `<div class="sig-stats">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>${item.votes}</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.5 8.5 0 0 1-4-1L3 20l1.3-3.9a8.4 8.4 0 1 1 16.7-4.6z"/></svg>${item.comments}</span>
+      </div>`
+    : `<div class="sig-enrich">
+        <div class="sig-enrich-blur">${item.enrich}<br>linkedin.com/in/••••••••</div>
+        <div class="sig-enrich-cta"><button class="sig-unlock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>Unlock</button></div>
+      </div>`;
+
+  return `
+    <div class="sig-card">
+      <div class="sig-top">
+        <div class="sig-icon" style="background:${COLORS[plat.key]}">${ICONS[plat.key]}</div>
+        <div class="sig-id">
+          <div class="sig-name">${item.name}</div>
+          <div class="sig-meta">${item.meta}</div>
+        </div>
+        <span class="sig-score ${scoreClass}">${item.score}%</span>
+      </div>
+      <p class="sig-title">${item.title}</p>
+      ${statsOrEnrich}
+      <div class="sig-foot">
+        <a class="sig-link" href="#">View post<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>`;
+}
+
+function sectionHtml(plat) {
+  return `
+    <div class="plat-section">
+      <div class="plat-head">
+        <div class="plat-title">
+          <span class="plat-title-icon" style="background:${COLORS[plat.key]}">${ICONS[plat.key]}</span>
+          ${plat.label}
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="plat-badge">${plat.badge}</span>
+          <div class="plat-nav">
+            <button class="plat-nav-btn" onclick="scrollRow('${plat.key}',-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <button class="plat-nav-btn" onclick="scrollRow('${plat.key}',1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div class="row-wrap">
+        <div class="sig-row" id="row-${plat.key}">
+          ${plat.data.map(item => cardHtml(plat, item)).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+document.getElementById('sections').innerHTML = platforms.map(sectionHtml).join('');
+
+function scrollRow(key, dir) {
+  const row = document.getElementById('row-' + key);
+  row.scrollBy({left: dir * 300, behavior: 'smooth'});
+}
+
+(function(){
+  const params = new URLSearchParams(location.search);
+  const site = params.get('site');
+  if (site) document.getElementById('rep-domain').textContent = site;
+})();
+</script>
 </body>
 </html>
