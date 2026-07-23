@@ -2,182 +2,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Flintel</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHPTRAVELS · AI Concierge</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fustat:wght@400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;background:#FAFAF9;color:#171717;overflow-x:clip;}
-h1,.logo{font-family:"Fustat","Inter",sans-serif;}
 :root{
-  --ink:#171717;--g1:rgba(23,23,23,.8);--g2:rgba(23,23,23,.55);--g3:rgba(23,23,23,.38);--g4:rgba(23,23,23,.14);
-  --hair:rgba(23,23,23,.08);--blue:#6863FC;--bluedeep:#4B46D6;--lime:#B6FF1E;--limedeep:#8FCC00;
-  --ease:cubic-bezier(.25,.1,.25,1);--navh:72px;
+  --bg:#F5F5F7;
+  --white:#FFF;
+  --text:#1D1D1F;
+  --muted:#6E6E73;
+  --faint:#86868B;
+  --sep:#E8E8ED;
+  --brand:#1A5FE8;
+  --brand-tint:#EDF3FE;
+  --bubble:#E9E9EB;
+  --ok:#1D8A4E;
+  --alert:#C2600F;
 }
-
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;height:var(--navh);padding:0 max(24px,4vw);background:rgba(250,250,249,.7);backdrop-filter:saturate(160%) blur(16px);-webkit-backdrop-filter:saturate(160%) blur(16px);border-bottom:1px solid var(--hair);}
-.logo{display:flex;align-items:center;gap:9px;font-size:15.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink);}
-.logo-icon{width:27px;height:27px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(23,23,23,.25),inset 0 1px 1px rgba(255,255,255,.15);}
-.logo-icon svg{width:13px;height:13px;fill:var(--lime);}
-.nav-login{font-size:13.5px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--g4);padding:9px 18px;border-radius:980px;cursor:pointer;transition:transform .15s var(--ease),box-shadow .15s var(--ease),border-color .15s;box-shadow:0 1px 2px rgba(0,0,0,.03);}
-.nav-login:hover{border-color:var(--g3);transform:translateY(-1px);box-shadow:0 6px 14px rgba(0,0,0,.08);}
-.nav-login:active{transform:translateY(0);}
-
-.stage{min-height:100vh;padding-top:var(--navh);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:24px;padding-right:24px;padding-bottom:24px;text-align:center;}
-
-/* ═══ SIDEBAR (added alongside the existing top nav) ═══ */
-.shell-body{display:flex;padding-top:var(--navh);min-height:100vh;}
-.sidebar{width:264px;flex-shrink:0;background:#F4F2EC;border-right:1px solid var(--hair);height:calc(100vh - var(--navh));position:sticky;top:var(--navh);padding:20px 20px 16px;display:flex;flex-direction:column;}
-.side-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
-.side-header-logo{width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:var(--ink);}
-.side-header-logo svg{width:100%;height:100%;fill:var(--ink);}
-.side-header-collapse{width:26px;height:26px;background:none;border:none;display:flex;align-items:center;justify-content:center;color:var(--g2);cursor:pointer;opacity:.75;transition:opacity .15s;}
-.side-header-collapse:hover{opacity:1;}
-.side-header-collapse svg{width:20px;height:20px;}
-
-.side-new{display:flex;align-items:center;gap:11px;background:rgba(23,23,23,.065);border:none;border-radius:980px;padding:13px 16px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;margin-bottom:14px;transition:background .15s;text-align:left;width:100%;}
-.side-new:hover{background:rgba(23,23,23,.1);}
-.side-new-icon{width:24px;height:24px;border-radius:50%;background:rgba(23,23,23,.1);color:var(--g1);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.side-new-icon svg{width:13px;height:13px;}
-
-.side-nav{display:flex;flex-direction:column;margin-bottom:6px;}
-.side-item{display:flex;align-items:center;gap:13px;padding:10px 8px;border-radius:9px;font-size:16px;font-weight:400;color:var(--g1);cursor:pointer;transition:background .15s;}
-.side-item:hover{background:rgba(23,23,23,.05);}
-.side-item svg{width:19px;height:19px;color:var(--g1);flex-shrink:0;}
-
-.side-label{display:none;}
-.side-sub{display:flex;flex-direction:column;margin-bottom:20px;}
-.side-sub-item{padding:8px 8px 8px 40px;font-size:15px;font-weight:400;color:rgba(23,23,23,.55);cursor:pointer;transition:color .15s;border-radius:9px;}
-.side-sub-item:hover{color:var(--ink);}
-
-.side-history-label{display:flex;align-items:center;gap:13px;padding:10px 8px;font-size:16px;font-weight:400;color:var(--g1);margin-bottom:2px;}
-.side-history-label svg{width:19px;height:19px;color:var(--g1);}
-.side-history-empty{padding:4px 8px 4px 40px;font-size:14.5px;color:rgba(23,23,23,.4);}
-
-.side-bottom{margin-top:auto;padding-top:16px;border-top:1px solid var(--hair);}
-.side-signin{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;padding:8px;cursor:pointer;border-radius:9px;transition:background .15s;}
-.side-signin:hover{background:rgba(23,23,23,.05);}
-.side-signin-left{display:flex;align-items:center;gap:11px;}
-.side-signin-avatar{width:28px;height:28px;border-radius:50%;background:#0F6E56;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.side-signin-avatar svg{width:15px;height:15px;color:#fff;}
-.side-signin-text{font-size:16px;font-weight:500;color:var(--ink);}
-.side-signin svg.chev{width:17px;height:17px;color:var(--g2);flex-shrink:0;}
-.main{flex:1;min-width:0;}
-
-.icon-row-wrap{position:relative;display:inline-block;margin-bottom:26px;opacity:0;animation:riseIn .7s var(--ease) forwards;}
-.icon-row-glow{position:absolute;inset:-36px -20px;background:radial-gradient(ellipse at center,rgba(104,99,252,.22),rgba(182,255,30,.14) 55%,transparent 78%);filter:blur(28px);z-index:0;pointer-events:none;}
-.icon-row{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:14px;}
-.icon-tile{width:54px;height:54px;border-radius:17px;display:flex;align-items:center;justify-content:center;position:relative;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.55);transition:transform .22s var(--ease),box-shadow .22s var(--ease);}
-.icon-tile:hover{transform:translateY(-5px) scale(1.06);}
-.icon-tile svg{width:34px;height:34px;position:relative;z-index:1;}
-.icon-tile::after{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(155deg,rgba(255,255,255,.55),rgba(255,255,255,0) 45%);pointer-events:none;}
-.icon-tile.reddit{background:#FF4500;}
-.icon-tile.x{background:#0A0A0A;}
-.icon-tile.linkedin{background:#0A66C2;}
-.icon-tile.facebook{background:#1877F2;}
-
-.greeting{font-size:clamp(24px,3.4vw,34px);font-weight:600;letter-spacing:-.03em;color:var(--ink);margin-bottom:32px;opacity:0;animation:riseIn .7s var(--ease) forwards;animation-delay:.1s;}
-.greeting span{color:var(--g3);font-weight:400;}
-
-.query-wrap{width:100%;max-width:640px;opacity:0;animation:riseIn .8s var(--ease) forwards;animation-delay:.25s;}
-.query-box{background:#fff;border:1px solid var(--hair);border-radius:26px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 12px 32px rgba(0,0,0,.06);padding:6px;transition:border-color .2s,box-shadow .2s;}
-.query-box:focus-within{border-color:var(--g4);box-shadow:0 1px 2px rgba(0,0,0,.03),0 16px 40px rgba(0,0,0,.09);}
-.query-input-row{display:flex;align-items:center;gap:10px;padding:14px 10px 14px 20px;}
-.query-icon{width:18px;height:18px;color:var(--g3);flex-shrink:0;}
-.query-input-row input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:16px;color:var(--ink);font-family:inherit;}
-.query-input-row input::placeholder{color:var(--g3);}
-.query-actions{display:flex;align-items:center;justify-content:space-between;padding:2px 8px 8px 20px;}
-.query-hint{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--g3);}
-.query-hint svg{width:13px;height:13px;}
-.query-submit{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#5c5c5c 0%,#1c1c1c 45%,#000 100%);border:1px solid rgba(255,255,255,.06);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s var(--ease),box-shadow .15s var(--ease);flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,.35),inset 0 1px 2px rgba(255,255,255,.28),inset 0 -4px 6px rgba(0,0,0,.55);}
-.query-submit:hover{transform:translateY(-1px) scale(1.04);box-shadow:0 6px 14px rgba(0,0,0,.4),inset 0 1px 2px rgba(255,255,255,.32),inset 0 -4px 6px rgba(0,0,0,.55);}
-.query-submit:active{transform:scale(.94);}
-.query-submit svg{width:16px;height:16px;color:#fff;}
-
-.chip-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px;opacity:0;animation:riseIn .8s var(--ease) forwards;animation-delay:.4s;}
-.chip{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:var(--g2);background:#fff;border:1px solid var(--hair);padding:8px 14px;border-radius:980px;cursor:pointer;transition:border-color .15s,color .15s;}
-.chip:hover{border-color:var(--g3);color:var(--ink);}
-.chip svg{width:12px;height:12px;flex-shrink:0;}
-
-.foot-note{margin-top:26px;font-size:12px;color:var(--g3);opacity:0;animation:riseIn .8s var(--ease) forwards;animation-delay:.5s;}
-
-@keyframes riseIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-
-@media(max-width:900px){
-  .sidebar{display:none;}
+*{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{
+  margin:0;background:var(--white);color:var(--text);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:17px;line-height:1.5;letter-spacing:-.01em;
 }
-@media(max-width:560px){
-  .query-input-row{padding:12px 6px 12px 16px;}
-  .query-input-row input{font-size:15px;}
-  .chip-row{gap:6px;}
-  .chip{padding:7px 12px;font-size:12px;}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+/* ---------- intro ---------- */
+.intro{padding:120px 0 96px;text-align:center}
+.eyebrow{font-size:15px;font-weight:600;color:var(--brand);margin:0 0 16px;letter-spacing:0}
+.intro h1{
+  font-size:clamp(38px,6vw,64px);font-weight:700;letter-spacing:-.035em;
+  line-height:1.06;margin:0 auto 22px;max-width:15ch;
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important;}}
+.intro p{font-size:20px;line-height:1.5;color:var(--muted);margin:0 auto;max-width:44ch;letter-spacing:-.015em}
+
+/* ---------- section ---------- */
+.sec{padding:0 0 112px}
+.sec-head{max-width:38ch;margin:0 auto 44px;text-align:center}
+.step{font-size:14px;font-weight:600;color:var(--faint);margin:0 0 12px;letter-spacing:0}
+.sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.12;margin:0 0 14px}
+.sec-head p{font-size:17px;color:var(--muted);margin:0;line-height:1.55}
+.sec-head p b{color:var(--text);font-weight:600}
+
+.stage{background:var(--bg);border-radius:24px;padding:64px 32px;display:flex;justify-content:center}
+.stage.tight{padding:48px 28px}
+
+/* ---------- phone ---------- */
+.phone{width:340px;max-width:100%;background:#1D1D1F;border-radius:52px;padding:9px;flex:none;
+  box-shadow:0 22px 50px rgba(0,0,0,.16)}
+.screen{background:var(--white);border-radius:44px;overflow:hidden}
+.status{display:flex;align-items:center;padding:16px 26px 8px;font-size:14px;font-weight:600;position:relative}
+.status .island{position:absolute;left:50%;top:11px;transform:translateX(-50%);
+  width:82px;height:22px;background:#1D1D1F;border-radius:99px}
+.status .ic{margin-left:auto;display:flex;align-items:center;gap:5px}
+.nav{padding:6px 22px 14px;text-align:center;border-bottom:.5px solid var(--sep)}
+.nav .who{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.nav .sub{font-size:12px;color:var(--faint);margin-top:1px}
+.thread{padding:18px 16px 8px;display:flex;flex-direction:column;gap:8px}
+.home{display:flex;justify-content:center;padding:8px 0 10px}
+.home i{width:126px;height:5px;border-radius:99px;background:#1D1D1F;opacity:.22}
+
+/* ---------- bubbles ---------- */
+.b{max-width:80%;padding:10px 15px;border-radius:20px;font-size:15px;line-height:1.42;letter-spacing:-.01em}
+.b.me{align-self:flex-end;background:var(--brand);color:#FFF;border-bottom-right-radius:6px}
+.b.ai{align-self:flex-start;background:var(--bubble);border-bottom-left-radius:6px}
+
+/* inline generated UI — no borders, tinted surface */
+.card{align-self:flex-start;width:86%;background:var(--bubble);border-radius:20px;
+  border-bottom-left-radius:6px;padding:15px;font-size:15px;letter-spacing:-.01em}
+.card .say{margin:0 0 14px;line-height:1.42}
+.card .say:last-child{margin-bottom:0}
+
+.f{background:var(--white);border-radius:12px;padding:10px 13px;margin-bottom:7px;
+  display:flex;justify-content:space-between;align-items:center}
+.f .k{font-size:13px;color:var(--faint)}
+.f .v{font-size:15px;font-weight:500}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.f2 .f{margin-bottom:0;display:block}
+.f2 .v{margin-top:2px}
+
+/* option rows */
+.opt{background:var(--white);border-radius:14px;padding:13px 14px;margin-bottom:7px}
+.opt.pick{background:var(--brand-tint);box-shadow:inset 0 0 0 1.5px var(--brand)}
+.opt .r1{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.opt .n{font-size:15px;font-weight:600;letter-spacing:-.015em}
+.opt .p{font-size:15px;font-weight:600;white-space:nowrap}
+.opt .d{font-size:13px;color:var(--muted);margin:3px 0 0;line-height:1.4}
+.opt .inc{font-size:13px;color:var(--faint);margin:6px 0 0;line-height:1.4}
+.rec{font-size:12px;font-weight:600;color:var(--brand);margin:0 0 6px}
+
+/* summary rows */
+.sum{background:var(--white);border-radius:14px;padding:4px 14px}
+.sum .r{display:flex;justify-content:space-between;gap:14px;padding:10px 0;font-size:14px;
+  border-bottom:.5px solid var(--sep)}
+.sum .r:last-child{border-bottom:0}
+.sum .r .k{color:var(--muted)}
+.sum .r .v{font-weight:500;text-align:right}
+.sum .r.big{padding:13px 0}
+.sum .r.big .k,.sum .r.big .v{font-size:17px;font-weight:600;color:var(--text)}
+
+.act{display:block;text-align:center;background:var(--brand);color:#FFF;border-radius:12px;
+  padding:12px;font-size:15px;font-weight:600;margin-top:10px;letter-spacing:-.01em}
+.act.quiet{background:var(--white);color:var(--brand)}
+
+.ref{background:var(--white);border-radius:14px;padding:16px;text-align:center;margin-bottom:8px}
+.ref .lab{font-size:12px;color:var(--faint);margin:0}
+.ref .code{font-size:28px;font-weight:700;letter-spacing:.04em;margin:4px 0 0}
+.done{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.done span{font-size:13.5px;color:var(--ok);font-weight:500}
+.foot{font-size:12.5px;color:var(--faint);margin:12px 0 0;text-align:center}
+
+/* ---------- desktop panels ---------- */
+.panel{width:100%;max-width:520px;background:var(--white);border-radius:20px;padding:28px;
+  box-shadow:0 18px 44px rgba(0,0,0,.09)}
+.panel .top{font-size:13px;color:var(--faint);margin:0 0 18px}
+.panel h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin:0 0 4px}
+.panel .when{font-size:14px;color:var(--muted);margin:0 0 20px}
+.checks{list-style:none;padding:0;margin:20px 0 0}
+.checks li{font-size:14.5px;padding:7px 0 7px 26px;position:relative;color:var(--text)}
+.checks li:before{content:"";position:absolute;left:0;top:12px;width:14px;height:14px;
+  border-radius:99px;background:var(--ok)}
+.checks li:after{content:"";position:absolute;left:4px;top:16px;width:6px;height:3px;
+  border-left:1.6px solid #fff;border-bottom:1.6px solid #fff;transform:rotate(-45deg)}
+.checks li.flag:before{background:var(--alert)}
+.checks li.flag:after{left:6.2px;top:14px;width:0;height:6px;border:0;border-left:1.6px solid #fff;transform:none}
+.acts{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:8px;margin-top:24px}
+.acts span{text-align:center;border-radius:12px;padding:12px;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.acts .go{background:var(--brand);color:#FFF}
+.acts .alt{background:var(--bg);color:var(--text)}
+
+/* dashboard */
+.dash{width:100%;max-width:760px}
+.hero-stat{background:var(--white);border-radius:20px;padding:38px 34px;margin-bottom:12px;
+  box-shadow:0 18px 44px rgba(0,0,0,.09)}
+.hero-stat .lab{font-size:14px;color:var(--muted);margin:0 0 10px}
+.hero-stat .num{font-size:clamp(44px,7vw,68px);font-weight:700;letter-spacing:-.04em;line-height:1;margin:0;color:var(--brand)}
+.hero-stat .sub{font-size:15px;color:var(--muted);margin:14px 0 0;max-width:46ch}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{background:var(--white);border-radius:18px;padding:22px 20px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.tile .lab{font-size:13px;color:var(--muted);margin:0 0 8px}
+.tile .num{font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:1;margin:0}
+.tile .sub{font-size:13px;color:var(--faint);margin:8px 0 0;line-height:1.4}
+
+/* admin */
+.admin{width:100%;max-width:820px;background:var(--white);border-radius:20px;overflow:hidden;
+  box-shadow:0 18px 44px rgba(0,0,0,.09);display:grid;grid-template-columns:186px 1fr}
+.side{background:var(--bg);padding:22px 0}
+.side .brand{padding:0 20px 18px;font-size:15px;font-weight:700;letter-spacing:-.02em}
+.side a{display:block;padding:9px 20px;font-size:14px;color:var(--muted);text-decoration:none}
+.side a.on{color:var(--brand);font-weight:600;background:var(--brand-tint)}
+.main{padding:24px 26px 26px}
+.main h4{font-size:19px;font-weight:600;letter-spacing:-.02em;margin:0 0 3px}
+.main .hint{font-size:13.5px;color:var(--faint);margin:0 0 18px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-size:12.5px;font-weight:500;color:var(--faint);text-align:left;padding:0 10px 10px;
+  border-bottom:.5px solid var(--sep)}
+td{padding:13px 10px;border-bottom:.5px solid var(--sep)}
+tr:last-child td{border-bottom:0}
+td.n{font-weight:500}
+.via{font-size:12.5px;color:var(--brand);font-weight:500}
+.via.man{color:var(--faint);font-weight:400}
+
+/* ---------- outro ---------- */
+.outro{background:var(--bg);border-radius:24px;padding:64px 40px;margin-bottom:96px;text-align:center}
+.outro h2{font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.03em;margin:0 auto 16px;max-width:22ch}
+.outro p{font-size:17px;color:var(--muted);margin:0 auto;max-width:52ch;line-height:1.6}
+.outro p + p{margin-top:14px}
+
+@media(max-width:760px){
+  .tiles{grid-template-columns:1fr 1fr}
+  .admin{grid-template-columns:1fr}
+  .side{display:none}
+  .stage{padding:36px 16px;border-radius:20px}
+  .intro{padding:80px 0 64px}
+}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<nav>
-  <a class="logo" href="#"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2.5c.5 4.2 2.8 6.5 7 7-4.2.5-6.5 2.8-7 7-.5-4.2-2.8-6.5-7-7 4.2-.5 6.5-2.8 7-7z"/></svg></div>Flintel</a>
-  <button class="nav-login">Log in</button>
-</nav>
+<header class="intro">
+  <p class="eyebrow">PHPTRAVELS · AI Concierge</p>
+  <h1>It books. It changes. It refunds.</h1>
+  <p>An agent that handles the whole conversation, inside the platform your agencies already run.</p>
+</header>
 
-<div class="stage">
-  <div class="icon-row-wrap">
-    <div class="icon-row-glow"></div>
-    <div class="icon-row">
-      <div class="icon-tile reddit"><svg viewBox="0 0 24 24"><circle cx="9" cy="13" r="1.6" fill="#fff"/><circle cx="15" cy="13" r="1.6" fill="#fff"/><path d="M8.4 15.8c.9.8 2.2 1.3 3.6 1.3s2.7-.5 3.6-1.3" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.1" fill="#fff"/><line x1="12" y1="8.5" x2="12" y2="10" stroke="#fff" stroke-width="1.2"/></svg></div>
-      <div class="icon-tile x"><svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div>
-      <div class="icon-tile linkedin"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.8" fill="#fff"/><rect x="6.4" y="11.5" width="3.2" height="9" rx="0.6" fill="#fff"/><path d="M12.3 11.5h3v1.5c.6-1 1.7-1.7 3-1.7 2.3 0 3.6 1.5 3.6 4.3v5h-3v-4.4c0-1.1-.4-2-1.6-2-.9 0-1.5.6-1.8 1.2-.1.2-.1.6-.1.9v4.3h-3V11.5z" fill="#fff"/></svg></div>
-      <div class="icon-tile facebook"><svg viewBox="0 0 24 24"><path d="M13.6 21v-7.2h2.2l.3-2.6h-2.5V9.5c0-.7.2-1.2 1.3-1.2h1.3V6c-.2 0-1-.1-1.9-.1-1.9 0-3.1 1.1-3.1 3.2v2.1H9v2.6h2.2V21h2.4z" fill="#fff"/></svg></div>
+<!-- 01 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">One</p>
+    <h2>People don't fill in forms</h2>
+    <p>They type one long sentence. The agent reads it and <b>asks only for what's missing</b>.</p>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>21:14</span><span class="island"></span><span class="ic">
+        <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M8 9.6 5.6 7.1a3.4 3.4 0 0 1 4.8 0Z" fill="#1D1D1F"/><path d="M3.4 4.9a6.6 6.6 0 0 1 9.2 0" stroke="#1D1D1F" stroke-width="1.5" stroke-linecap="round"/><path d="M1 2.4a10 10 0 0 1 14 0" stroke="#1D1D1F" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#1D1D1F"/><path d="M23.4 4.2v3.6a2 2 0 0 0 0-3.6Z" fill="#1D1D1F" fill-opacity=".4"/></svg>
+      </span></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="thread">
+        <div class="b me">Taking the family to Istanbul for a week in April. Somewhere central, walking distance to the old city. Around $2,800 for everything.</div>
+        <div class="card">
+          <p class="say">Central, under $2,800. Two things I still need.</p>
+          <div class="f"><span class="k">Departing from</span><span class="v">Dubai</span></div>
+          <div class="f2">
+            <div class="f"><span class="k">Dates</span><div class="v">11–18 Apr</div></div>
+            <div class="f"><span class="k">Travellers</span><div class="v">2 + 2 kids</div></div>
+          </div>
+          <span class="act">Find trips</span>
+        </div>
+      </div>
+      <div class="home"><i></i></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Two</p>
+    <h2>Answers you can compare</h2>
+    <p>Not a paragraph of options. <b>Real choices</b>, with a recommendation.</p>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>21:16</span><span class="island"></span><span class="ic">
+        <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
+      </span></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="thread">
+        <div class="b ai">Three trips under budget, all walkable to Sultanahmet.</div>
+        <div class="card">
+          <p class="rec">Recommended</p>
+          <div class="opt pick">
+            <div class="r1"><span class="n">Sirkeci Mansion</span><span class="p">$2,740</span></div>
+            <p class="d">6 minutes from Hagia Sophia · 7 nights</p>
+            <p class="inc">Direct both ways · connecting rooms · breakfast · transfers</p>
+          </div>
+          <div class="opt">
+            <div class="r1"><span class="n">Neorion Hotel</span><span class="p">$2,590</span></div>
+            <p class="d">9 minutes · 7 nights</p>
+            <p class="inc">One stop returning · family room · breakfast</p>
+          </div>
+          <div class="opt">
+            <div class="r1"><span class="n">Levni Hotel &amp; Spa</span><span class="p">$2,380</span></div>
+            <p class="d">18 minutes · 7 nights</p>
+            <p class="inc">One stop each way · two twins · non-refundable</p>
+          </div>
+        </div>
+      </div>
+      <div class="home"><i></i></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Three</p>
+    <h2>It knows the rules</h2>
+    <p>Where other chatbots hand over to a human, it <b>answers and keeps going</b>.</p>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>21:19</span><span class="island"></span><span class="ic">
+        <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
+      </span></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="thread">
+        <div class="b me">School holidays might shift. What does moving the dates cost us?</div>
+        <div class="card">
+          <p class="say">On the Sirkeci Mansion trip.</p>
+          <div class="sum">
+            <div class="r"><span class="k">Hotel, 14+ days out</span><span class="v">Free</span></div>
+            <div class="r"><span class="k">Flights, same cabin</span><span class="v">$85 each, plus fare difference</span></div>
+            <div class="r"><span class="k">Transfers</span><span class="v">Rebooked free</span></div>
+          </div>
+          <p class="say" style="margin:14px 0 0">I can hold it 48 hours while the school confirms. Nothing to pay now.</p>
+          <span class="act">Hold for 48 hours</span>
+        </div>
+        <div class="b me">Perfect, hold it</div>
+      </div>
+      <div class="home"><i></i></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Four</p>
+    <h2>Booked at 2:47 in the morning</h2>
+    <p>Documents, payment, confirmation. <b>Revenue that doesn't exist today</b>, because nobody is at the desk.</p>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>02:47</span><span class="island"></span><span class="ic">
+        <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="9" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
+      </span></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="thread">
+        <div class="b me">Passports uploaded. Paying now.</div>
+        <div class="card">
+          <div class="done"><span>4 passengers verified</span><span>Payment received, $2,740</span></div>
+          <div class="ref"><p class="lab">Booking reference</p><p class="code">QX4T7M</p></div>
+          <div class="sum">
+            <div class="r"><span class="k">Sirkeci Mansion</span><span class="v">7 nights</span></div>
+            <div class="r"><span class="k">Dubai to Istanbul, direct</span><span class="v">11 April</span></div>
+            <div class="r"><span class="k">Transfers</span><span class="v">Both ways</span></div>
+          </div>
+          <p class="foot">Completed at 2:47. No staff online.</p>
+        </div>
+      </div>
+      <div class="home"><i></i></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Five</p>
+    <h2>And it cleans up afterwards</h2>
+    <p>Refunds are the most expensive work in an agency. It gives <b>the exact amount and the exact date</b>.</p>
+  </div>
+  <div class="stage">
+    <div class="phone"><div class="screen">
+      <div class="status"><span>09:32</span><span class="island"></span><span class="ic">
+        <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="16" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
+      </span></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="thread">
+        <div class="b me">Something came up. I need to cancel QX4T7M</div>
+        <div class="b ai">Surname on the booking?</div>
+        <div class="b me">Karim</div>
+        <div class="card">
+          <p class="say">Found it. Four travellers, 11 April — 23 days away, so free cancellation still applies.</p>
+          <div class="sum">
+            <div class="r"><span class="k">Paid</span><span class="v">$2,740</span></div>
+            <div class="r"><span class="k">Hotel</span><span class="v">Fully refunded</span></div>
+            <div class="r"><span class="k">Airline fee</span><span class="v">−$180</span></div>
+            <div class="r big"><span class="k">Refund</span><span class="v">$2,560</span></div>
+            <div class="r"><span class="k">Back on your card by</span><span class="v">28 March</span></div>
+          </div>
+          <span class="act">Confirm cancellation</span>
+          <span class="act quiet">Move the dates instead</span>
+        </div>
+      </div>
+      <div class="home"><i></i></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Six</p>
+    <h2>The agency decides</h2>
+    <p>Nothing commits without a tap — until they <b>choose to let it</b>.</p>
+  </div>
+  <div class="stage tight">
+    <div class="panel">
+      <p class="top">Waiting for approval · 2 of 7</p>
+      <h3>Karim family · 4 travellers</h3>
+      <p class="when">Istanbul, 11–18 April · came in on WhatsApp at 2:47</p>
+      <div class="sum" style="background:var(--bg)">
+        <div class="r"><span class="k">Sirkeci Mansion and flights, 7 nights</span><span class="v">$2,740</span></div>
+        <div class="r"><span class="k">Supplier cost</span><span class="v">$2,330</span></div>
+        <div class="r big"><span class="k">Margin</span><span class="v">$410 · 15%</span></div>
+      </div>
+      <ul class="checks">
+        <li>Within your published price band</li>
+        <li>Rooms and seats confirmed</li>
+        <li>Payment cleared in full</li>
+        <li class="flag">Child passport expires in 7 months</li>
+      </ul>
+      <div class="acts">
+        <span class="go">Approve and book</span>
+        <span class="alt">Edit</span>
+        <span class="alt">Reject</span>
+      </div>
     </div>
   </div>
-  <h1 class="greeting">Where's your next customer <span>talking?</span></h1>
+</section>
 
-  <div class="query-wrap">
-    <div class="query-box">
-      <div class="query-input-row">
-        <svg class="query-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
-        <input id="query-input" type="text" placeholder="yourwebsite.com" autofocus onkeydown="if(event.key==='Enter')submitQuery()">
+<!-- 07 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Seven</p>
+    <h2>The reason they renew</h2>
+    <p>What the agency owner opens on a Monday morning.</p>
+  </div>
+  <div class="stage tight">
+    <div class="dash">
+      <div class="hero-stat">
+        <p class="lab">Booked outside office hours, last 30 days</p>
+        <p class="num">$186,400</p>
+        <p class="sub">214 trips completed between 8pm and 9am, with nobody online.</p>
       </div>
-      <div class="query-actions">
-        <div class="query-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Ready in seconds</div>
-        <button class="query-submit" onclick="submitQuery()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg>
-        </button>
+      <div class="tiles">
+        <div class="tile"><p class="lab">Enquiries</p><p class="num">1,482</p><p class="sub">WhatsApp, web, Instagram</p></div>
+        <div class="tile"><p class="lab">Handled end to end</p><p class="num">88%</p><p class="sub">1,301 without a person</p></div>
+        <div class="tile"><p class="lab">Passed to staff</p><p class="num">181</p><p class="sub">Groups, complex refunds</p></div>
+        <div class="tile"><p class="lab">First reply</p><p class="num">8 sec</p><p class="sub">Was 41 minutes by email</p></div>
+        <div class="tile"><p class="lab">Enquiry to booking</p><p class="num">23%</p><p class="sub">Up from 14%</p></div>
+        <div class="tile"><p class="lab">Hours given back</p><p class="num">312</p><p class="sub">About two full-time roles</p></div>
       </div>
-    </div>
-
-    <div class="chip-row">
-      <div class="chip" onclick="tryExample('acmepay.com')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Try acmepay.com</div>
-      <div class="chip" onclick="tryExample('shieldsec.io')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>Try shieldsec.io</div>
-      <div class="chip" onclick="tryExample('crmflow.com')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>Try crmflow.com</div>
     </div>
   </div>
+</section>
 
-  <div class="foot-note">Free report · No card required · Built for six industries</div>
+<!-- 08 -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Eight</p>
+    <h2>Inside the platform you already sell</h2>
+    <p>Same dashboard, same reports. <b>A module you license</b>, not a product they have to adopt.</p>
+  </div>
+  <div class="stage tight">
+    <div class="admin">
+      <div class="side">
+        <div class="brand">PHPTRAVELS</div>
+        <a href="#">Dashboard</a>
+        <a href="#" class="on">Bookings</a>
+        <a href="#">Customers</a>
+        <a href="#">Packages</a>
+        <a href="#">Suppliers</a>
+        <a href="#">Payments</a>
+        <a href="#">Reports</a>
+      </div>
+      <div class="main">
+        <h4>Bookings</h4>
+        <p class="hint">All channels, last 30 days</p>
+        <table>
+          <thead><tr><th>Reference</th><th>Customer</th><th>Trip</th><th>Value</th><th>Booked via</th></tr></thead>
+          <tbody>
+            <tr><td class="n">QX4T7M</td><td>Karim family</td><td>Istanbul, 7 nights</td><td>$2,740</td><td><span class="via">AI Concierge</span></td></tr>
+            <tr><td class="n">RB9K2P</td><td>S. Bilal</td><td>Baku, 5 nights</td><td>$1,480</td><td><span class="via man">Counter</span></td></tr>
+            <tr><td class="n">TM7W1D</td><td>N. Rehman</td><td>Dubai to London</td><td>$964</td><td><span class="via">AI Concierge</span></td></tr>
+            <tr><td class="n">HV3Q8L</td><td>Q. Mahmood</td><td>Bangkok, 6 nights</td><td>$2,190</td><td><span class="via man">Phone</span></td></tr>
+            <tr><td class="n">ZP5N6C</td><td>F. Iqbal</td><td>Maldives, 5 nights</td><td>$4,110</td><td><span class="via">AI Concierge</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="outro">
+  <h2>One conversation, start to finish</h2>
+  <p>Screens one to five are a single thread — the same family, the same booking reference, across three days. Six answers trust, seven answers price, eight answers why it's yours.</p>
+  <p>Figures are illustrative and should be replaced with real agency data before any commercial conversation.</p>
+</section>
+
 </div>
-
-<script>
-'use strict';
-function normalizeDomain(raw) {
-  let v = String(raw || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split(/[/?#]/)[0];
-  return /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/.test(v) ? v : null;
-}
-function submitQuery() {
-  const input = document.getElementById('query-input');
-  const domain = normalizeDomain(input.value);
-  if (!domain) { input.focus(); return; }
-  alert('Would proceed to scanning: ' + domain);
-}
-function tryExample(domain) {
-  document.getElementById('query-input').value = domain;
-  submitQuery();
-}
-</script>
 </body>
 </html>
