@@ -167,6 +167,36 @@ td.n{font-weight:500}
 .via{font-size:12.5px;color:var(--brand);font-weight:500}
 .via.man{color:var(--faint);font-weight:400}
 
+
+/* proof + model slides */
+.proof{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:760px}
+.pf{background:var(--white);border-radius:18px;padding:24px 22px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.pf .big{font-size:34px;font-weight:700;letter-spacing:-.03em;margin:0 0 8px;color:var(--brand)}
+.pf .t{font-size:15px;font-weight:600;margin:0 0 6px;letter-spacing:-.015em}
+.pf .d{font-size:14px;color:var(--muted);margin:0;line-height:1.45}
+.pf .src{font-size:12px;color:var(--faint);margin:10px 0 0}
+.pf.full{grid-column:span 2}
+
+.flow{width:100%;max-width:720px}
+.step-row{display:flex;gap:18px;align-items:flex-start;background:var(--white);border-radius:16px;
+  padding:20px 22px;margin-bottom:10px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.step-row .n{width:28px;height:28px;border-radius:99px;background:var(--brand-tint);color:var(--brand);
+  font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.step-row .t{font-size:16px;font-weight:600;letter-spacing:-.015em;margin:0 0 4px}
+.step-row .d{font-size:14.5px;color:var(--muted);margin:0;line-height:1.45}
+
+.deal{width:100%;max-width:720px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.col{background:var(--white);border-radius:18px;padding:24px 22px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.col h5{font-size:15px;font-weight:600;margin:0 0 14px;letter-spacing:-.015em}
+.col ul{list-style:none;padding:0;margin:0}
+.col li{font-size:14.5px;color:var(--muted);padding:6px 0 6px 18px;position:relative;line-height:1.45}
+.col li:before{content:"";position:absolute;left:0;top:14px;width:5px;height:5px;border-radius:99px;background:var(--brand)}
+.deal .ask{grid-column:span 2;background:var(--brand);color:#FFF;text-align:center;padding:30px 24px}
+.deal .ask h5{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px;color:#FFF}
+.deal .ask p{font-size:15.5px;margin:0;opacity:.9;line-height:1.5}
+.note{font-size:12.5px;color:var(--faint);margin:14px 0 0;text-align:center}
+@media(max-width:760px){.proof,.deal{grid-template-columns:1fr}.pf.full,.deal .ask{grid-column:span 1}}
+
 /* ---------- outro ---------- */
 .outro{background:var(--bg);border-radius:24px;padding:64px 40px;margin-bottom:96px;text-align:center}
 .outro h2{font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.03em;margin:0 auto 16px;max-width:22ch}
@@ -191,6 +221,45 @@ td.n{font-weight:500}
   <p>An agent that handles the whole conversation, inside the platform your agencies already run.</p>
 </header>
 
+<!-- why now -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">Why now</p>
+    <h2>Travellers are already asking for this</h2>
+    <p>The demand exists. What's missing is anyone offering it to agencies your size.</p>
+  </div>
+  <div class="stage tight">
+    <div class="proof">
+      <div class="pf full">
+        <p class="big">89%</p>
+        <p class="t">of travellers say they want to use AI when planning a trip</p>
+        <p class="d">Not a future preference. It is how people already expect to shop for travel, and the gap between that expectation and what a typical agency can answer at 11pm is where bookings are lost.</p>
+        <p class="src">Booking.com, Global AI Sentiment Report</p>
+      </div>
+      <div class="pf">
+        <p class="t">Hotel groups are opening up to agents</p>
+        <p class="d">Major chains including Marriott and IHG have made inventory and pricing reachable by autonomous booking tools. The supply side is preparing for this.</p>
+        <p class="src">Industry reporting, 2026</p>
+      </div>
+      <div class="pf">
+        <p class="t">The funnel is shifting</p>
+        <p class="d">IDC forecasts that agentic AI is changing how travel is discovered and booked, forcing brands to rethink how they get found at all.</p>
+        <p class="src">IDC FutureScape</p>
+      </div>
+      <div class="pf">
+        <p class="t">But people still want a name they trust</p>
+        <p class="d">Research shows travellers happily use AI to explore, then want a trusted brand when money changes hands. That favours agencies — if their brand is the one answering.</p>
+        <p class="src">Expedia, AI Trust Gap research</p>
+      </div>
+      <div class="pf">
+        <p class="t">Nobody is building it for small agencies</p>
+        <p class="d">What exists today is sold to airlines and large corporate travel firms at enterprise prices. The 4,800 agencies running PHPTRAVELS are not in that market. That is the opening.</p>
+        <p class="src">The gap this module fills</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 01 -->
 <section class="sec">
   <div class="sec-head">
@@ -205,7 +274,7 @@ td.n{font-weight:500}
         <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M8 9.6 5.6 7.1a3.4 3.4 0 0 1 4.8 0Z" fill="#1D1D1F"/><path d="M3.4 4.9a6.6 6.6 0 0 1 9.2 0" stroke="#1D1D1F" stroke-width="1.5" stroke-linecap="round"/><path d="M1 2.4a10 10 0 0 1 14 0" stroke="#1D1D1F" stroke-width="1.5" stroke-linecap="round"/></svg>
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#1D1D1F"/><path d="M23.4 4.2v3.6a2 2 0 0 0 0-3.6Z" fill="#1D1D1F" fill-opacity=".4"/></svg>
       </span></div>
-      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">WhatsApp · replies instantly</div></div>
       <div class="thread">
         <div class="b me">Taking the family to Istanbul for a week in April. Somewhere central, walking distance to the old city. Around $2,800 for everything.</div>
         <div class="card">
@@ -236,7 +305,7 @@ td.n{font-weight:500}
         <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
       </span></div>
-      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">WhatsApp · replies instantly</div></div>
       <div class="thread">
         <div class="b ai">Three trips under budget, all walkable to Sultanahmet.</div>
         <div class="card">
@@ -276,7 +345,7 @@ td.n{font-weight:500}
         <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="14" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
       </span></div>
-      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">WhatsApp · replies instantly</div></div>
       <div class="thread">
         <div class="b me">School holidays might shift. What does moving the dates cost us?</div>
         <div class="card">
@@ -309,7 +378,7 @@ td.n{font-weight:500}
         <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="9" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
       </span></div>
-      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">WhatsApp · replies instantly</div></div>
       <div class="thread">
         <div class="b me">Passports uploaded. Paying now.</div>
         <div class="card">
@@ -341,7 +410,7 @@ td.n{font-weight:500}
         <svg width="17" height="11" viewBox="0 0 17 11"><rect y="7.5" width="2.6" height="3.5" rx="1"/><rect x="4.2" y="5" width="2.6" height="6" rx="1"/><rect x="8.4" y="2.5" width="2.6" height="8.5" rx="1"/><rect x="12.6" width="2.6" height="11" rx="1"/></svg>
         <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="#1D1D1F" stroke-opacity=".4" stroke-width="1.2"/><rect x="2.3" y="2.3" width="16" height="7.4" rx="1.8" fill="#1D1D1F"/></svg>
       </span></div>
-      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">Usually replies instantly</div></div>
+      <div class="nav"><div class="who">PHPTRAVELS</div><div class="sub">WhatsApp · replies instantly</div></div>
       <div class="thread">
         <div class="b me">Something came up. I need to cancel QX4T7M</div>
         <div class="b ai">Surname on the booking?</div>
@@ -387,6 +456,7 @@ td.n{font-weight:500}
         <li>Payment cleared in full</li>
         <li class="flag">Child passport expires in 7 months</li>
       </ul>
+      <p class="note" style="text-align:left">Illustrative figures.</p>
       <div class="acts">
         <span class="go">Approve and book</span>
         <span class="alt">Edit</span>
@@ -418,6 +488,7 @@ td.n{font-weight:500}
         <div class="tile"><p class="lab">Enquiry to booking</p><p class="num">23%</p><p class="sub">Up from 14%</p></div>
         <div class="tile"><p class="lab">Hours given back</p><p class="num">312</p><p class="sub">About two full-time roles</p></div>
       </div>
+      <p class="note">Illustrative figures — to be replaced with real agency data.</p>
     </div>
   </div>
 </section>
@@ -459,10 +530,63 @@ td.n{font-weight:500}
   </div>
 </section>
 
+<!-- how -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">How it works</p>
+    <h2>One brain, every install</h2>
+    <p>PHPTRAVELS is self-hosted. The agent isn't — and that's what makes it licensable.</p>
+  </div>
+  <div class="stage tight">
+    <div class="flow">
+      <div class="step-row"><span class="n">1</span><div><p class="t">The agent runs as a hosted service</p><p class="d">One system, maintained centrally. Agencies never install, update or manage a model.</p></div></div>
+      <div class="step-row"><span class="n">2</span><div><p class="t">Each install talks to it over the existing API</p><p class="d">The agent reads live inventory and writes bookings through the same endpoints PHPTRAVELS already exposes. No change to the core product.</p></div></div>
+      <div class="step-row"><span class="n">3</span><div><p class="t">Every agency configures its own</p><p class="d">Their policies, their fare rules, their markup, their tone, their brand. Nothing is shared between agencies.</p></div></div>
+      <div class="step-row"><span class="n">4</span><div><p class="t">It hands over when it should</p><p class="d">Low confidence, group travel, anything outside policy — routed to a human with the full conversation attached.</p></div></div>
+      <div class="step-row"><span class="n">5</span><div><p class="t">PHPTRAVELS sells it as a module</p><p class="d">Listed alongside flights, hotels and visas. Billed monthly, or per completed booking.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- offer -->
+<section class="sec">
+  <div class="sec-head">
+    <p class="step">The proposal</p>
+    <h2>Prove it on three agencies</h2>
+    <p>Not a purchase. A 60-day pilot that costs PHPTRAVELS nothing to find out.</p>
+  </div>
+  <div class="stage tight">
+    <div class="deal">
+      <div class="col">
+        <h5>What I bring</h5>
+        <ul>
+          <li>Design and build of the full agent</li>
+          <li>Hosting, model costs and maintenance</li>
+          <li>Onboarding for the three pilot agencies</li>
+          <li>Weekly numbers on what it actually converted</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>What PHPTRAVELS brings</h5>
+        <ul>
+          <li>API access to a sandbox install</li>
+          <li>Three agencies willing to test</li>
+          <li>The brand it ships under</li>
+          <li>A decision at day sixty</li>
+        </ul>
+      </div>
+      <div class="col ask">
+        <h5>If it works, it becomes a module in your catalogue</h5>
+        <p>Sold to your agencies as a monthly add-on, on a revenue share. New recurring income on top of licence sales, and the AI story before any competing platform has one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="outro">
-  <h2>One conversation, start to finish</h2>
+  <h2>Fifteen minutes</h2>
   <p>Screens one to five are a single thread — the same family, the same booking reference, across three days. Six answers trust, seven answers price, eight answers why it's yours.</p>
-  <p>Figures are illustrative and should be replaced with real agency data before any commercial conversation.</p>
+  <p>All figures in this document are illustrative. They describe the shape of the opportunity, not a deployment.</p>
 </section>
 
 </div>
