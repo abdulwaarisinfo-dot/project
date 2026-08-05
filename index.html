@@ -4,916 +4,527 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdGenSi — Hero</title>
 
-  <!-- ================= SEO ================= -->
-  <title>AdGenSi | AI Advertising Agency, Video Ads and Cinematic Production</title>
-  <meta name="description" content="AdGenSi combines AI creative, cinematic production, video advertising, performance marketing and creative automation to produce high-impact campaigns for ambitious global brands." />
-  <meta name="keywords" content="AI advertising agency, AI creative agency, video advertising agency, cinematic production agency, AI video ads, product advertising, performance creative, creative automation, commercial video production, global advertising agency" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="canonical" href="https://adgensi.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="AdGenSi | AI Advertising Agency & Cinematic Production" />
-  <meta property="og:description" content="AI creative, cinematic production and performance strategy for advertising that earns attention and drives action." />
-  <meta property="og:url" content="https://adgensi.com/" />
-  <meta property="og:image" content="https://adgensi.com/assets/images/hero-poster.webp" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" type="image/svg+xml" href="https://adgensi.com/assets/images/favicon.svg" />
-
-  <!-- ================= FONTS ================= -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- ================= TAILWIND (CDN) ================= -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: { extend: {
-        colors: { ink:'#000000', soft:'#080808', char:'#111111', red:'#E10600', redb:'#FF1A12', redd:'#780000', warm:'#F6F4F1', grayx:'#A3A3A3' },
-        fontFamily: { display:['Manrope','system-ui','sans-serif'], sans:['Manrope','system-ui','sans-serif'], mono:['"JetBrains Mono"','ui-monospace','monospace'] },
-      } },
-    };
+    tailwind.config = { theme: { extend: {
+      colors: { ink:'#0A0A0A', red:'#E10600', redb:'#FF1A12', paper:'#F5F2EC', mute:'#6B6660', line:'#E4E0D9' },
+      fontFamily: { display:['Manrope','system-ui','sans-serif'], sans:['Manrope','system-ui','sans-serif'], mono:['"JetBrains Mono"','ui-monospace','monospace'] },
+    } } };
   </script>
-
-  <!-- ================= ALPINE (CDN, deferred) ================= -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 
-  <!-- ================= CUSTOM CSS ================= -->
   <style>
-    :root { --gx:50vw; --gy:35vh; --cx:-100px; --cy:-100px; }
-    *{ -webkit-tap-highlight-color: transparent; }
-    html{ background:#000; }
-    html.lenis, html.lenis body{ height:auto; }
-    body{ overflow-x:hidden; background:#000; }
+    *{ -webkit-tap-highlight-color:transparent; }
+    html,body{ background:#F5F2EC; }
+    body{ overflow-x:hidden; }
     [x-cloak]{ display:none !important; }
-    @media (pointer:fine){ body{ cursor:none; } }
 
-    /* ---- Intro preloader ---- */
-    #intro{ position:fixed; inset:0; z-index:120; background:#000; display:flex; align-items:center; justify-content:center; }
-    #intro.done{ transform:translateY(-100%); transition:transform 1s cubic-bezier(.76,0,.24,1); }
-    .slate{ font-family:'JetBrains Mono',monospace; }
-    #introBar{ transition:width .1s linear; }
+    /* ===== Split wordmark ===== */
+    .wm{ font-size:clamp(3rem,12vw,9rem); line-height:.86; letter-spacing:-.05em; }
+    .wm-in{ display:inline-block; overflow:hidden; vertical-align:bottom; }
+    .wm-in>span{ display:inline-block; transform:translateY(115%); transition:transform 1.1s cubic-bezier(.19,1,.22,1); }
+    .go .wm-in>span{ transform:translateY(0); }
+    .wm-in.b>span{ transition-delay:.12s; }
 
-    /* ---- Editorial type ---- */
-    .display{ line-height:.9; letter-spacing:-.035em; }
-    .display-tight{ line-height:.84; letter-spacing:-.05em; }
+    /* ===== Panel reveal ===== */
+    .panel{ clip-path:inset(0 0 100% 0 round 22px); transition:clip-path 1.15s cubic-bezier(.19,1,.22,1) .5s; }
+    .go .panel{ clip-path:inset(0 0 0 0 round 22px); }
 
-    /* ---- Word/line reveal ---- */
-    .word{ display:inline-block; overflow:hidden; vertical-align:top; }
-    .word>span{ display:inline-block; transform:translateY(112%); transition:transform .9s cubic-bezier(.16,1,.3,1); }
-    .revealed .word>span{ transform:translateY(0); }
-    .reveal-line{ display:block; overflow:hidden; }
-    .reveal-line>span{ display:block; transform:translateY(115%); transition:transform 1s cubic-bezier(.16,1,.3,1); }
-    .revealed .reveal-line>span{ transform:translateY(0); }
-    .reveal-line:nth-child(2)>span{ transition-delay:.09s; }
-    .reveal-line:nth-child(3)>span{ transition-delay:.18s; }
+    .fx{ opacity:0; transform:translateY(16px); transition:opacity .9s ease, transform .9s cubic-bezier(.19,1,.22,1); }
+    .go .fx{ opacity:1; transform:none; }
+    .fx.a{ transition-delay:.15s } .fx.b{ transition-delay:1.05s } .fx.c{ transition-delay:1.2s } .fx.d{ transition-delay:1.35s }
 
-    .rise{ opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
-    .revealed .rise, .rise.revealed{ opacity:1; transform:none; }
-    .rise.d1{ transition-delay:.1s; } .rise.d2{ transition-delay:.2s; } .rise.d3{ transition-delay:.3s; } .rise.d4{ transition-delay:.4s; }
+    /* ===== Iridescent panel: drifting warm blobs ===== */
+    .irid{ position:absolute; inset:-30%; filter:blur(42px); }
+    .blob{ position:absolute; border-radius:50%; mix-blend-mode:screen; will-change:transform; }
+    @keyframes b1{ 0%,100%{ transform:translate(0,0) scale(1) } 50%{ transform:translate(12%,8%) scale(1.15) } }
+    @keyframes b2{ 0%,100%{ transform:translate(0,0) scale(1.05) } 50%{ transform:translate(-14%,-6%) scale(1.2) } }
+    @keyframes b3{ 0%,100%{ transform:translate(0,0) scale(1) } 50%{ transform:translate(8%,-12%) scale(1.1) } }
+    @keyframes b4{ 0%,100%{ transform:translate(0,0) scale(1.1) } 50%{ transform:translate(-10%,10%) scale(1.25) } }
+    .blob1{ animation:b1 16s ease-in-out infinite } .blob2{ animation:b2 20s ease-in-out infinite }
+    .blob3{ animation:b3 18s ease-in-out infinite } .blob4{ animation:b4 22s ease-in-out infinite }
 
-    /* ---- Grain ---- */
-    .grain::before{ content:""; position:fixed; inset:0; z-index:65; pointer-events:none; opacity:.05; mix-blend-mode:screen;
+    .grain::after{ content:""; position:absolute; inset:0; pointer-events:none; opacity:.09; mix-blend-mode:overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
-    /* ---- Cursor: ring + ambient glow ---- */
-    .glow{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .6s; }
-    .glow.on{ opacity:1; }
-    .glow::after{ content:""; position:absolute; width:62vmax; height:62vmax; left:var(--gx); top:var(--gy); transform:translate(-50%,-50%);
-      background:radial-gradient(circle, rgba(225,6,0,.15) 0%, rgba(225,6,0,.045) 32%, transparent 62%); }
-    .cursor{ position:fixed; z-index:110; left:var(--cx); top:var(--cy); width:34px; height:34px; margin:-17px 0 0 -17px; border:1.5px solid rgba(255,255,255,.55); border-radius:50%; pointer-events:none; transition:width .25s, height .25s, margin .25s, background-color .25s, border-color .25s, opacity .3s; mix-blend-mode:difference; }
-    .cursor.big{ width:74px; height:74px; margin:-37px 0 0 -37px; background:rgba(255,255,255,.9); border-color:transparent; }
-    .cursor-dot{ position:fixed; z-index:111; left:var(--cx); top:var(--cy); width:5px; height:5px; margin:-2.5px 0 0 -2.5px; background:#E10600; border-radius:50%; pointer-events:none; }
+    /* rotating word */
+    .rot{ position:relative; display:inline-block; height:1em; overflow:hidden; vertical-align:bottom; }
+    .rot>span{ display:block; transition:transform .6s cubic-bezier(.19,1,.22,1), opacity .6s ease; }
 
-    /* ---- Marquee ---- */
-    @keyframes marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .marquee{ display:inline-flex; white-space:nowrap; animation:marquee 30s linear infinite; will-change:transform; }
-    .marquee.slow{ animation-duration:64s; } .marquee.rev{ animation-direction:reverse; }
-
-    /* ---- Light sweep / drift / blink ---- */
-    @keyframes sweep{ 0%{transform:translateX(-140%) skewX(-14deg)} 100%{transform:translateX(240%) skewX(-14deg)} }
-    .sweep{ animation:sweep 6s ease-in-out infinite; }
-    @keyframes drift{ 0%,100%{transform:translate(-4%,-2%) scale(1.08)} 50%{transform:translate(4%,3%) scale(1.16)} }
-    .drift{ animation:drift 20s ease-in-out infinite; will-change:transform; }
+    @keyframes tick{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .tick{ display:inline-flex; white-space:nowrap; animation:tick 22s linear infinite; }
+    .tick.slow{ animation-duration:44s } .tick.rev{ animation-direction:reverse }
+    .reveal{ opacity:0; transform:translateY(30px); transition:opacity 1s cubic-bezier(.19,1,.22,1), transform 1s cubic-bezier(.19,1,.22,1); }
+    .reveal.is-in{ opacity:1; transform:none; }
+    .reveal.d1{ transition-delay:.09s } .reveal.d2{ transition-delay:.18s } .reveal.d3{ transition-delay:.27s }
+    .reveal-img{ clip-path:inset(0 0 100% 0 round 22px); transition:clip-path 1.2s cubic-bezier(.19,1,.22,1); }
+    .reveal-img.is-in{ clip-path:inset(0 0 0 0 round 22px); }
+    .rmedia{ transform:scale(1.3); transition:transform 1.7s cubic-bezier(.19,1,.22,1); }
+    .reveal-img.is-in .rmedia{ transform:scale(1); }
+    .rise{ display:block; overflow:hidden; }
+    .rise>span{ display:block; transform:translateY(115%); transition:transform 1s cubic-bezier(.19,1,.22,1); }
+    .rise.is-in>span{ transform:translateY(0); }
+    .rise.d1>span{ transition-delay:.14s } .rise.d2>span{ transition-delay:.28s }
+    .draw{ transform:scaleX(0); transform-origin:left; transition:transform .9s cubic-bezier(.19,1,.22,1) .45s; }
+    .rise.is-in .draw{ transform:scaleX(1); }
+    .ba-glow{ box-shadow:0 0 20px rgba(225,6,0,.55); }
+    .fw{ color:rgba(10,10,10,.16); transition:color .45s ease; }
+    .fw.lit{ color:#0A0A0A; }
+    .fw[data-acc].lit{ color:#E10600; }
+    @keyframes thread{ from{ background-position:0% 0 } to{ background-position:300% 0 } }
+    .rpar{ will-change:transform; }
     @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:.2} }
     .blink{ animation:blink 1.5s steps(1) infinite; }
-    @keyframes spinslow{ to{transform:rotate(360deg)} }
-    .spinslow{ animation:spinslow 26s linear infinite; }
+    .barcode{ background:repeating-linear-gradient(90deg,#0A0A0A 0 1.5px,transparent 1.5px 3.5px,#0A0A0A 3.5px 4.5px,transparent 4.5px 8px); }
+    .barcode-nav{ background:repeating-linear-gradient(90deg,#0A0A0A 0 2px,transparent 2px 4px,#0A0A0A 4px 7px,transparent 7px 9px,#0A0A0A 9px 10px,transparent 10px 13px,#0A0A0A 13px 16px,transparent 16px 18px); }
 
-    /* ---- Focus ---- */
-    a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{ outline:2px solid #FF1A12; outline-offset:3px; border-radius:2px; }
+    a:focus-visible,button:focus-visible{ outline:2px solid #E10600; outline-offset:3px; border-radius:3px; }
 
-    /* ---- Scrollbar ---- */
-    ::-webkit-scrollbar{ width:10px; } ::-webkit-scrollbar-track{ background:#080808; }
-    ::-webkit-scrollbar-thumb{ background:#2a2a2a; border-radius:8px; } ::-webkit-scrollbar-thumb:hover{ background:#E10600; }
-
-    /* ---- Nav underline ---- */
-    .nav-link{ position:relative; }
-    .nav-link::after{ content:""; position:absolute; left:0; bottom:-4px; height:1px; width:0; background:#E10600; transition:width .35s cubic-bezier(.16,1,.3,1); }
-    .nav-link[data-active="true"]::after,.nav-link:hover::after{ width:100%; }
-
-    /* ---- Side rail ---- */
-    .rail-dot{ transition:all .4s; }
-
-    .cv{ content-visibility:auto; contain-intrinsic-size:1px 900px; }
-
-    /* ---- Work gallery: horizontal on desktop ---- */
-    .work-track{ }
-    @media (min-width:1024px){
-      .work-pin{ }
-      .work-sticky{ position:sticky; top:0; height:100vh; display:flex; align-items:center; overflow:hidden; }
-      .work-track{ display:flex; gap:2rem; padding:0 8vw; will-change:transform; }
-      .work-card{ width:46vw; max-width:720px; flex:0 0 auto; }
-    }
-    @media (max-width:1023px){
-      .work-track{ display:flex; gap:1rem; overflow-x:auto; scroll-snap-type:x mandatory; padding:0 1.25rem 1rem; -webkit-overflow-scrolling:touch; }
-      .work-card{ width:82vw; flex:0 0 auto; scroll-snap-align:center; }
-      .work-track::-webkit-scrollbar{ height:0; }
-    }
-
-    /* ---- Reduced motion ---- */
     @media (prefers-reduced-motion:reduce){
-      .word>span,.reveal-line>span{ transform:none !important; transition:none !important; }
-      .rise{ opacity:1 !important; transform:none !important; transition:none !important; }
-      .marquee,.sweep,.drift,.blink,.spinslow{ animation:none !important; }
-      .glow,.cursor,.cursor-dot{ display:none !important; }
-      #intro{ display:none !important; }
-      @media (pointer:fine){ body{ cursor:auto; } }
-      html{ scroll-behavior:auto; }
+      .wm-in>span,.fx,.reveal{ transform:none !important; opacity:1 !important; transition:none !important; }
+      .reveal-img{ clip-path:none !important; } .rmedia,.rpar{ transform:none !important; }
+      .rise>span,.draw{ transform:none !important; }
+      .fw{ color:#0A0A0A !important; } .fw[data-acc]{ color:#E10600 !important; }
+      .panel{ clip-path:none !important; transition:none !important; }
+      .blob1,.blob2,.blob3,.blob4,.tick,.blink{ animation:none !important; }
     }
+
+    /* ===== Selected Work — cinematic ===== */
+    .wk{ perspective:1400px; }
+    .wk-card{ transform-style:preserve-3d; transition:transform .5s cubic-bezier(.19,1,.22,1); will-change:transform; }
+    .wk-frame{ position:relative; border-radius:20px; overflow:hidden; }
+    .wk-media{ position:absolute; inset:-8%; will-change:transform; transition:transform .9s cubic-bezier(.19,1,.22,1); }
+    .wk-card:hover .wk-media{ transform:scale(1.08); }
+    .wk-frame::after{ content:""; position:absolute; inset:0; border-radius:20px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); pointer-events:none; }
+    .wk-spot{ position:absolute; inset:0; opacity:0; transition:opacity .5s ease; pointer-events:none;
+      background:radial-gradient(240px 240px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.28), transparent 60%); mix-blend-mode:overlay; }
+    .wk-card:hover .wk-spot{ opacity:1; }
+    .wk-scan{ position:absolute; left:0; right:0; top:-40%; height:40%; pointer-events:none; opacity:0;
+      background:linear-gradient(180deg, transparent, rgba(255,255,255,.14), transparent); }
+    .wk-card:hover .wk-scan{ animation:scan 1.1s cubic-bezier(.4,0,.2,1); }
+    @keyframes scan{ from{ top:-40%; opacity:.9 } to{ top:120%; opacity:0 } }
+
+    /* clip reveal (per card, staggered by JS delay) */
+    .wk-frame{ clip-path:inset(0 0 100% 0 round 20px); transition:clip-path 1.15s cubic-bezier(.19,1,.22,1); }
+    .wk-card.in .wk-frame{ clip-path:inset(0 0 0 0 round 20px); }
+    .wk-media{ transform:scale(1.35); }
+    .wk-card.in .wk-media{ transform:scale(1); }
+
+    /* caption rise */
+    .wk-cap{ overflow:hidden; }
+    .wk-cap>span{ display:block; transform:translateY(120%); transition:transform .8s cubic-bezier(.19,1,.22,1) .25s; }
+    .wk-card.in .wk-cap>span{ transform:translateY(0); }
+
+    /* title marquee on hover */
+    .wk-title{ display:inline-block; }
+    .wk-cta{ position:absolute; bottom:16px; left:16px; display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px;
+      background:rgba(255,255,255,.14); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.25); color:#fff; font-size:12px; font-weight:600;
+      transform:translateY(12px); opacity:0; transition:transform .5s cubic-bezier(.19,1,.22,1), opacity .5s ease; }
+    .wk-card:hover .wk-cta{ transform:translateY(0); opacity:1; }
+
+    @media (prefers-reduced-motion:reduce){
+      .wk-frame{ clip-path:none !important; } .wk-media{ transform:none !important; }
+      .wk-cap>span{ transform:none !important; } .wk-card{ transform:none !important; }
+      .wk-card:hover .wk-scan{ animation:none !important; }
+    }
+
   </style>
 </head>
 
-<body class="grain bg-ink text-warm font-sans antialiased selection:bg-red selection:text-white"
-      x-data="site()" x-init="init()" :class="{ 'overflow-hidden': menuOpen || reelOpen }">
+<body class="bg-paper text-ink font-sans antialiased selection:bg-red selection:text-white"
+      x-data="hero()" :class="{ 'overflow-hidden': menu || reel }">
 
-  <!-- ================= INTRO PRELOADER ================= -->
-  <div id="intro" aria-hidden="true">
-    <div class="text-center">
-      <div class="slate text-[11px] tracking-[0.35em] text-grayx uppercase flex items-center justify-center gap-3 mb-6">
-        <span class="text-red blink">●</span> AdGenSi — Scene 01 / Take 01
-      </div>
-      <div class="font-display font-extrabold display-tight text-[clamp(3rem,12vw,9rem)] text-warm leading-none">
-        <span id="introCount" class="tabular-nums slate">000</span>
-      </div>
-      <div class="mt-8 h-px w-56 max-w-[70vw] mx-auto bg-white/10 overflow-hidden">
-        <div id="introBar" class="h-full w-0 bg-red"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Skip link -->
-  <a href="#hero" class="sr-only focus:not-sr-only focus:fixed focus:z-[130] focus:top-4 focus:left-4 focus:bg-red focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold">Skip to content</a>
-
-  <!-- Progress + cursor + glow -->
-  <div class="fixed top-0 inset-x-0 z-[70] h-[3px]" aria-hidden="true"><div id="progress" class="h-full bg-red origin-left" style="transform:scaleX(0)"></div></div>
-  <div id="glow" class="glow" aria-hidden="true"></div>
-  <div id="cursor" class="cursor" aria-hidden="true"></div>
-  <div id="cursorDot" class="cursor-dot" aria-hidden="true"></div>
-
-  <!-- Side section rail (desktop) -->
-  <div class="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-4" aria-hidden="true">
-    <template x-for="item in nav" :key="'r'+item.id">
-      <a :href="'#'+item.id" class="rail-dot h-2 w-2 rounded-full"
-         :class="active===item.id ? 'bg-red scale-150' : 'bg-white/25 hover:bg-white/60'"></a>
-    </template>
-  </div>
-
-  <!-- ================= HEADER ================= -->
-  <header class="fixed inset-x-0 top-0 z-50 transition-all duration-500"
-          :class="scrolled ? 'py-3 bg-ink/80 backdrop-blur-md border-b border-white/5' : 'py-6 bg-transparent border-b border-transparent'">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10 flex items-center justify-between gap-6">
-      <a href="#hero" class="flex items-center gap-3 group shrink-0" aria-label="AdGenSi home" data-cursor>
-        <!-- Official logo: /assets/images/favicon.svg -->
-        <span class="relative grid place-items-center h-9 w-9 rounded-[6px] bg-red overflow-hidden">
-          <span class="absolute inset-0 opacity-40"><span class="block h-full w-1/3 bg-white/50 sweep"></span></span>
-          <span class="relative font-display font-extrabold text-white text-lg leading-none">A</span>
+  <!-- ===== Thin header ===== -->
+  <header class="fx a relative z-40">
+    <div class="mx-auto max-w-[1600px] px-5 md:px-8 h-20 flex items-center justify-between gap-6">
+      <div class="flex items-center gap-5">
+        <a href="#" class="flex items-start gap-0.5">
+          <span class="font-display font-extrabold tracking-tight text-[28px] md:text-[30px] leading-none">AdGenSi</span>
+          <span class="text-red font-display font-bold text-sm leading-none mt-1">®</span>
+        </a>
+        <span class="hidden md:flex items-center gap-3">
+          <span class="barcode-nav h-6 w-16"></span>
+          <span class="font-display font-bold text-[13px] tracking-[0.14em] text-ink uppercase">Creative Studio</span>
         </span>
-        <span class="font-display font-extrabold tracking-tight text-[19px]">AdGenSi</span>
-      </a>
-      <nav class="hidden lg:flex items-center gap-9 text-[13px] font-medium tracking-wide" aria-label="Primary">
-        <template x-for="item in nav" :key="item.id">
-          <a class="nav-link text-grayx hover:text-warm transition-colors" data-cursor :href="'#'+item.id" :data-active="active===item.id" x-text="item.label"></a>
-        </template>
-      </nav>
-      <div class="hidden lg:flex items-center gap-3 shrink-0">
-        <button @click="openReel()" data-cursor class="text-[13px] font-medium text-warm/90 hover:text-white transition-colors flex items-center gap-2">
-          <span class="grid place-items-center h-7 w-7 rounded-full border border-white/20"><svg width="9" height="10" viewBox="0 0 9 10" fill="currentColor" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg></span>
-          Watch Showreel
-        </button>
-        <a href="#contact" data-magnetic data-cursor class="text-[13px] font-semibold bg-red hover:bg-redb text-white px-5 py-2.5 rounded-full transition-colors">Start a Project</a>
       </div>
-      <button @click="menuOpen=true" class="lg:hidden grid place-items-center h-11 w-11 -mr-2" aria-label="Open menu" :aria-expanded="menuOpen">
-        <span class="space-y-[6px]"><span class="block h-[2px] w-7 bg-warm"></span><span class="block h-[2px] w-7 bg-warm"></span><span class="block h-[2px] w-5 bg-red ml-auto"></span></span>
-      </button>
+      <div class="flex items-center gap-7 md:gap-10">
+        <nav class="hidden lg:flex items-center gap-9 text-[19px] font-medium text-ink" aria-label="Primary">
+          <a href="#" class="hover:text-red transition-colors">Home</a>
+          <a href="#" class="hover:text-red transition-colors">Studio</a>
+          <a href="#" class="relative pr-3 hover:text-red transition-colors">Work<span class="absolute -top-2 -right-1 grid place-items-center h-5 w-5 rounded-full bg-red text-white text-[11px] font-semibold leading-none">3</span></a>
+          <a href="#" class="hover:text-red transition-colors">Blog</a>
+          <a href="#" class="hover:text-red transition-colors">Contact</a>
+        </nav>
+        <button @click="menu=true" class="grid place-items-center h-10 w-10 -mr-1" aria-label="Menu">
+          <span class="space-y-[7px]"><span class="block h-[2px] w-8 bg-ink"></span><span class="block h-[2px] w-8 bg-ink"></span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- ================= MOBILE MENU ================= -->
-  <div x-show="menuOpen" x-cloak @keydown.escape.window="menuOpen=false" class="fixed inset-0 z-[80] lg:hidden"
-       x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-       x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-       role="dialog" aria-modal="true" aria-label="Menu">
-    <div class="absolute inset-0 bg-ink" @click="menuOpen=false"></div>
-    <div class="relative h-full flex flex-col px-6 py-6">
-      <div class="flex items-center justify-between">
-        <span class="font-display font-extrabold tracking-tight text-lg">AdGenSi</span>
-        <button @click="menuOpen=false" class="grid place-items-center h-11 w-11" aria-label="Close menu"><svg width="22" height="22" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 2l18 18M20 2L2 20"/></svg></button>
-      </div>
-      <nav class="flex-1 flex flex-col justify-center gap-1" aria-label="Mobile">
-        <template x-for="(item,i) in nav" :key="item.id">
-          <a :href="'#'+item.id" @click="menuOpen=false" class="font-display font-extrabold text-[2.6rem] leading-tight tracking-tight hover:text-red transition-colors py-1 flex items-baseline gap-4">
-            <span class="font-mono text-xs text-grayx" x-text="String(i+1).padStart(2,'0')"></span><span x-text="item.label"></span>
-          </a>
-        </template>
-      </nav>
-      <div class="grid gap-3">
-        <button @click="menuOpen=false; openReel()" class="w-full border border-white/15 rounded-full py-3.5 font-semibold text-sm">Watch Showreel</button>
-        <a href="#contact" @click="menuOpen=false" class="w-full bg-red text-white rounded-full py-3.5 font-semibold text-sm text-center">Start a Project</a>
-      </div>
-    </div>
-  </div>
+  <!-- ===== HERO ===== -->
+  <section class="relative mx-auto max-w-[1600px] px-4 md:px-7 pt-4 md:pt-6 pb-6">
 
-  <main id="content">
-  <!-- ================= HERO ================= -->
-  <section id="hero" data-nav class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden pt-28 lg:pt-36 pb-20">
-    <div class="absolute inset-0 z-0" aria-hidden="true">
-      <!-- Hero video drops in here (poster + mp4) -->
-      <div class="absolute inset-0 bg-ink"></div>
-      <div id="heroBg" class="absolute inset-0 drift" style="background:
-        radial-gradient(60% 50% at 72% 30%, rgba(225,6,0,.38), transparent 60%),
-        radial-gradient(52% 62% at 18% 80%, rgba(120,0,0,.5), transparent 60%);"></div>
-      <div class="absolute inset-0" style="background:radial-gradient(120% 100% at 50% 0%, transparent 38%, rgba(0,0,0,.72))"></div>
-      <div class="absolute inset-6 md:inset-10 border border-white/5"></div>
-      <!-- corner ticks -->
-      <span class="absolute bottom-6 left-6 md:bottom-10 md:left-10 font-mono text-[10px] tracking-[0.3em] text-white/30">00:00:01</span>
-      <span class="absolute bottom-6 right-6 md:bottom-10 md:right-10 font-mono text-[10px] tracking-[0.3em] text-white/30">4K · 24FPS</span>
+    <!-- split wordmark -->
+    <div class="wm font-display font-extrabold text-ink flex flex-col md:flex-row md:items-baseline md:justify-between gap-0 md:gap-6 select-none px-1 leading-[.86]">
+      <span class="wm-in"><span>AdGenSi<span class="text-red">®</span></span></span>
+      <span class="wm-in b"><span>Studio</span></span>
     </div>
 
-    <div id="heroInner" class="relative z-10 mx-auto max-w-[1600px] w-full px-5 md:px-10">
-      <div class="rise flex items-center gap-3 font-mono text-[11px] tracking-[0.25em] text-grayx uppercase mb-6">
-        <span class="text-red blink">●</span> REC <span class="text-white/20">/</span> AI Creative Intelligence
-        <span class="text-white/20 hidden sm:inline">/</span><span class="hidden sm:inline">Cinematic Production</span>
+    <!-- iridescent panel -->
+    <div class="panel grain relative mt-4 md:mt-6 rounded-[22px] overflow-hidden h-[54svh] min-h-[430px]">
+      <!-- Drop the real reel here (a bright/holographic ad reel works best):
+           <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline
+                  poster="/assets/images/hero-poster.webp"><source src="/assets/video/adgensi-showreel.mp4" type="video/mp4"></video> -->
+      <div class="absolute inset-0" style="background:linear-gradient(135deg,#160318,#0a0410 55%,#050505)"></div>
+      <div class="irid" aria-hidden="true">
+        <span class="blob blob1" style="width:52%;height:70%;left:6%;top:8%;background:radial-gradient(circle,#2E6BFF,transparent 60%)"></span>
+        <span class="blob blob2" style="width:52%;height:66%;left:26%;top:0%;background:radial-gradient(circle,#00C2B8,transparent 60%)"></span>
+        <span class="blob blob3" style="width:48%;height:64%;left:34%;bottom:-6%;background:radial-gradient(circle,#FF1A12,transparent 60%)"></span>
+        <span class="blob blob4" style="width:46%;height:62%;left:40%;bottom:-2%;background:radial-gradient(circle,#FFB020,transparent 62%)"></span>
+        <span class="blob blob2" style="width:50%;height:64%;right:2%;top:4%;background:radial-gradient(circle,#FF2D9E,transparent 62%)"></span>
+        <span class="blob blob1" style="width:44%;height:58%;right:6%;bottom:0%;background:radial-gradient(circle,#7C4DFF,transparent 64%)"></span>
       </div>
-      <h1 class="font-display font-extrabold display-tight text-[clamp(3rem,9.2vw,11rem)]">
-        <span class="reveal-line"><span>We Create</span></span>
-        <span class="reveal-line"><span>Advertising</span></span>
-        <span class="reveal-line"><span class="text-red">People Stop For.</span></span>
-      </h1>
-      <div class="mt-8 grid md:grid-cols-[1.2fr_1fr] gap-8 md:gap-16 items-end">
-        <p class="rise d1 max-w-xl text-grayx text-base md:text-lg leading-relaxed">AdGenSi combines artificial intelligence, cinematic production and performance strategy to create advertising that earns attention and drives action.</p>
-        <div class="rise d2 flex flex-col sm:flex-row md:justify-end gap-3">
-          <a href="#contact" data-magnetic data-cursor class="bg-red hover:bg-redb text-white font-semibold text-sm px-7 py-4 rounded-full transition-colors text-center">Start Your Project</a>
-          <button @click="openReel()" data-cursor class="border border-white/15 hover:border-white/40 text-warm font-semibold text-sm px-7 py-4 rounded-full transition-colors flex items-center justify-center gap-2"><svg width="10" height="11" viewBox="0 0 9 10" fill="currentColor" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>Watch Showreel</button>
+      <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(0,0,0,.30), transparent 24%, transparent 46%, rgba(0,0,0,.74))"></div>
+
+      <!-- top service labels: 4-col with underline dividers -->
+      <div class="fx b absolute top-0 inset-x-0 px-6 md:px-9 pt-6 md:pt-7">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 md:gap-x-10">
+          <div class="pb-3 border-b border-white/25"><span class="font-medium text-white text-[13px] md:text-[16px]">AI Creative</span></div>
+          <div class="pb-3 border-b border-white/25 sm:text-center"><span class="font-medium text-white text-[13px] md:text-[16px]">Video Ads</span></div>
+          <div class="pb-3 border-b border-white/25 sm:text-center"><span class="font-medium text-white text-[13px] md:text-[16px]">Cinematic</span></div>
+          <div class="pb-3 border-b border-white/25 sm:text-right"><span class="font-medium text-white text-[13px] md:text-[16px]">Social</span></div>
         </div>
       </div>
-      <p class="rise d3 mt-10 font-mono text-[11px] tracking-[0.2em] text-white/40 uppercase">Creative built for brands that refuse to look ordinary.</p>
-    </div>
 
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 font-mono text-[10px] tracking-[0.3em] text-white/40 uppercase flex flex-col items-center gap-2" aria-hidden="true">
-      <span>Scroll</span><span class="block h-8 w-px bg-gradient-to-b from-white/40 to-transparent"></span>
-    </div>
-  </section>
-
-  <!-- ================= 01 POSITIONING ================= -->
-  <section id="about" data-nav data-reveal class="cv relative py-28 md:py-40">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-      <div class="lg:col-span-6">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">01 — Positioning</span>
-        <h2 class="mt-6 font-display font-extrabold display text-[clamp(2.2rem,5.5vw,4.5rem)]">
-          <span class="reveal-line"><span>AI Gives Us Speed.</span></span>
-          <span class="reveal-line"><span class="text-grayx">Human Creativity</span></span>
-          <span class="reveal-line"><span>Gives It Meaning.</span></span>
-        </h2>
-        <p class="rise d2 mt-8 max-w-lg text-grayx leading-relaxed">AdGenSi is not an automated template generator. We combine intelligent creative systems with strategy, direction, storytelling, production and human judgment to produce advertising worthy of serious brands.</p>
-      </div>
-      <div class="lg:col-span-6 rise d2">
-        <div class="relative aspect-[4/3] rounded-lg overflow-hidden border border-white/8">
-          <div class="absolute inset-0 grid grid-cols-2">
-            <div class="relative bg-char overflow-hidden">
-              <div class="absolute inset-0" style="background:repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 2px, transparent 2px 9px), radial-gradient(80% 80% at 30% 30%, rgba(120,0,0,.5), transparent)"></div>
-              <span class="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-white/40 uppercase">AI Concept</span>
-            </div>
-            <div class="relative overflow-hidden">
-              <div class="absolute inset-0" style="background:radial-gradient(90% 90% at 70% 40%, rgba(225,6,0,.6), transparent 65%), linear-gradient(160deg,#150000,#000)"></div>
-              <div class="absolute inset-0 flex items-center justify-center"><div class="text-center">
-                <div class="font-display font-extrabold text-2xl md:text-4xl text-white leading-none">STOP.</div>
-                <div class="mt-1 h-px w-16 bg-red mx-auto"></div>
-                <div class="mt-2 font-mono text-[9px] tracking-[0.3em] text-white/60 uppercase">Campaign 01</div>
-              </div></div>
-              <span class="absolute top-4 right-4 font-mono text-[10px] tracking-widest text-white/50 uppercase">Finished</span>
-            </div>
-          </div>
-          <div class="absolute inset-y-0 left-1/2 w-px bg-red/60"></div>
-          <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-24 overflow-hidden pointer-events-none"><span class="block h-full w-1/2 bg-white/10 sweep"></span></div>
+      <!-- scroll-to-reveal ticker (dim, center masked by the glow) -->
+      <div class="fx c absolute top-[54%] -translate-y-1/2 left-0 right-0 overflow-hidden select-none" aria-hidden="true"
+           style="-webkit-mask-image:radial-gradient(135% 100% at 50% 50%, transparent 0 20%, #000 58%); mask-image:radial-gradient(135% 100% at 50% 50%, transparent 0 20%, #000 58%)">
+        <div class="tick font-mono text-[11px] md:text-[12px] tracking-[0.42em] text-white/20 uppercase">
+          <span class="px-6">Scroll to Reveal —</span><span class="px-6">Scroll to Reveal —</span><span class="px-6">Scroll to Reveal —</span><span class="px-6">Scroll to Reveal —</span>
+          <span class="px-6">Scroll to Reveal —</span><span class="px-6">Scroll to Reveal —</span><span class="px-6">Scroll to Reveal —</span><span class="px-6">Scroll to Reveal —</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ================= 02 SERVICES ================= -->
-  <section id="services" data-nav data-reveal class="cv relative py-24 md:py-36 border-t border-white/5">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-        <div>
-          <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">02 — Services</span>
-          <h2 class="mt-5 font-display font-extrabold display text-[clamp(2.2rem,6vw,5rem)]"><span class="reveal-line"><span>What We Build.</span></span></h2>
-        </div>
-        <p class="rise d1 max-w-sm text-grayx text-sm leading-relaxed">Five capabilities, one connected creative system — from first concept to campaign-ready output.</p>
-      </div>
-      <div class="border-t border-white/8" x-data="{ hover:null }">
-        <template x-for="(s,i) in services" :key="s.n">
-          <div class="group relative border-b border-white/8 py-8 md:py-10 grid md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-center transition-all duration-500"
-               data-cursor @mouseenter="hover=i" @mouseleave="hover=null" :class="hover===i ? 'md:pl-6' : ''">
-            <span class="font-mono text-sm transition-colors" :class="hover===i ? 'text-red' : 'text-grayx'" x-text="s.n"></span>
-            <div class="min-w-0">
-              <h3 class="font-display font-extrabold text-3xl md:text-5xl tracking-tight transition-colors" :class="hover===i ? 'text-white' : 'text-warm'" x-text="s.title"></h3>
-              <p class="mt-3 max-w-2xl text-grayx text-sm md:text-base leading-relaxed" x-text="s.desc"></p>
-            </div>
-            <div class="hidden md:block relative h-28 w-40 shrink-0 rounded-md overflow-hidden bg-black border border-white/8">
-              <div class="absolute inset-0 transition-transform duration-700" :class="hover===i ? 'scale-110 rotate-3' : 'scale-100'" x-html="s.shape"></div>
-            </div>
-          </div>
-        </template>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 03 FEATURED WORK (pinned horizontal on desktop) ================= -->
-  <section id="work" data-nav data-reveal class="cv relative py-24 md:py-36 border-t border-white/5" x-data="{ aw:0 }">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="max-w-3xl mb-12 md:mb-16">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">03 — Featured Work</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2.2rem,6vw,5rem)]"><span class="reveal-line"><span>Work Made to Be Remembered.</span></span></h2>
-        <p class="rise d1 mt-6 text-grayx leading-relaxed">Advertising should not disappear into the feed. Our work is designed to command attention, strengthen brand perception and support measurable growth.</p>
-      </div>
-
-      <!-- ===== Desktop: editorial index -> cinematic stage ===== -->
-      <div class="hidden lg:grid grid-cols-[0.82fr_1.18fr] gap-14 items-stretch rise d2">
-        <ol class="flex flex-col justify-center divide-y divide-white/10 border-y border-white/10">
-          <template x-for="(w,i) in work" :key="w.title">
-            <li @mouseenter="aw=i" data-cursor class="group relative py-7 cursor-pointer transition-all duration-500" :class="aw===i ? 'pl-5' : 'pl-0'">
-              <span class="absolute left-0 top-0 h-full w-px bg-red transition-transform duration-500 origin-top" :class="aw===i ? 'scale-y-100' : 'scale-y-0'"></span>
-              <div class="flex items-center gap-5">
-                <span class="font-mono text-sm transition-colors" :class="aw===i ? 'text-red' : 'text-grayx'" x-text="String(i+1).padStart(2,'0')"></span>
-                <h3 class="font-display font-extrabold text-3xl xl:text-[2.6rem] leading-none tracking-tight transition-colors duration-300" :class="aw===i ? 'text-white' : 'text-grayx group-hover:text-warm'" x-text="w.title"></h3>
-                <span class="ml-auto text-red text-xl transition-all duration-500" :class="aw===i ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3'">&rarr;</span>
-              </div>
-            </li>
-          </template>
-        </ol>
-
-        <div class="relative rounded-2xl overflow-hidden border border-white/10 min-h-[540px]" data-cursor>
-          <div class="absolute inset-0">
-            <div x-show="aw===0" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0">
-              <div class="absolute inset-0 drift" style="background:radial-gradient(70% 90% at 62% 42%, rgba(225,6,0,.65), transparent 60%), linear-gradient(160deg,#1c0000,#000)"></div>
-              <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-[72px] rounded-[36px] border border-white/25" style="background:linear-gradient(90deg, rgba(255,255,255,.35), rgba(225,6,0,.9) 40%, #4a0000)"></div>
-              <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-[72px] rounded-[36px] overflow-hidden pointer-events-none"><span class="block h-full w-1/3 bg-white/30 sweep"></span></div>
-            </div>
-            <div x-show="aw===1" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0">
-              <div class="absolute inset-0 drift" style="background:radial-gradient(60% 70% at 50% 55%, rgba(180,20,0,.7), transparent 62%), linear-gradient(160deg,#150000,#000)"></div>
-              <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-52 w-52 rounded-full border border-white/15" style="background:radial-gradient(circle at 40% 35%, rgba(255,120,60,.55), rgba(120,0,0,.9) 60%, #220000)"></div>
-              <div class="absolute left-1/2 top-[24%] -translate-x-1/2 flex gap-6 opacity-40"><span class="block h-10 w-px bg-white/40 -rotate-6"></span><span class="block h-14 w-px bg-white/40"></span><span class="block h-10 w-px bg-white/40 rotate-6"></span></div>
-            </div>
-            <div x-show="aw===2" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0">
-              <div class="absolute inset-0 drift" style="background:radial-gradient(70% 80% at 40% 60%, rgba(255,26,18,.55), transparent 60%), linear-gradient(160deg,#180000,#000)"></div>
-              <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-40 rotate-12" style="background:linear-gradient(135deg, rgba(255,255,255,.2), rgba(225,6,0,.9) 45%, #3a0000); box-shadow:0 30px 80px rgba(225,6,0,.35)"></div>
-              <span class="absolute left-[58%] top-[34%] font-mono text-[10px] tracking-[0.3em] text-white bg-red px-2 py-1 rounded-sm">NEW</span>
-            </div>
-            <div x-show="aw===3" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0">
-              <div class="absolute inset-0 drift" style="background:radial-gradient(80% 90% at 55% 45%, rgba(225,6,0,.45), transparent 58%), linear-gradient(200deg,#120000,#000)"></div>
-              <div class="absolute inset-x-0 top-0 h-14 bg-black"></div><div class="absolute inset-x-0 bottom-0 h-14 bg-black"></div>
-              <div class="absolute left-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 opacity-50"><span class="h-3 w-3 border border-white/40"></span><span class="h-3 w-3 border border-white/40"></span><span class="h-3 w-3 border border-white/40"></span><span class="h-3 w-3 border border-white/40"></span></div>
-            </div>
-          </div>
-
-          <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, transparent 30%, transparent 45%, rgba(0,0,0,.92) 100%)"></div>
-          <div class="absolute inset-5 border border-white/10 pointer-events-none"></div>
-          <span class="absolute top-5 left-6 font-mono text-[10px] tracking-[0.3em] text-white/60 uppercase flex items-center gap-2"><span class="text-red blink">&#9679;</span> <span x-text="'Case '+String(aw+1).padStart(2,'0')"></span> &middot; Concept</span>
-          <span class="absolute top-3 right-6 font-display font-extrabold text-white/10 text-[8rem] leading-none pointer-events-none" x-text="String(aw+1).padStart(2,'0')"></span>
-
-          <div class="absolute bottom-0 inset-x-0 p-8 md:p-10">
-            <h3 class="font-display font-extrabold text-4xl xl:text-5xl tracking-tight text-white" x-text="work[aw].title"></h3>
-            <p class="mt-3 max-w-lg text-grayx leading-relaxed" x-text="work[aw].desc"></p>
-            <div class="mt-5 flex flex-wrap gap-2">
-              <template x-for="tag in work[aw].tags" :key="tag"><span class="font-mono text-[10px] tracking-wide uppercase text-white/70 border border-white/20 rounded-full px-3 py-1" x-text="tag"></span></template>
-            </div>
+      <!-- bottom-left headline -->
+      <div class="fx c absolute bottom-0 left-0 p-6 md:p-9 max-w-[80%]">
+        <div class="font-mono text-[10px] md:text-[11px] tracking-[0.28em] text-white/60 uppercase mb-3">We are AdGenSi®</div>
+        <div class="font-display font-extrabold text-white text-[clamp(1.9rem,4.8vw,3.8rem)] leading-[1.02] tracking-tight">
+          <div>Not just an agency,</div>
+          <div class="flex items-baseline gap-3 flex-wrap">we are
+            <span class="rot text-red">
+              <template x-for="(w,idx) in words" :key="w">
+                <span x-show="i===idx" x-transition:enter="transition duration-500" x-transition:enter-start="translate-y-full opacity-0" x-transition:enter-end="translate-y-0 opacity-100" x-transition:leave="transition duration-500 absolute inset-0" x-transition:leave-start="translate-y-0 opacity-100" x-transition:leave-end="-translate-y-full opacity-0" x-text="w"></span>
+              </template>
+            </span>
           </div>
         </div>
       </div>
 
-      <!-- ===== Mobile: stacked cinematic cards ===== -->
-      <div class="lg:hidden space-y-4">
-        <template x-for="(w,i) in work" :key="'m'+w.title">
-          <article class="rise relative aspect-[4/3] rounded-xl overflow-hidden border border-white/10" data-cursor>
-            <div class="absolute inset-0" :style="w.bg"></div>
-            <div class="absolute inset-0" style="background:linear-gradient(180deg, transparent 38%, rgba(0,0,0,.9))"></div>
-            <div class="absolute inset-4 border border-white/8 pointer-events-none"></div>
-            <span class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.25em] text-white/50 uppercase" x-text="'Case '+String(i+1).padStart(2,'0')"></span>
-            <span class="absolute top-2 right-4 font-display font-extrabold text-white/10 text-6xl leading-none" x-text="String(i+1).padStart(2,'0')"></span>
-            <div class="absolute bottom-0 inset-x-0 p-5">
-              <h3 class="font-display font-extrabold text-2xl tracking-tight text-white" x-text="w.title"></h3>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <template x-for="tag in w.tags" :key="tag"><span class="font-mono text-[9px] tracking-wide uppercase text-white/70 border border-white/15 rounded-full px-2.5 py-1" x-text="tag"></span></template>
-              </div>
-            </div>
-          </article>
-        </template>
-      </div>
-
-      <p class="mt-8 font-mono text-[10px] tracking-[0.2em] text-white/30 uppercase">Concept work — global brand names shown as quality benchmark only, not clients.</p>
-    </div>
-  </section>
-
-  <!-- ================= 04 SHOWREEL ================= -->
-  <section id="showreel" data-reveal class="cv relative py-24 md:py-36 border-t border-white/5">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">04 — Showreel</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2rem,5.5vw,4.5rem)]"><span class="reveal-line"><span>Sixty Seconds of Creative Possibility.</span></span></h2>
-        <p class="rise d1 mt-5 text-grayx leading-relaxed">See how strategy, AI, storytelling and production come together inside the AdGenSi creative system.</p>
-      </div>
-      <button @click="openReel()" data-cursor class="rise d2 group relative block w-full aspect-video rounded-xl overflow-hidden border border-white/10" aria-label="Play showreel">
-        <div id="reelBg" class="absolute inset-0" style="background:radial-gradient(70% 90% at 50% 40%, rgba(225,6,0,.4), transparent 60%), linear-gradient(160deg,#160000,#000)"></div>
-        <div class="absolute inset-6 md:inset-10 border border-white/8"></div>
-        <div class="absolute inset-0 grid place-items-center">
-          <span class="relative grid place-items-center h-20 w-20 md:h-24 md:w-24 rounded-full bg-red text-white transition-transform duration-500 group-hover:scale-110">
-            <span class="absolute inset-0 rounded-full border border-red animate-ping opacity-30"></span>
-            <svg width="22" height="26" viewBox="0 0 9 10" fill="currentColor" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>
+      <!-- bottom-right contact card (portrait) -->
+      <a href="#" class="fx d hidden md:flex items-center gap-3.5 absolute bottom-6 right-6 bg-white/10 hover:bg-white/[0.16] backdrop-blur-md border border-white/20 rounded-2xl p-2.5 pr-5 transition-colors shrink-0">
+        <span class="relative">
+          <!-- swap for a real team portrait: /assets/images/team-lead.webp -->
+          <span class="grid place-items-center h-12 w-12 rounded-xl overflow-hidden" style="background:linear-gradient(150deg,#3a3a3a,#111)">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20c0-3.8 3.4-6 7.5-6s7.5 2.2 7.5 6"/></svg>
           </span>
-        </div>
-        <div class="absolute bottom-5 left-5 font-mono text-[10px] tracking-[0.25em] text-white/60 uppercase flex items-center gap-2"><span class="text-red blink">●</span> 00:60 — Showreel</div>
+          <span class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red border-2 border-white/20"></span>
+        </span>
+        <span class="text-left leading-tight">
+          <span class="block text-white text-[15px] font-semibold">Business Enquiries</span>
+          <span class="block text-white/60 text-[12px]">Direct line to the studio</span>
+        </span>
+      </a>
+    </div>
+
+    <!-- sub-row -->
+    <div class="fx d mt-5 md:mt-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1">
+      <p class="max-w-xl text-ink text-base md:text-lg font-medium leading-snug">
+        AI-driven creative, cinematic production and performance strategy — <span class="text-mute">for brands that refuse to look ordinary.</span>
+      </p>
+      <button @click="reel=true" class="group inline-flex items-center gap-3 text-sm font-semibold text-ink shrink-0">
+        <span class="grid place-items-center h-11 w-11 rounded-full bg-ink group-hover:bg-red text-paper transition-colors"><svg width="10" height="11" viewBox="0 0 9 10" fill="currentColor" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg></span>
+        Watch Showreel
       </button>
     </div>
   </section>
 
-  <!-- ================= 05 WHY ================= -->
-  <section id="why" data-reveal class="cv relative py-24 md:py-36 border-t border-white/5">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="max-w-3xl mb-14">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">05 — Why AdGenSi</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2.2rem,6vw,5rem)]"><span class="reveal-line"><span>Built Differently From Traditional Agencies.</span></span></h2>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8 border border-white/8 rounded-lg overflow-hidden">
-        <template x-for="(a,i) in why" :key="a.title">
-          <div class="rise bg-ink p-7 md:p-8 hover:bg-char transition-colors" :class="'d'+((i%3)+1)" data-cursor>
-            <span class="font-mono text-sm text-red" x-text="String(i+1).padStart(2,'0')"></span>
-            <h3 class="mt-5 font-display font-extrabold text-xl md:text-2xl tracking-tight" x-text="a.title"></h3>
-            <p class="mt-3 text-grayx text-sm leading-relaxed" x-text="a.desc"></p>
-          </div>
-        </template>
-      </div>
+  <!-- ===== 02 · SELECTED WORK (cinematic) ===== -->
+  <section id="work" class="relative mx-auto max-w-[1600px] px-5 md:px-8 pt-24 md:pt-36 wk">
+    <div class="text-center">
+      <span class="reveal inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.24em] uppercase text-ink"><span class="grid place-items-center h-4 w-4 rounded-full bg-ink"><span class="h-1 w-1 rounded-full bg-red"></span></span> Recent Projects</span>
+      <h2 class="reveal d1 mt-5 font-display font-extrabold text-[clamp(2.2rem,5vw,4rem)] leading-[.98] tracking-tight">
+        <span class="text-ink/35">Selected</span><br>Work
+      </h2>
     </div>
-  </section>
 
-  <!-- ================= 06 PROCESS ================= -->
-  <section id="process" data-nav data-reveal class="cv relative py-24 md:py-36 border-t border-white/5">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10 grid lg:grid-cols-[0.9fr_1.4fr] gap-12 lg:gap-20">
-      <div class="lg:sticky lg:top-28 lg:self-start">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">06 — Process</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2rem,4.5vw,3.75rem)]"><span class="reveal-line"><span>From Business Objective to Campaign-Ready Advertising.</span></span></h2>
-        <div class="mt-8 h-px w-full bg-white/8 relative overflow-hidden"><div id="procBar" class="absolute inset-y-0 left-0 bg-red" style="width:0%"></div></div>
-      </div>
-      <ol class="relative">
-        <template x-for="(p,i) in process" :key="p.n">
-          <li class="rise relative pl-10 md:pl-16 pb-10 last:pb-0 border-l border-white/10" :class="'d'+((i%3)+1)">
-            <span class="absolute -left-[6px] top-1 h-3 w-3 rounded-full bg-red ring-4 ring-ink"></span>
-            <div class="flex items-baseline gap-4"><span class="font-mono text-sm text-grayx" x-text="p.n"></span><h3 class="font-display font-extrabold text-2xl md:text-3xl tracking-tight" x-text="p.title"></h3></div>
-            <p class="mt-3 text-grayx text-sm md:text-base leading-relaxed" x-text="p.desc"></p>
-          </li>
-        </template>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ================= 07 SCALE ================= -->
-  <section id="scale" data-reveal class="cv relative py-24 md:py-36 border-t border-white/5 overflow-hidden">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="max-w-3xl mb-12">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">07 — Scale of Output</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2.2rem,6vw,5rem)]"><span class="reveal-line"><span>One Campaign. Every Format. Every Channel.</span></span></h2>
-        <p class="rise d1 mt-6 text-grayx leading-relaxed">AdGenSi creates connected campaign systems instead of isolated creative files. Every variation remains aligned with the original brand idea.</p>
-      </div>
-      <div class="grid lg:grid-cols-[1.2fr_1fr] gap-6 items-stretch">
-        <div class="rise relative rounded-lg overflow-hidden border border-white/10 min-h-[300px]">
-          <div class="absolute inset-0" style="background:radial-gradient(80% 90% at 60% 30%, rgba(225,6,0,.55), transparent 60%), linear-gradient(160deg,#170000,#000)"></div>
-          <div class="absolute inset-6 border border-white/8"></div>
-          <div class="absolute top-5 right-5 h-10 w-10 spinslow" style="background:conic-gradient(from 0deg,#E10600,transparent 60%);border-radius:50%;mask:radial-gradient(transparent 55%,#000 56%);-webkit-mask:radial-gradient(transparent 55%,#000 56%)"></div>
-          <div class="absolute bottom-5 left-5"><div class="font-display font-extrabold text-3xl md:text-5xl text-white">MASTER</div><div class="font-mono text-[10px] tracking-[0.3em] text-white/60 uppercase mt-1">16:9 — Hero Commercial</div></div>
-        </div>
-        <div class="rise d1 grid grid-cols-3 gap-3 content-start">
-          <template x-for="(f,i) in formats" :key="f">
-            <div class="rounded-md border border-white/10 bg-char/60 hover:border-red/60 hover:-translate-y-1 transition-all p-3 flex flex-col justify-between min-h-[92px]" data-cursor>
-              <span class="font-mono text-[10px] tracking-widest text-white/40 uppercase" x-text="'0'+(i+1)"></span>
-              <span class="font-display font-bold text-sm leading-tight" x-text="f"></span>
+    <div class="mt-14 md:mt-20 mx-auto max-w-[1180px] grid md:grid-cols-2 gap-x-8 lg:gap-x-14">
+      <div class="space-y-14 md:space-y-24">
+        <a href="#" class="wk-card group block" data-wk="0">
+            <div class="wk-frame aspect-[4/3]">
+              <div class="wk-media" :style="'background:'+feat[0].bg"></div>
+              <div class="wk-spot"></div>
+              <div class="wk-scan"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45))"></div>
+              <span class="wk-cta">View project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+              <span class="absolute top-4 right-4 font-mono text-[11px] tracking-[0.2em] text-white/70">01<span class="text-white/40"> / 06</span></span>
             </div>
-          </template>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 08 INDUSTRIES ================= -->
-  <section id="industries" data-reveal class="cv relative py-24 md:py-36 border-t border-white/5" x-data="{ ind:0 }">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="max-w-3xl mb-12">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">08 — Industries</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2rem,5vw,4rem)]"><span class="reveal-line"><span>Creative Expertise Across High-Impact Consumer Categories.</span></span></h2>
-      </div>
-      <div class="grid lg:grid-cols-[1fr_0.8fr] gap-8 items-stretch">
-        <div class="flex flex-wrap gap-2 content-start">
-          <template x-for="(c,i) in industries" :key="c">
-            <button @click="ind=i" @mouseenter="ind=i" data-cursor class="font-display font-bold text-lg md:text-2xl tracking-tight px-4 py-2 rounded-full border transition-colors"
-                    :class="ind===i ? 'text-white border-red bg-red/10' : 'text-grayx border-white/10 hover:text-warm hover:border-white/30'" x-text="c"></button>
-          </template>
-        </div>
-        <div class="relative rounded-lg overflow-hidden border border-white/10 min-h-[260px]">
-          <template x-for="(c,i) in industries" :key="'v'+c">
-            <div x-show="ind===i" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100" class="absolute inset-0">
-              <div class="absolute inset-0" :style="indBg(i)"></div>
-              <div class="absolute inset-0" style="background:linear-gradient(180deg,transparent,rgba(0,0,0,.7))"></div>
-              <div class="absolute bottom-5 left-5"><div class="font-mono text-[10px] tracking-[0.3em] text-white/60 uppercase" x-text="String(i+1).padStart(2,'0')+' — Category'"></div><div class="font-display font-extrabold text-2xl md:text-3xl text-white mt-1" x-text="c"></div></div>
+            <div class="mt-4 flex items-start gap-6 wk-cap">
+              <span><span class="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-mute pt-0.5 shrink-0"><span class="h-1 w-1 rounded-full bg-red"></span>01</span></span>
+              <span class="wk-cap-t"><span class="wk-title font-display font-bold text-[15px] md:text-lg leading-snug tracking-tight max-w-[18rem] group-hover:text-red transition-colors" x-text="feat[0].t"></span></span>
             </div>
-          </template>
-        </div>
+          </a>
+        <a href="#" class="wk-card group block" data-wk="90">
+            <div class="wk-frame aspect-[4/3]">
+              <div class="wk-media" :style="'background:'+feat[2].bg"></div>
+              <div class="wk-spot"></div>
+              <div class="wk-scan"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45))"></div>
+              <span class="wk-cta">View project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+              <span class="absolute top-4 right-4 font-mono text-[11px] tracking-[0.2em] text-white/70">03<span class="text-white/40"> / 06</span></span>
+            </div>
+            <div class="mt-4 flex items-start gap-6 wk-cap">
+              <span><span class="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-mute pt-0.5 shrink-0"><span class="h-1 w-1 rounded-full bg-red"></span>03</span></span>
+              <span class="wk-cap-t"><span class="wk-title font-display font-bold text-[15px] md:text-lg leading-snug tracking-tight max-w-[18rem] group-hover:text-red transition-colors" x-text="feat[2].t"></span></span>
+            </div>
+          </a>
+        <a href="#" class="wk-card group block" data-wk="180">
+            <div class="wk-frame aspect-[4/3]">
+              <div class="wk-media" :style="'background:'+feat[4].bg"></div>
+              <div class="wk-spot"></div>
+              <div class="wk-scan"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45))"></div>
+              <span class="wk-cta">View project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+              <span class="absolute top-4 right-4 font-mono text-[11px] tracking-[0.2em] text-white/70">05<span class="text-white/40"> / 06</span></span>
+            </div>
+            <div class="mt-4 flex items-start gap-6 wk-cap">
+              <span><span class="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-mute pt-0.5 shrink-0"><span class="h-1 w-1 rounded-full bg-red"></span>05</span></span>
+              <span class="wk-cap-t"><span class="wk-title font-display font-bold text-[15px] md:text-lg leading-snug tracking-tight max-w-[18rem] group-hover:text-red transition-colors" x-text="feat[4].t"></span></span>
+            </div>
+          </a>
       </div>
+      <div class="space-y-14 md:space-y-24 mt-14 md:mt-0 md:pt-32">
+        <a href="#" class="wk-card group block" data-wk="120">
+            <div class="wk-frame aspect-[4/3]">
+              <div class="wk-media" :style="'background:'+feat[1].bg"></div>
+              <div class="wk-spot"></div>
+              <div class="wk-scan"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45))"></div>
+              <span class="wk-cta">View project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+              <span class="absolute top-4 right-4 font-mono text-[11px] tracking-[0.2em] text-white/70">02<span class="text-white/40"> / 06</span></span>
+            </div>
+            <div class="mt-4 flex items-start gap-6 wk-cap">
+              <span><span class="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-mute pt-0.5 shrink-0"><span class="h-1 w-1 rounded-full bg-red"></span>02</span></span>
+              <span class="wk-cap-t"><span class="wk-title font-display font-bold text-[15px] md:text-lg leading-snug tracking-tight max-w-[18rem] group-hover:text-red transition-colors" x-text="feat[1].t"></span></span>
+            </div>
+          </a>
+        <a href="#" class="wk-card group block" data-wk="210">
+            <div class="wk-frame aspect-[4/3]">
+              <div class="wk-media" :style="'background:'+feat[3].bg"></div>
+              <div class="wk-spot"></div>
+              <div class="wk-scan"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45))"></div>
+              <span class="wk-cta">View project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+              <span class="absolute top-4 right-4 font-mono text-[11px] tracking-[0.2em] text-white/70">04<span class="text-white/40"> / 06</span></span>
+            </div>
+            <div class="mt-4 flex items-start gap-6 wk-cap">
+              <span><span class="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-mute pt-0.5 shrink-0"><span class="h-1 w-1 rounded-full bg-red"></span>04</span></span>
+              <span class="wk-cap-t"><span class="wk-title font-display font-bold text-[15px] md:text-lg leading-snug tracking-tight max-w-[18rem] group-hover:text-red transition-colors" x-text="feat[3].t"></span></span>
+            </div>
+          </a>
+        <a href="#" class="wk-card group block" data-wk="300">
+            <div class="wk-frame aspect-[4/3]">
+              <div class="wk-media" :style="'background:'+feat[5].bg"></div>
+              <div class="wk-spot"></div>
+              <div class="wk-scan"></div>
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45))"></div>
+              <span class="wk-cta">View project <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg></span>
+              <span class="absolute top-4 right-4 font-mono text-[11px] tracking-[0.2em] text-white/70">06<span class="text-white/40"> / 06</span></span>
+            </div>
+            <div class="mt-4 flex items-start gap-6 wk-cap">
+              <span><span class="flex items-center gap-1.5 font-mono text-[11px] tracking-wide text-mute pt-0.5 shrink-0"><span class="h-1 w-1 rounded-full bg-red"></span>06</span></span>
+              <span class="wk-cap-t"><span class="wk-title font-display font-bold text-[15px] md:text-lg leading-snug tracking-tight max-w-[18rem] group-hover:text-red transition-colors" x-text="feat[5].t"></span></span>
+            </div>
+          </a>
+      </div>
+    </div>
+
+    <div class="reveal mt-16 md:mt-24 flex justify-center">
+      <a href="#" class="group inline-flex items-center gap-2.5 border border-ink/15 hover:border-red hover:bg-ink hover:text-white font-semibold text-sm px-7 py-3.5 rounded-full transition-colors"><span class="h-1.5 w-1.5 rounded-full bg-red group-hover:bg-white transition-colors"></span> All Projects</a>
     </div>
   </section>
 
-  <!-- ================= 09 TRUST ================= -->
-  <section id="trust" data-reveal class="cv relative py-24 md:py-32 border-t border-white/5">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">09 — Trust</span>
-
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:auto-rows-[210px] rise d1">
-
-        <!-- Statement (big anchor tile) -->
-        <div class="relative overflow-hidden rounded-3xl border border-white/10 p-8 md:p-10 flex flex-col justify-between sm:col-span-2 lg:col-span-2 lg:row-span-2 group">
-          <div class="absolute inset-0 -z-10" style="background:radial-gradient(90% 90% at 15% 15%, rgba(225,6,0,.28), transparent 60%), linear-gradient(160deg,#120000,#050505)"></div>
-          <div class="absolute -right-16 -bottom-16 h-56 w-56 rounded-full bg-red/20 blur-3xl opacity-60 group-hover:opacity-90 transition-opacity"></div>
-          <div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-white/60 uppercase">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-red" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-            Creative Standard
-          </div>
-          <div>
-            <h2 class="font-display font-extrabold display text-[clamp(2rem,4.5vw,3.75rem)] text-white"><span class="reveal-line"><span>Built for Brands That Demand Better Creative.</span></span></h2>
-            <p class="rise d2 mt-5 max-w-md text-grayx leading-relaxed">Built to meet the creative standards expected by leading global and multinational brands.</p>
-          </div>
-        </div>
-
-        <!-- Trustpilot -->
-        <a href="https://www.trustpilot.com/review/adgensi.com" target="_blank" rel="noopener" data-cursor
-           class="group relative overflow-hidden rounded-3xl border border-white/10 bg-char/40 p-7 flex flex-col justify-between sm:col-span-2 hover:border-red/40 hover:-translate-y-1 transition-all duration-300">
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-[10px] tracking-[0.3em] text-grayx uppercase">External Profile</span>
-            <span class="grid place-items-center h-8 w-8 rounded-full border border-white/15 text-white/70 group-hover:text-red group-hover:border-red/50 transition-colors"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-          </div>
-          <div>
-            <div class="font-display font-extrabold text-2xl md:text-3xl tracking-tight text-warm">View AdGenSi on Trustpilot</div>
-            <div class="mt-2 text-xs text-grayx">Verified reviews appear here once genuine ratings exist.</div>
-          </div>
-        </a>
-
-        <!-- Email -->
-        <a href="mailto:hello@adgensi.com" data-cursor
-           class="group relative overflow-hidden rounded-3xl border border-white/10 bg-char/40 p-7 flex flex-col justify-between hover:border-red/40 hover:-translate-y-1 transition-all duration-300">
-          <span class="grid place-items-center h-10 w-10 rounded-xl bg-red/10 text-red"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-          <div><div class="font-mono text-[10px] tracking-[0.25em] text-grayx uppercase">Email</div><div class="mt-1 font-display font-bold text-warm group-hover:text-red transition-colors break-all">hello@adgensi.com</div></div>
-        </a>
-
-        <!-- WhatsApp -->
-        <a href="#contact" data-cursor
-           class="group relative overflow-hidden rounded-3xl border border-white/10 bg-char/40 p-7 flex flex-col justify-between hover:border-red/40 hover:-translate-y-1 transition-all duration-300">
-          <span class="grid place-items-center h-10 w-10 rounded-xl bg-red/10 text-red"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></span>
-          <div><div class="font-mono text-[10px] tracking-[0.25em] text-grayx uppercase">Direct</div><div class="mt-1 font-display font-bold text-warm group-hover:text-red transition-colors">Message on WhatsApp</div></div>
-        </a>
-
-        <!-- Social profiles -->
-        <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-char/40 p-7 flex flex-col justify-between sm:col-span-2">
-          <div class="font-mono text-[10px] tracking-[0.3em] text-grayx uppercase">Follow · @adgensi</div>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <template x-for="s in ['LinkedIn','Instagram','YouTube','TikTok','Facebook','X']" :key="s">
-              <a href="#" data-cursor class="font-mono text-[11px] tracking-wide uppercase text-white/70 border border-white/15 rounded-full px-3.5 py-1.5 hover:text-white hover:border-red/50 hover:bg-red/10 transition-colors" x-text="s"></a>
-            </template>
-          </div>
-        </div>
-
-        <!-- Testimonials pending (honest) -->
-        <div class="relative overflow-hidden rounded-3xl border border-dashed border-white/12 p-7 flex flex-col justify-between sm:col-span-2">
-          <div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-grayx uppercase">
-            <span class="h-1.5 w-1.5 rounded-full bg-red blink"></span> Testimonials
-          </div>
-          <p class="text-warm/90 leading-relaxed">Client testimonials will be published <span class="text-red">after verification and approval</span> — never fabricated.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 10 INQUIRY FORM ================= -->
-  <section id="contact" data-nav data-reveal class="cv relative py-24 md:py-36 border-t border-white/5" x-data="inquiry()">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="max-w-2xl mb-12">
-        <span class="font-mono text-[11px] tracking-[0.25em] text-red uppercase">10 — Start a Project</span>
-        <h2 class="mt-5 font-display font-extrabold display text-[clamp(2.2rem,6vw,5rem)]"><span class="reveal-line"><span>Tell Us What You Want to Create.</span></span></h2>
-        <p class="rise d1 mt-6 text-grayx leading-relaxed">Share your campaign requirements and our creative team will review the project and contact you with the recommended production approach.</p>
-      </div>
-
-      <div x-show="sent" x-cloak class="max-w-[860px] rounded-xl border border-red/40 bg-red/5 p-10 text-center">
-        <div class="font-display font-extrabold text-2xl">Your project brief has been received.</div>
-        <p class="mt-3 text-grayx">Our team will review the requirements and contact you shortly.</p>
-      </div>
-
-      <form x-show="!sent" @submit.prevent="submit()" novalidate class="max-w-[860px] grid md:grid-cols-2 gap-5">
-        <div class="hidden" aria-hidden="true"><label>Leave blank <input type="text" x-model="f.company_url" tabindex="-1" autocomplete="off" /></label></div>
-
-        <div>
-          <label for="cat" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Project Category *</label>
-          <select id="cat" x-model="f.category" :aria-invalid="err.category?'true':'false'" aria-describedby="cat-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red"><option value="">Select a category</option><template x-for="o in categories" :key="o"><option x-text="o" :value="o"></option></template></select>
-          <p id="cat-e" x-show="err.category" x-cloak class="mt-1.5 text-xs text-redb">Please choose a category.</p>
-        </div>
-        <div>
-          <label for="bud" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Estimated Budget *</label>
-          <select id="bud" x-model="f.budget" :aria-invalid="err.budget?'true':'false'" aria-describedby="bud-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red"><option value="">Select a range</option><template x-for="o in budgets" :key="o"><option x-text="o" :value="o"></option></template></select>
-          <p id="bud-e" x-show="err.budget" x-cloak class="mt-1.5 text-xs text-redb">Please choose a budget range.</p>
-        </div>
-        <div>
-          <label for="dl" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Deadline *</label>
-          <select id="dl" x-model="f.deadline" :aria-invalid="err.deadline?'true':'false'" aria-describedby="dl-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red"><option value="">Select a timeline</option><template x-for="o in deadlines" :key="o"><option x-text="o" :value="o"></option></template></select>
-          <p id="dl-e" x-show="err.deadline" x-cloak class="mt-1.5 text-xs text-redb">Please choose a deadline.</p>
-        </div>
-        <div x-show="f.deadline==='Specific date'" x-cloak>
-          <label for="dd" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Target Date</label>
-          <input id="dd" type="date" x-model="f.date" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red" />
-        </div>
-        <div>
-          <label for="nm" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Full Name *</label>
-          <input id="nm" type="text" x-model="f.name" :aria-invalid="err.name?'true':'false'" aria-describedby="nm-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red" />
-          <p id="nm-e" x-show="err.name" x-cloak class="mt-1.5 text-xs text-redb">Please enter your name.</p>
-        </div>
-        <div>
-          <label for="em" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Business Email *</label>
-          <input id="em" type="email" x-model="f.email" :aria-invalid="err.email?'true':'false'" aria-describedby="em-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red" />
-          <p id="em-e" x-show="err.email" x-cloak class="mt-1.5 text-xs text-redb">Please enter a valid business email.</p>
-        </div>
-        <div>
-          <label for="co" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Company Name *</label>
-          <input id="co" type="text" x-model="f.companyName" :aria-invalid="err.companyName?'true':'false'" aria-describedby="co-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red" />
-          <p id="co-e" x-show="err.companyName" x-cloak class="mt-1.5 text-xs text-redb">Please enter your company.</p>
-        </div>
-        <div>
-          <label for="wa" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">WhatsApp Number</label>
-          <input id="wa" type="tel" x-model="f.whatsapp" placeholder="+92 ..." class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red placeholder:text-white/25" />
-        </div>
-        <div class="md:col-span-2">
-          <label for="pd" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Project Details *</label>
-          <textarea id="pd" rows="5" x-model="f.details" :aria-invalid="err.details?'true':'false'" aria-describedby="pd-e" class="w-full bg-char border border-white/10 rounded-md px-4 py-3.5 text-warm focus:border-red resize-y" placeholder="Describe the product, audience, campaign objective, required deliverables and any important references."></textarea>
-          <p id="pd-e" x-show="err.details" x-cloak class="mt-1.5 text-xs text-redb">Please describe your project.</p>
-        </div>
-        <div class="md:col-span-2">
-          <label for="fu" class="block font-mono text-[11px] tracking-widest text-grayx uppercase mb-2">Attach Brief (optional — PDF or ZIP)</label>
-          <input id="fu" type="file" accept=".pdf,.zip" class="w-full text-sm text-grayx file:mr-4 file:py-2.5 file:px-4 file:rounded-full file:border-0 file:bg-red file:text-white file:font-semibold file:text-xs hover:file:bg-redb" />
-        </div>
-        <div class="md:col-span-2 flex items-start gap-3">
-          <input id="cs" type="checkbox" x-model="f.consent" :aria-invalid="err.consent?'true':'false'" aria-describedby="cs-e" class="mt-1 h-4 w-4 accent-red" />
-          <label for="cs" class="text-sm text-grayx">I agree that AdGenSi may contact me regarding this project inquiry.<span id="cs-e" x-show="err.consent" x-cloak class="block text-redb mt-1">Please accept to continue.</span></label>
-        </div>
-        <div class="md:col-span-2">
-          <button type="submit" :disabled="loading" data-cursor class="w-full sm:w-auto bg-red hover:bg-redb disabled:opacity-60 text-white font-semibold px-8 py-4 rounded-full transition-colors flex items-center justify-center gap-3">
-            <span x-show="!loading">Submit Project Brief</span>
-            <span x-show="loading" x-cloak class="flex items-center gap-2"><span class="h-4 w-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span> Sending…</span>
-          </button>
-          <p x-show="failed" x-cloak class="mt-3 text-sm text-redb">Something went wrong. Please review the highlighted fields and try again.</p>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- ================= 11 FINAL CTA ================= -->
-  <section id="final" data-reveal class="cv relative py-28 md:py-44 border-t border-white/5 overflow-hidden">
-    <div class="absolute inset-0" aria-hidden="true">
-      <div class="absolute inset-0" style="background:radial-gradient(70% 100% at 50% 50%, rgba(225,6,0,.5), transparent 60%), #0a0000"></div>
-      <div class="absolute inset-0 overflow-hidden"><span class="absolute top-0 left-0 h-full w-40 bg-white/5 sweep"></span></div>
-    </div>
-    <div class="relative z-10 mx-auto max-w-[1600px] px-5 md:px-10 text-center">
-      <h2 class="font-display font-extrabold display-tight text-[clamp(2rem,6.5vw,5.5rem)] text-white max-w-4xl mx-auto"><span class="reveal-line"><span>Your Next Campaign Should Not Look Like Everyone Else's.</span></span></h2>
-      <p class="rise d1 mt-7 max-w-xl mx-auto text-white/70 leading-relaxed">Bring us the product, objective or creative challenge. AdGenSi will turn it into advertising designed to earn attention and inspire action.</p>
-      <div class="rise d2 mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="#contact" data-magnetic data-cursor class="bg-white text-ink font-semibold text-sm px-8 py-4 rounded-full hover:bg-warm transition-colors">Start Your Project</a>
-        <button @click="openReel()" data-cursor class="border border-white/30 text-white font-semibold text-sm px-8 py-4 rounded-full hover:border-white transition-colors">Watch Showreel</button>
-      </div>
-    </div>
-  </section>
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="relative border-t border-white/8 pt-20 pb-8 overflow-hidden">
-    <div class="mx-auto max-w-[1600px] px-5 md:px-10">
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-        <div>
-          <div class="flex items-center gap-3 mb-5"><span class="grid place-items-center h-8 w-8 rounded-[6px] bg-red font-display font-extrabold text-white">A</span><span class="font-display font-extrabold text-lg">AdGenSi</span></div>
-          <p class="text-grayx text-sm leading-relaxed max-w-xs">AdGenSi is an AI-powered creative advertising and cinematic production agency creating high-impact campaigns for ambitious brands.</p>
-        </div>
-        <div>
-          <h3 class="font-mono text-[11px] tracking-widest text-grayx uppercase mb-4">Services</h3>
-          <ul class="space-y-2.5 text-sm text-warm/80">
-            <li><a href="#services" class="hover:text-red transition-colors" data-cursor>AI Creative</a></li><li><a href="#services" class="hover:text-red transition-colors" data-cursor>Video Ads</a></li><li><a href="#services" class="hover:text-red transition-colors" data-cursor>Cinematic Production</a></li><li><a href="#services" class="hover:text-red transition-colors" data-cursor>Performance Marketing</a></li><li><a href="#services" class="hover:text-red transition-colors" data-cursor>Creative Automation</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-mono text-[11px] tracking-widest text-grayx uppercase mb-4">Company</h3>
-          <ul class="space-y-2.5 text-sm text-warm/80">
-            <li><a href="#work" class="hover:text-red transition-colors" data-cursor>Work</a></li><li><a href="#process" class="hover:text-red transition-colors" data-cursor>Process</a></li><li><a href="#about" class="hover:text-red transition-colors" data-cursor>About</a></li><li><a href="#contact" class="hover:text-red transition-colors" data-cursor>Contact</a></li><li><a href="https://www.trustpilot.com/review/adgensi.com" rel="noopener" class="hover:text-red transition-colors" data-cursor>Trustpilot</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="font-mono text-[11px] tracking-widest text-grayx uppercase mb-4">Industries</h3>
-          <ul class="space-y-2.5 text-sm text-warm/80"><li>Food &amp; Beverage</li><li>FMCG</li><li>Technology</li><li>Travel</li><li>Consumer Products</li></ul>
-        </div>
-      </div>
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-14 border-b border-white/8">
-        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-warm/70">
-          <a href="#" class="hover:text-red transition-colors" data-cursor>LinkedIn</a><a href="#" class="hover:text-red transition-colors" data-cursor>Instagram</a><a href="#" class="hover:text-red transition-colors" data-cursor>Facebook</a><a href="#" class="hover:text-red transition-colors" data-cursor>YouTube</a><a href="#" class="hover:text-red transition-colors" data-cursor>TikTok</a><a href="#" class="hover:text-red transition-colors" data-cursor>X</a>
-        </div>
-        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-grayx"><a href="#" class="hover:text-warm transition-colors">Privacy Policy</a><a href="#" class="hover:text-warm transition-colors">Terms &amp; Conditions</a><a href="#" class="hover:text-warm transition-colors">Cookie Policy</a></div>
-      </div>
-      <div class="flex flex-col sm:flex-row justify-between items-center gap-3 pt-6"><p class="font-mono text-[11px] tracking-[0.2em] text-red uppercase">Creative That Converts.</p><p class="text-xs text-grayx">© 2026 AdGenSi. All rights reserved.</p></div>
-    </div>
-    <div class="mt-10 select-none pointer-events-none" aria-hidden="true">
-      <div class="marquee slow font-display font-extrabold display-tight text-[clamp(4rem,18vw,16rem)] text-white/[0.04] leading-none"><span class="px-6">ADGENSI —</span><span class="px-6">ADGENSI —</span><span class="px-6">ADGENSI —</span><span class="px-6">ADGENSI —</span></div>
-    </div>
-  </footer>
-
-  <!-- ================= SHOWREEL MODAL ================= -->
-  <div x-show="reelOpen" x-cloak @keydown.escape.window="closeReel()" class="fixed inset-0 z-[90] grid place-items-center p-4 md:p-10"
+  <!-- ===== Mobile menu ===== -->
+  <div x-show="menu" x-cloak @keydown.escape.window="menu=false" class="fixed inset-0 z-[80] lg:hidden"
        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-       x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-       role="dialog" aria-modal="true" aria-label="Showreel">
-    <div class="absolute inset-0 bg-ink/90 backdrop-blur-sm" @click="closeReel()"></div>
-    <div class="relative w-full max-w-5xl" @keydown.tab="trapReel($event)">
-      <button x-ref="reelClose" @click="closeReel()" class="absolute -top-11 right-0 text-white/70 hover:text-white flex items-center gap-2 text-sm">Close <svg width="18" height="18" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 2l18 18M20 2L2 20"/></svg></button>
-      <div class="aspect-video rounded-xl overflow-hidden border border-white/10 bg-black">
-        <!-- Real reel: <video controls playsinline poster="/assets/images/hero-poster.webp"><source src="/assets/video/adgensi-showreel.mp4" type="video/mp4"></video> -->
-        <div class="h-full w-full grid place-items-center" style="background:radial-gradient(70% 90% at 50% 40%, rgba(225,6,0,.4), transparent 60%), linear-gradient(160deg,#160000,#000)">
-          <div class="text-center px-6"><div class="font-mono text-[10px] tracking-[0.3em] text-white/60 uppercase mb-3">Showreel · 00:60</div><div class="font-display font-extrabold text-2xl md:text-4xl text-white">Reel plays here once <span class="text-red">adgensi-showreel.mp4</span> is added.</div></div>
-        </div>
+       x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-paper" @click="menu=false"></div>
+    <div class="relative h-full flex flex-col px-6 py-6">
+      <div class="flex items-center justify-between"><span class="font-display font-extrabold text-xl">AdGenSi<span class="text-red">®</span></span>
+        <button @click="menu=false" class="grid place-items-center h-11 w-11" aria-label="Close"><svg width="22" height="22" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 2l18 18M20 2L2 20"/></svg></button></div>
+      <nav class="flex-1 flex flex-col justify-center gap-1">
+        <a href="#" @click="menu=false" class="font-display font-extrabold text-4xl tracking-tight py-1.5 hover:text-red transition-colors">Home</a>
+        <a href="#" @click="menu=false" class="font-display font-extrabold text-4xl tracking-tight py-1.5 hover:text-red transition-colors">Studio</a>
+        <a href="#" @click="menu=false" class="font-display font-extrabold text-4xl tracking-tight py-1.5 hover:text-red transition-colors">Work</a>
+        <a href="#" @click="menu=false" class="font-display font-extrabold text-4xl tracking-tight py-1.5 hover:text-red transition-colors">Contact</a>
+      </nav>
+      <a href="#" class="w-full bg-red text-white rounded-full py-3.5 font-semibold text-sm text-center">Start a Project</a>
+    </div>
+  </div>
+
+  <!-- ===== Showreel modal ===== -->
+  <div x-show="reel" x-cloak @keydown.escape.window="reel=false" class="fixed inset-0 z-[90] grid place-items-center p-4 md:p-10"
+       x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" role="dialog" aria-modal="true" aria-label="Showreel">
+    <div class="absolute inset-0 bg-ink/85 backdrop-blur-sm" @click="reel=false"></div>
+    <div class="relative w-full max-w-5xl">
+      <button @click="reel=false" class="absolute -top-11 right-0 text-white/70 hover:text-white flex items-center gap-2 text-sm">Close <svg width="18" height="18" viewBox="0 0 22 22" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 2l18 18M20 2L2 20"/></svg></button>
+      <div class="aspect-video rounded-2xl overflow-hidden border border-white/10 grid place-items-center" style="background:radial-gradient(70% 90% at 50% 40%, rgba(225,6,0,.4), transparent 60%), linear-gradient(160deg,#160000,#000)">
+        <div class="text-center px-6"><div class="font-mono text-[10px] tracking-[0.3em] text-white/60 uppercase mb-3">Showreel · 00:60</div><div class="font-display font-extrabold text-2xl md:text-4xl text-white">Reel plays here once <span class="text-red">adgensi-showreel.mp4</span> is added.</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ================= STRUCTURED DATA ================= -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[
-    {"@type":"Organization","@id":"https://adgensi.com/#org","name":"AdGenSi","url":"https://adgensi.com/","logo":"https://adgensi.com/assets/images/favicon.svg","description":"AI-powered creative advertising and cinematic production agency for ambitious global brands."},
-    {"@type":"ProfessionalService","name":"AdGenSi","image":"https://adgensi.com/assets/images/hero-poster.webp","url":"https://adgensi.com/","priceRange":"$$$","serviceType":"AI advertising and cinematic production","areaServed":"Worldwide"},
-    {"@type":"WebSite","@id":"https://adgensi.com/#site","url":"https://adgensi.com/","name":"AdGenSi","publisher":{"@id":"https://adgensi.com/#org"}},
-    {"@type":"Service","provider":{"@id":"https://adgensi.com/#org"},"serviceType":"AI Creative, Video Ads, Cinematic Production, Performance Marketing, Creative Automation","name":"AI-Powered Advertising Production"},
-    {"@type":"ContactPoint","@id":"https://adgensi.com/#contact","contactType":"sales","email":"hello@adgensi.com","availableLanguage":["English"]}
-  ]}
-  </script>
-
-  <!-- ================= JS ================= -->
   <script>
-    function site(){
-      return {
-        scrolled:false, menuOpen:false, reelOpen:false, active:'hero', lastFocus:null,
-        nav:[{id:'work',label:'Work'},{id:'services',label:'Services'},{id:'process',label:'Process'},{id:'about',label:'About'},{id:'contact',label:'Contact'}],
-        services:[
-          {n:'01',title:'AI Creative',desc:'Develop advertising concepts, visual directions, campaign hooks, storyboards and scalable creative variations using AI-assisted workflows.',shape:shape('sphere')},
-          {n:'02',title:'Video Ads',desc:'Produce high-impact short-form advertisements, product videos, social campaigns, reels and platform-specific video variations.',shape:shape('bars')},
-          {n:'03',title:'Cinematic Production',desc:'Create premium brand films, product cinematography, commercial advertising, motion graphics, editing, sound design and color grading.',shape:shape('torus')},
-          {n:'04',title:'Performance Marketing',desc:'Connect creative production with campaign strategy, testing, audience insights and performance improvement.',shape:shape('graph')},
-          {n:'05',title:'Creative Automation',desc:'Transform one campaign idea into multiple formats, sizes, languages and channel-specific variations while protecting brand consistency.',shape:shape('grid')},
-        ],
-        work:[
-          {title:'Global Beverage Campaign',desc:'Cinematic product advertising designed around energy, refreshment and global lifestyle moments.',tags:['Creative Direction','Product Film','Motion Design','Social Advertising'],bg:'background:radial-gradient(80% 90% at 30% 20%, rgba(225,6,0,.6), transparent 60%), linear-gradient(160deg,#1a0000,#000)'},
-          {title:'Premium Food Campaign',desc:'A sensory campaign combining food cinematography, cultural storytelling and high-impact social content.',tags:['Campaign Strategy','Food Styling','Video Production','Digital Adaptation'],bg:'background:radial-gradient(80% 90% at 70% 30%, rgba(120,0,0,.7), transparent 60%), linear-gradient(160deg,#120000,#000)'},
-          {title:'Consumer Product Launch',desc:'A launch system built around one hero campaign and multiple channel-specific creative variations.',tags:['AI Concept Development','Product Advertising','Reels','Display Creative'],bg:'background:radial-gradient(90% 90% at 40% 70%, rgba(255,26,18,.45), transparent 60%), linear-gradient(160deg,#160000,#000)'},
-          {title:'International Brand Film',desc:'A cinematic brand story created to communicate identity, scale and emotional relevance across markets.',tags:['Storyboarding','Production','Editing','Sound Design'],bg:'background:radial-gradient(80% 80% at 60% 50%, rgba(225,6,0,.5), transparent 55%), linear-gradient(200deg,#100000,#000)'},
-        ],
-        why:[
-          {title:'Faster Creative Development',desc:'AI-assisted ideation and previsualization reduce the time between brief and first concept.'},
-          {title:'Premium Production Quality',desc:'Every campaign is guided by professional creative direction, cinematic standards and brand strategy.'},
-          {title:'Scalable Campaign Variations',desc:'One strong campaign can be adapted into multiple platforms, formats, messages and audience variations.'},
-          {title:'Performance Intelligence',desc:'Creative decisions can be informed by campaign data, audience behavior and real-world performance.'},
-        ],
-        process:[
-          {n:'01',title:'Discover',desc:'We understand the brand, product, market, audience, campaign objective and required deliverables.'},
-          {n:'02',title:'Strategize',desc:'We define the central idea, campaign message, creative direction, production approach and distribution formats.'},
-          {n:'03',title:'Create',desc:'Our team develops concepts, scripts, storyboards, visual treatments and AI-assisted previsualizations.'},
-          {n:'04',title:'Produce',desc:'We create, film, generate, animate, edit, design and refine every required campaign asset.'},
-          {n:'05',title:'Launch',desc:'Final creative is prepared for the required platforms, dimensions, languages and campaign environments.'},
-          {n:'06',title:'Optimize',desc:'Campaign feedback and performance insights guide future creative variations and improvements.'},
-        ],
-        formats:['16:9 Commercial','9:16 Reel','1:1 Social','4:5 Feed','Display','YouTube','TikTok','Instagram','LinkedIn'],
-        industries:['Food & Beverage','FMCG','Consumer Products','Travel & Hospitality','Fashion & Lifestyle','Technology','E-commerce','Automotive','Financial Services','Entertainment'],
-        indBg(i){ const h=[0,345,10,352,4,0,348,6,350,2][i%10]; return `background:radial-gradient(80% 90% at ${20+(i*7)%60}% 30%, hsla(${h},95%,35%,.7), transparent 60%), linear-gradient(160deg,#140000,#000)`; },
-        init(){ initMotion(this); },
-        openReel(){ this.lastFocus=document.activeElement; this.reelOpen=true; this.$nextTick(()=>{ if(this.$refs.reelClose) this.$refs.reelClose.focus(); }); },
-        closeReel(){ this.reelOpen=false; if(this.lastFocus) this.lastFocus.focus(); },
-        trapReel(e){ const m=e.target.closest('[role=dialog]'); if(!m) return; const f=m.querySelectorAll('button,a,[tabindex]'); if(!f.length) return; const first=f[0], last=f[f.length-1]; if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();} else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();} },
-      };
-    }
-
-    function shape(kind){
-      const g='<defs><radialGradient id="r'+kind+'" cx="35%" cy="30%" r="80%"><stop offset="0%" stop-color="#FF3b30"/><stop offset="45%" stop-color="#E10600"/><stop offset="100%" stop-color="#3a0000"/></radialGradient></defs>';
-      const base='<svg viewBox="0 0 160 112" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">'+g;
-      const s={
-        sphere:'<circle cx="80" cy="56" r="34" fill="url(#rsphere)"/><ellipse cx="70" cy="44" rx="12" ry="7" fill="#fff" opacity=".18"/>',
-        torus:'<g fill="none" stroke="url(#rtorus)" stroke-width="12"><ellipse cx="80" cy="56" rx="36" ry="24"/></g>',
-        bars:'<g fill="url(#rbars)"><rect x="52" y="40" width="12" height="42" rx="2"/><rect x="74" y="28" width="12" height="54" rx="2"/><rect x="96" y="52" width="12" height="30" rx="2"/></g>',
-        graph:'<polyline points="46,74 70,54 90,64 116,34" fill="none" stroke="url(#rgraph)" stroke-width="5" stroke-linecap="round"/><circle cx="116" cy="34" r="6" fill="#FF1A12"/>',
-        grid:'<g fill="url(#rgrid)"><rect x="52" y="34" width="22" height="22" rx="3"/><rect x="86" y="34" width="22" height="22" rx="3" opacity=".7"/><rect x="52" y="62" width="22" height="22" rx="3" opacity=".55"/><rect x="86" y="62" width="22" height="22" rx="3" opacity=".85"/></g>',
-      };
-      return base+(s[kind]||s.sphere)+'</svg>';
-    }
-
-    function inquiry(){
-      return {
-        loading:false, sent:false, failed:false,
-        categories:['AI Creative Campaign','Video Advertisement','Cinematic Commercial','Product Advertisement','Social Media Ads','UGC Campaign','Performance Creative','Creative Automation','Brand Film','Motion Graphics','Other'],
-        budgets:['Under $5,000','$5,000 to $10,000','$10,000 to $25,000','$25,000 to $50,000','$50,000 to $100,000','Above $100,000','Budget Not Finalized'],
-        deadlines:['Within 2 weeks','Within 1 month','Within 2 months','Within 3 months','Flexible','Specific date'],
-        f:{category:'',budget:'',deadline:'',date:'',name:'',email:'',companyName:'',whatsapp:'',details:'',consent:false,company_url:''},
-        err:{},
-        validate(){ const e={};
-          if(!this.f.category)e.category=1; if(!this.f.budget)e.budget=1; if(!this.f.deadline)e.deadline=1;
-          if(!this.f.name.trim())e.name=1; if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(this.f.email))e.email=1;
-          if(!this.f.companyName.trim())e.companyName=1; if(!this.f.details.trim())e.details=1; if(!this.f.consent)e.consent=1;
-          this.err=e; return Object.keys(e).length===0; },
-        submit(){ this.failed=false; if(this.f.company_url) return; if(!this.validate()){ this.failed=true; return; }
-          this.loading=true; setTimeout(()=>{ this.loading=false; this.sent=true; window.scrollTo({top:document.getElementById('contact').offsetTop-80,behavior:'smooth'}); },900); }
-      };
-    }
-
-    function initMotion(root){
+    document.addEventListener('alpine:initialized', ()=>{
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const fine   = matchMedia('(pointer: fine)').matches;
-      const deskWork = matchMedia('(min-width:1024px)').matches;
-
-      // Intro preloader
-      const intro=document.getElementById('intro');
-      if(intro){
-        if(reduce){ intro.remove(); document.getElementById('hero').classList.add('revealed'); }
-        else{
-          const cnt=document.getElementById('introCount'), bar=document.getElementById('introBar');
-          let p=0; const t=setInterval(()=>{ p=Math.min(100,p+Math.random()*11+4); if(cnt)cnt.textContent=String(Math.floor(p)).padStart(3,'0'); if(bar)bar.style.width=p+'%';
-            if(p>=100){ clearInterval(t); setTimeout(()=>{ intro.classList.add('done'); document.getElementById('hero').classList.add('revealed'); setTimeout(()=>intro.remove(),1000); },250); } },90);
+      const all=()=>document.querySelectorAll('.reveal, .reveal-img, .rise');
+      if(reduce){ all().forEach(e=>e.classList.add('is-in')); }
+      else{
+        const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }),{threshold:.08, rootMargin:'0px 0px -6% 0px'});
+        all().forEach(e=>io.observe(e));
+        /* fail-safe: never leave content hidden */
+        setTimeout(()=>{ all().forEach(e=>{ const r=e.getBoundingClientRect(); if(r.top < innerHeight*1.1) e.classList.add('is-in'); }); }, 1600);
+        const pars=[...document.querySelectorAll('[data-par]')];
+        if(pars.length){
+          let tk=false;
+          const upd=()=>{ const vh=innerHeight; pars.forEach(p=>{ const r=p.getBoundingClientRect(); const prog=((r.top+r.height/2)-vh/2)/vh; p.style.transform='translateY('+Math.max(-12,Math.min(12,prog*-11))+'%)'; }); tk=false; };
+          addEventListener('scroll',()=>{ if(!tk){ requestAnimationFrame(upd); tk=true; } },{passive:true});
+          addEventListener('resize',upd,{passive:true}); upd();
         }
       }
-
-      // Split section headings into words (skip the manual reveal-line ones — those handle themselves)
-      // (reveal-line used throughout; no split needed)
-
-      // Reveal observer
-      const io=new IntersectionObserver((es)=>{ es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('revealed'); io.unobserve(en.target); } }); },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
-      document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
-
-      // Active nav observer
-      const navIo=new IntersectionObserver((es)=>{ es.forEach(en=>{ if(en.isIntersecting) root.active=en.target.id; }); },{threshold:.35});
-      document.querySelectorAll('[data-nav]').forEach(el=>navIo.observe(el));
-
-      const progress=document.getElementById('progress');
-      const heroInner=document.getElementById('heroInner');
-      const heroBg=document.getElementById('heroBg');
-      const procBar=document.getElementById('procBar'), procSec=document.getElementById('process');
-      const workPin=document.getElementById('workPin'), workSticky=workPin?workPin.querySelector('.work-sticky'):null, workTrack=document.getElementById('workTrack');
-
-      // Set up pinned horizontal work (desktop only)
-      let workMax=0;
-      function layoutWork(){
-        if(!deskWork||!workPin||!workTrack) return;
-        workMax=Math.max(0, workTrack.scrollWidth - window.innerWidth);
-        workPin.style.height=(window.innerHeight + workMax)+'px';
+      const lits=[...document.querySelectorAll('[data-lit]')];
+      if(lits.length){
+        if(reduce){ lits.forEach(el=>el.querySelectorAll('.fw').forEach(w=>w.classList.add('lit'))); }
+        else{
+          let lk=false;
+          const updL=()=>{ const vh=innerHeight; lits.forEach(el=>{ const ws=[...el.querySelectorAll('.fw')]; const r=el.getBoundingClientRect(); let prog=(vh*0.86 - r.top)/(r.height + vh*0.35); prog=Math.max(0,Math.min(1,prog)); const n=Math.round(prog*ws.length); ws.forEach((w,i)=>w.classList.toggle('lit', i<n)); }); lk=false; };
+          addEventListener('scroll',()=>{ if(!lk){ requestAnimationFrame(updL); lk=true; } },{passive:true});
+          updL();
+        }
       }
-      layoutWork();
-      window.addEventListener('resize',()=>{ layoutWork(); },{passive:true});
-
-      let ticking=false;
-      function onScroll(){ if(ticking)return; ticking=true; requestAnimationFrame(()=>{
-        const y=window.scrollY;
-        root.scrolled=y>40;
-        const max=document.documentElement.scrollHeight-window.innerHeight;
-        progress.style.transform='scaleX('+Math.min(1,y/Math.max(1,max))+')';
-        if(!reduce&&heroInner&&y<window.innerHeight){ heroInner.style.transform='translateY('+(y*0.16)+'px)'; heroInner.style.opacity=String(Math.max(0,1-y/(window.innerHeight*0.85))); if(heroBg) heroBg.style.transform='translateY('+(y*0.28)+'px) scale(1.1)'; }
-        if(procBar&&procSec){ const r=procSec.getBoundingClientRect(); const p=Math.min(1,Math.max(0,(window.innerHeight*0.5-r.top)/r.height)); procBar.style.width=(p*100).toFixed(1)+'%'; }
-        if(deskWork&&workPin&&workTrack&&workMax>0){ const r=workPin.getBoundingClientRect(); const prog=Math.min(1,Math.max(0,(-r.top)/(workPin.offsetHeight-window.innerHeight))); workTrack.style.transform='translateX('+(-prog*workMax)+'px)'; }
-        ticking=false;
-      }); }
-      window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-
-      // Cursor + glow + magnetic (desktop, motion ok)
-      if(fine&&!reduce){
-        const glow=document.getElementById('glow'), cur=document.getElementById('cursor'), dot=document.getElementById('cursorDot');
-        glow.classList.add('on');
-        let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
-        addEventListener('mousemove',(e)=>{ mx=e.clientX; my=e.clientY; glow.style.setProperty('--gx',mx+'px'); glow.style.setProperty('--gy',my+'px'); dot.style.setProperty('--cx',mx+'px'); dot.style.setProperty('--cy',my+'px'); },{passive:true});
-        (function loop(){ cx+=(mx-cx)*0.18; cy+=(my-cy)*0.18; cur.style.setProperty('--cx',cx+'px'); cur.style.setProperty('--cy',cy+'px'); requestAnimationFrame(loop); })();
-        document.querySelectorAll('[data-cursor]').forEach(el=>{ el.addEventListener('mouseenter',()=>cur.classList.add('big')); el.addEventListener('mouseleave',()=>cur.classList.remove('big')); });
-        document.querySelectorAll('[data-magnetic]').forEach(btn=>{ btn.style.transition='transform .3s cubic-bezier(.16,1,.3,1)';
-          btn.addEventListener('mousemove',(e)=>{ const r=btn.getBoundingClientRect(); btn.style.transform='translate('+((e.clientX-r.left-r.width/2)*0.25)+'px,'+((e.clientY-r.top-r.height/2)*0.35)+'px)'; });
-          btn.addEventListener('mouseleave',()=>{ btn.style.transform=''; }); });
+      const wkCards=[...document.querySelectorAll('.wk-card')];
+      if(wkCards.length){
+        if(reduce){ wkCards.forEach(c=>c.classList.add('in')); }
+        else{
+          const wio=new IntersectionObserver((es)=>es.forEach(en=>{
+            if(!en.isIntersecting) return; wio.unobserve(en.target);
+            const d=+en.target.dataset.wk||0; setTimeout(()=>en.target.classList.add('in'), d);
+          }),{threshold:.2, rootMargin:'0px 0px -8% 0px'});
+          wkCards.forEach(c=>wio.observe(c));
+          const fine=matchMedia('(pointer:fine)').matches;
+          if(fine) wkCards.forEach(card=>{
+            const f=card.querySelector('.wk-frame');
+            card.addEventListener('pointermove',(e)=>{
+              const r=f.getBoundingClientRect(); const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+              card.style.transform='rotateY('+((px-.5)*7)+'deg) rotateX('+((.5-py)*7)+'deg)';
+              f.style.setProperty('--mx',(px*100)+'%'); f.style.setProperty('--my',(py*100)+'%');
+            });
+            card.addEventListener('pointerleave',()=>{ card.style.transform=''; });
+          });
+          /* failsafe */
+          setTimeout(()=>wkCards.forEach(c=>{ const r=c.getBoundingClientRect(); if(r.top<innerHeight*1.1) c.classList.add('in'); }),1800);
+        }
       }
+      const cio=new IntersectionObserver((es)=>es.forEach(en=>{
+        if(!en.isIntersecting) return; cio.unobserve(en.target);
+        const el=en.target, end=+el.dataset.count, suf=el.dataset.suffix||''; const t0=performance.now();
+        const tick=(t)=>{ const p=Math.min(1,(t-t0)/1200); const e=1-Math.pow(1-p,3); el.textContent=Math.round(end*e)+suf; if(p<1) requestAnimationFrame(tick); };
+        if(reduce){ el.textContent=end+suf; } else requestAnimationFrame(tick);
+      }),{threshold:.5});
+      document.querySelectorAll('[data-count]').forEach(e=>cio.observe(e));
+    });
+    function ba(){
+      return {
+        p:8, drag:false, manual:false, step:0,
+        grab(e){ this.manual=true; this.drag=true; this.set(e); },
+        set(e){ const r=this.$refs.box.getBoundingClientRect(); const x=((e.clientX-r.left)/r.width)*100; this.p=Math.max(3,Math.min(97,x)); this.calc(); },
+        calc(){ this.step = this.p<28?0 : this.p<52?1 : this.p<76?2 : 3; },
+        scrub(){ if(this.manual) return; const r=this.$refs.box.getBoundingClientRect(); const vh=window.innerHeight; let prog=(vh*0.82 - r.top)/(vh*0.6); prog=Math.max(0,Math.min(1,prog)); this.p=6+prog*88; this.calc(); },
+        init(){ if(matchMedia('(prefers-reduced-motion: reduce)').matches){ this.p=62; this.calc(); return; } this.scrub(); const on=()=>{ if(!this.manual) requestAnimationFrame(()=>this.scrub()); }; window.addEventListener('scroll',on,{passive:true}); window.addEventListener('resize',on,{passive:true}); }
+      };
+    }
+    function hero(){
+      return {
+        menu:false, reel:false, i:0, svc:0,
+        words:['Bold.','Cinematic.','Unforgettable.'],
+        services:[
+          {n:'AI Creative Development', d:'Concepts, scripts and visual directions generated at speed — then curated and refined by senior creatives.', tags:['Concepts','Scripts','Art Direction','Iterations'], img:'https://picsum.photos/seed/adgensi-svc1/900/620'},
+          {n:'Video Ad Production', d:'Performance-ready video ads for every platform — hooks, cutdowns and variations built to convert.', tags:['Hooks','UGC Style','Cutdowns','Paid Social'], img:'https://picsum.photos/seed/adgensi-svc2/900/620'},
+          {n:'Cinematic Brand Films', d:'Big-idea brand films with cinematic craft — story, sound and grade that make a brand feel inevitable.', tags:['Story','Direction','Sound','Grade'], img:'https://picsum.photos/seed/adgensi-svc3/900/620'},
+          {n:'Social Content Systems', d:'Always-on content engines — monthly systems of reels, statics and stories in a consistent brand voice.', tags:['Reels','Statics','Stories','Calendars'], img:'https://picsum.photos/seed/adgensi-svc4/900/620'},
+          {n:'Creative Automation', d:'One master idea scaled into every size, language and market — automatically, without losing the craft.', tags:['Versioning','Localization','Formats','Scale'], img:'https://picsum.photos/seed/adgensi-svc5/900/620'}
+        ],
+        work:[
+          {t:'Global Beverage Campaign', tags:['Creative Direction','Product Film','Motion','Social'], img:'https://picsum.photos/seed/adgensi-w1/1400/900'},
+          {t:'Premium Food Campaign', tags:['Strategy','Food Styling','Video','Digital'], img:'https://picsum.photos/seed/adgensi-w2/1400/900'},
+          {t:'Consumer Product Launch', tags:['AI Concept','Product Ad','Reels','Display'], img:'https://picsum.photos/seed/adgensi-w3/1400/900'},
+          {t:'International Brand Film', tags:['Storyboarding','Production','Editing','Sound'], img:'https://picsum.photos/seed/adgensi-w4/1400/900'}
+        ],
+        steps:[
+          {n:'Discover', d:'Brand, audience and goal — we lock the brief before anything is made.'},
+          {n:'Concept', d:'AI-accelerated ideation, human-curated directions presented fast.'},
+          {n:'Design', d:'Frames, boards and styleframes that set the cinematic look.'},
+          {n:'Produce', d:'Generation, shoot and edit — the idea becomes real at pace.'},
+          {n:'Grade', d:'Color, sound and finishing until every frame feels premium.'},
+          {n:'Launch', d:'Delivered in every format, ready for every platform.'}
+        ],
+        industries:['FMCG','Beverages','Food & Restaurants','Fashion','Beauty','Tech & Apps','Real Estate','Automotive','Retail & E-commerce','Entertainment'],
+        hov:null, mx:0, my:0,
+        partners:[
+          {n:'NOVA®',c:'Consumer Goods'},{n:'ATLAS®',c:'Technology'},{n:'VERA®',c:'Beauty'},{n:'LUMEN®',c:'Media'},
+          {n:'ORBIT®',c:'Travel'},{n:'PRISM®',c:'Finance'},{n:'HALO®',c:'Lifestyle'},{n:'VERTEX®',c:'Automotive'}
+        ],
+        work:[
+          {t:'Global Beverage Campaign', tags:['Creative Direction','Product Film','Motion','Social'], img:'https://picsum.photos/seed/adgensi-beverage/1400/900'},
+          {t:'Premium Food Campaign', tags:['Strategy','Food Styling','Video','Digital'], img:'https://picsum.photos/seed/adgensi-food/1400/900'},
+          {t:'Consumer Product Launch', tags:['AI Concept','Product Ad','Reels','Display'], img:'https://picsum.photos/seed/adgensi-launch/1400/900'},
+          {t:'International Brand Film', tags:['Storyboarding','Production','Editing','Sound'], img:'https://picsum.photos/seed/adgensi-film/1400/900'}
+        ],
+        feat:[
+          {t:'Global beverage brand — cinematic product film', bg:'radial-gradient(80% 90% at 30% 25%, #FF6A3D, transparent 60%), linear-gradient(150deg,#3a0d00,#0a0402)'},
+          {t:'Helio finance — launch brand experience', bg:'radial-gradient(85% 95% at 60% 28%, #2E6BFF, transparent 62%), linear-gradient(160deg,#0a1633,#050810)'},
+          {t:'Consumer product launch — AI-led concept ad', bg:'radial-gradient(70% 80% at 38% 40%, #FF2D9E, transparent 60%), radial-gradient(65% 75% at 72% 62%, #7C4DFF, transparent 60%), linear-gradient(150deg,#180322,#050308)'},
+          {t:'International brand film — story to final grade', bg:'radial-gradient(82% 92% at 55% 35%, #35C4B5, transparent 60%), linear-gradient(160deg,#08201d,#04100e)'},
+          {t:'Fashion editorial — motion & art direction', bg:'radial-gradient(82% 92% at 45% 42%, #C9B48E, transparent 62%), linear-gradient(160deg,#2a2418,#0a0806)'},
+          {t:'App launch campaign — performance creative', bg:'radial-gradient(82% 92% at 50% 45%, #E10600, transparent 60%), linear-gradient(160deg,#1a0000,#050505)'}
+        ],
+        init(){
+          const wm=document.querySelector('.wm');
+          const fit=()=>{
+            if(!wm) return;
+            if(window.innerWidth<768){ wm.style.fontSize=''; return; }
+            wm.style.fontSize='140px';
+            const kids=[...wm.querySelectorAll('.wm-in')];
+            const total=kids.reduce((s,k)=>s+k.getBoundingClientRect().width,0);
+            const avail=wm.clientWidth;
+            if(total>0){ wm.style.fontSize=(140*(avail*0.9)/total)+'px'; }
+          };
+          const run=()=>requestAnimationFrame(fit);
+          run();
+          if(document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+          window.addEventListener('resize', run, {passive:true});
+          requestAnimationFrame(()=>document.body.classList.add('go'));
+          const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if(!reduce) setInterval(()=>{ this.i=(this.i+1)%this.words.length; }, 2400);
+        }
+      };
     }
   </script>
 </body>
