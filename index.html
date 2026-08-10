@@ -1,310 +1,1019 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth motion-reduce:scroll-auto">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Analytics Bento</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="AdGenSi Studio builds cinematic, high-impact advertising for brands and agencies — AI-speed concepting with human creative direction.">
+<title>AdGenSi Studio — Building Cinematic Ads</title>
+
+<!-- Tailwind Play CDN — loaded synchronously in <head> so utilities are injected before <body> parses (FOUC guard, no <style> block) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        red1:'#ff1312', red2:'#ff0f18', red3:'#ff1d1c', red4:'#e10600', red5:'#ff0e16', red6:'#f3350c',
+        ink:'#0a0a0a'
+      },
+      fontFamily: { sans:['Figtree','system-ui','-apple-system','sans-serif'] },
+      maxWidth: { site:'1440px' },
+      backgroundImage: {
+        badge:"url('https://www.figma.com/api/mcp/asset/0a37e104-5585-4f45-a217-4f7a174a1d3d.png')",
+        video:"url('https://www.figma.com/api/mcp/asset/05c37aae-82bb-4e6d-93b4-2b321cbfe3ee.png')"
+      },
+      keyframes: {
+        marquee:{ from:{transform:'translateX(0)'}, to:{transform:'translateX(-1600px)'} },
+        marquee2:{ from:{transform:'translateX(0)'}, to:{transform:'translateX(-50%)'} },
+        navDrop:{ from:{transform:'translateY(-100%)',opacity:'0'}, to:{transform:'translateY(0)',opacity:'1'} },
+        aRise:{ from:{opacity:'0',transform:'translateY(32px)'}, to:{opacity:'1',transform:'none'} },
+        aBlur:{ from:{opacity:'0',transform:'translateY(42px)',filter:'blur(9px)'}, to:{opacity:'1',transform:'none',filter:'blur(0)'} },
+        aScale:{ from:{opacity:'0',transform:'scale(.955)'}, to:{opacity:'1',transform:'none'} },
+        aClip:{ from:{opacity:'0',clipPath:'inset(0 0 100% 0)'}, to:{opacity:'1',clipPath:'inset(0 0 0 0)'} },
+        aWord:{ from:{opacity:'0',transform:'translateY(1.05em)'}, to:{opacity:'1',transform:'none'} },
+        aChar:{ from:{opacity:'0',transform:'translateY(.55em) scale(.8)',filter:'blur(9px)'}, to:{opacity:'1',transform:'none',filter:'blur(0)'} },
+        aFoot:{ from:{opacity:'0',transform:'translateY(115%)'}, to:{opacity:'1',transform:'none'} },
+        ken:{ from:{transform:'scale(1.14)'}, to:{transform:'scale(1)'} },
+        pulseRing:{ '0%':{boxShadow:'0 0 0 0 rgba(255,255,255,.5)'}, '70%':{boxShadow:'0 0 0 16px rgba(255,255,255,0)'}, '100%':{boxShadow:'0 0 0 0 rgba(255,255,255,0)'} },
+        pulseRingDark:{ '0%':{boxShadow:'0 0 0 0 rgba(255,255,255,.4)'}, '70%':{boxShadow:'0 0 0 20px rgba(255,255,255,0)'}, '100%':{boxShadow:'0 0 0 0 rgba(255,255,255,0)'} },
+        shimmer:{ from:{backgroundPosition:'200% 0'}, to:{backgroundPosition:'-200% 0'} },
+        footGlow:{ '0%,100%':{opacity:'.4'}, '50%':{opacity:'.64'} },
+        footShine:{ from:{left:'-70%'}, to:{left:'130%'} }
+      },
+      animation: {
+        marquee:'marquee 40s linear infinite',
+        marquee2:'marquee2 18s linear infinite',
+        navDrop:'navDrop .8s cubic-bezier(.22,.61,.36,1) both',
+        rise:'aRise .85s cubic-bezier(.22,.61,.36,1) both',
+        riseBack:'aRise .85s cubic-bezier(.22,.61,.36,1) backwards',
+        blurIn:'aBlur .85s cubic-bezier(.22,.61,.36,1) both',
+        scaleIn:'aScale .85s cubic-bezier(.22,.61,.36,1) both',
+        scaleBack:'aScale .85s cubic-bezier(.22,.61,.36,1) backwards',
+        clipIn:'aClip .85s cubic-bezier(.22,.61,.36,1) both',
+        word:'aWord .8s cubic-bezier(.22,.61,.36,1) both',
+        char:'aChar .8s cubic-bezier(.22,.61,.36,1) both',
+        foot:'aFoot .8s cubic-bezier(.22,.61,.36,1) both',
+        ken:'ken 15s ease-out forwards',
+        ken18:'ken 18s ease-out forwards',
+        pulseRing:'pulseRing 2.6s ease-out infinite',
+        pulseRingDark:'pulseRingDark 2.6s ease-out infinite',
+        shimmer:'shimmer 1.4s linear infinite',
+        footGlow:'footGlow 6.5s ease-in-out 1s infinite',
+        footShine:'footShine .75s ease'
+      }
+    }
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#EAE9EF;
-    --card:#FFFFFF;
-    --ink:#1D2033;
-    --ink-2:#3A3D52;
-    --mute:#9195A8;
-    --mute-2:#B9BCC9;
-    --line:#EEEEF3;
-    --indigo:#5B5DF0;
-    --indigo-soft:#EDEDFD;
-    --coral:#FF6A45;
-    --coral-soft:#FFE9E2;
-    --green:#35C877;
-    --track:#F1F1F5;
-    --radius:22px;
-    --shadow:0 18px 40px -22px rgba(30,32,60,.28), 0 2px 8px -4px rgba(30,32,60,.12);
+<link rel="preconnect" href="https://www.figma.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.figma.com">
+<link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/05c37aae-82bb-4e6d-93b4-2b321cbfe3ee.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/8f6d56fc-19f3-4da4-b126-9ca391b1fa93.png">
+<link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/c8c53153-3b2e-46f2-82a6-f99dfdc0edff.png">
+<link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/f396452c-b6d1-4080-a2a1-2e868753f56a.png">
+<link rel="preload" as="image" href="https://www.figma.com/api/mcp/asset/bb8b0214-437d-4965-85d2-571f55b0f12c.png">
+<!-- EXCEPTION 1: external stylesheet. Figtree cannot be embedded without a <style> @font-face block + ~3MB of base64. See notes. -->
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,800&display=swap" rel="stylesheet">
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+<style type="text/tailwindcss">
+  @layer components {
+    .eyebrow{ @apply inline-flex items-center gap-2 font-semibold text-[15px] text-ink before:content-[''] before:w-5 before:h-5 before:rounded-[10px] before:shrink-0 before:bg-badge before:bg-cover before:bg-center before:bg-no-repeat group-[.in]:animate-rise motion-reduce:animate-none; }
+    .flip-label{ @apply inline-grid overflow-hidden leading-[1.2] align-bottom [&>span]:[grid-area:1/1] [&>span]:transition-transform [&>span]:duration-[450ms] [&>span]:[transition-timing-function:cubic-bezier(.34,.9,.32,1)] motion-reduce:[&>span]:transition-none; }
+    .svc-tags{ @apply flex flex-wrap gap-2 [&>span]:bg-[#292929] [&>span]:text-[#707070] [&>span]:font-medium [&>span]:text-[14px] [&>span]:tracking-[-0.32px] [&>span]:px-[18px] [&>span]:py-2 [&>span]:rounded-[48px] [&>span]:whitespace-nowrap; }
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#DEDDE5;font-family:'Figtree',sans-serif;display:flex;justify-content:center;align-items:flex-start;padding:40px 20px;color:var(--ink)}
-  .board{
-    width:1128px;background:var(--bg);border-radius:28px;padding:34px;
-    display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;
-  }
-  .col{display:flex;flex-direction:column;gap:22px}
-  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
-
-  h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
-  .desc{font-size:13.5px;line-height:1.5;color:var(--mute)}
-
-  /* ---------- Revenue churn / Benchmark ---------- */
-  .churn-head{display:flex;align-items:center;justify-content:space-between;
-    border:1px solid var(--line);border-radius:16px;padding:16px 20px;position:relative;z-index:2}
-  .churn-head .lbl{font-size:16px;font-weight:600}
-  .churn-head .val{display:flex;align-items:center;gap:6px;font-size:20px;font-weight:600}
-  .tri{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:8px solid var(--green)}
-  .connector{width:34px;height:16px;border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;margin:-1px auto 0;background:#fff;position:relative;z-index:1}
-
-  .bench-box{border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:14px}
-  .slider{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-  .slider .name{width:52px;font-size:12px;color:var(--mute)}
-  .track{flex:1;height:9px;border-radius:20px;background:var(--track);position:relative}
-  .track.dash{background:repeating-linear-gradient(90deg,#E7E7ED 0 6px,transparent 6px 11px)}
-  .fill{position:absolute;top:0;left:0;height:100%;border-radius:20px}
-  .knob{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:#fff;
-    box-shadow:0 1px 4px rgba(0,0,0,.25);transform:translate(-50%,-50%);border:1px solid #eee}
-  .knob.dot{width:9px;height:9px}
-  .track.you{background:var(--indigo)}
-  .track.upper{background:var(--coral)}
-  .note{display:flex;gap:10px;align-items:flex-start;background:#F7F7FB;border-radius:12px;padding:12px 14px;margin-top:4px}
-  .note .ic{width:26px;height:26px;border-radius:8px;background:var(--indigo-soft);color:var(--indigo);
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
-  .note p{font-size:11.5px;line-height:1.45;color:var(--mute)}
-  .note b{color:var(--ink-2)}
-  .bench-title{margin-top:20px}
-
-  /* ---------- Control centre ---------- */
-  .cc-list{position:relative;margin-bottom:20px}
-  .cc-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#fff;
-    box-shadow:0 8px 20px -14px rgba(30,32,60,.35);border:1px solid var(--line);margin-bottom:10px}
-  .cc-row.top{position:relative;z-index:3}
-  .cc-ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;
-    font-size:14px;flex-shrink:0;font-weight:700}
-  .cc-ic.d{background:#EEEBFA;color:#8257E6}
-  .cc-ic.f{background:#EAF0FF;color:#3B6FF5}
-  .cc-ic.p{background:#EAF0FF;color:#4459C7}
-  .cc-row .t{font-size:13px;font-weight:600;line-height:1.3}
-  .cc-row .s{font-size:11px;color:var(--mute)}
-  .cc-row .s b{color:var(--indigo)}
-  .cc-cols{display:flex;gap:14px}
-  .cc-cols>div{flex:1;min-width:0}
-  .ghost{position:absolute;right:-30px;top:6px;width:120px;opacity:.55}
-
-  /* ---------- Goals ---------- */
-  .goal-top{display:flex;justify-content:space-between;align-items:flex-start;font-size:12px;color:var(--mute)}
-  .goal-top .g{font-size:12.5px;font-weight:500;color:var(--ink-2)}
-  .goal-top .v{font-size:19px;font-weight:600;color:var(--ink)}
-  .goal-sub{display:flex;justify-content:space-between;font-size:11px;color:var(--mute-2);margin:14px 0 8px}
-  .goal-track{height:12px;border-radius:20px;background:var(--track);position:relative;margin-bottom:6px}
-  .goal-fill{position:absolute;left:0;top:0;height:100%;width:84%;border-radius:20px;background:var(--indigo)}
-  .goal-fill .kb{position:absolute;right:-2px;top:50%;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.3)}
-  .goal-dots{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
-  .goal-dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.7)}
-  .goals-title{margin-top:20px}
-
-  /* ---------- Dashboards ---------- */
-  .rev-box{border:1px solid var(--line);border-radius:16px;padding:20px 16px 14px;text-align:center;margin-bottom:18px}
-  .rev-box .big{font-size:30px;font-weight:600;letter-spacing:-.02em}
-  .rev-box .cap{font-size:12px;color:var(--mute);margin-top:2px}
-  .months{display:flex;justify-content:center;gap:8px;margin-top:16px}
-  .months span{font-size:12px;color:var(--mute);padding:6px 16px;border-radius:20px}
-  .months span.active{background:var(--indigo-soft);color:var(--indigo);font-weight:600}
-  .rating{display:flex;justify-content:space-between;align-items:flex-end}
-  .rating .rp{font-size:11px;color:var(--mute)}
-  .rating .rp b{display:block;font-size:22px;color:var(--ink);font-weight:600;margin-top:2px}
-  .rating .mid{text-align:center;font-size:10.5px;color:var(--mute)}
-  .rating .mid b{color:var(--ink-2)}
-  .rating .tot{font-size:11px;color:var(--mute-2)}
-  .spark{display:flex;gap:2px;align-items:flex-end;height:30px;margin:14px 0 6px}
-  .spark b{flex:1;background:var(--coral);border-radius:2px;opacity:.9}
-  .wave{position:relative}
-  .wave svg{display:block;width:100%}
-  .wave .marker{position:absolute;left:52%;top:-6px;bottom:0;width:4px;border-radius:4px;background:var(--indigo)}
-  .wave .marker::before{content:"";position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--indigo);box-shadow:0 0 0 4px rgba(91,93,240,.18)}
-  .dash-title{margin-top:20px}
-
-  /* ---------- Trails insights ---------- */
-  .stat-row{display:flex;gap:10px;margin-bottom:22px}
-  .stat{flex:1;border:1px solid var(--line);border-radius:14px;padding:12px}
-  .stat .si{color:var(--mute);font-size:13px;margin-bottom:16px}
-  .stat .sv{font-size:17px;font-weight:600}
-  .stat .sc{font-size:10px;color:var(--mute-2);margin-top:2px}
-  .plus-wrap{display:flex;justify-content:center;margin:8px 0 26px}
-  .plus{width:78px;height:78px;border-radius:50%;
-    background:radial-gradient(120% 120% at 30% 25%, #7B7DF7, var(--indigo));
-    display:flex;align-items:center;justify-content:center;color:#fff;
-    box-shadow:0 16px 30px -10px rgba(91,93,240,.6), inset 0 -6px 14px rgba(0,0,0,.15);position:relative}
-  .plus::after{content:"";position:absolute;inset:9px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
-  .plus svg{width:30px;height:30px}
-  .tcr{border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-  .tcr .l .t{font-size:14px;font-weight:600}
-  .tcr .l .p{display:inline-block;margin-top:8px;background:var(--indigo-soft);color:var(--indigo);font-size:11px;font-weight:600;padding:3px 9px;border-radius:8px}
-  .tcr .bars{display:flex;gap:5px;align-items:flex-end;height:38px}
-  .tcr .bars b{width:10px;border-radius:3px;background:#EDEDF2}
-  .tcr .bars b.hi{background:var(--coral)}
-
-  /* ---------- Forecast ---------- */
-  .fc-cloud{position:relative;height:120px;margin-bottom:8px}
-  .chip{position:absolute;display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);
-    box-shadow:0 8px 20px -12px rgba(30,32,60,.4);border-radius:20px;padding:8px 14px;font-size:12px;font-weight:500}
-  .chip i{width:14px;height:14px;border-radius:50%;background:var(--track);display:inline-block}
-  .chip.c1{left:8px;top:6px}
-  .chip.c2{right:14px;top:0}
-  .chip.c3{right:6px;bottom:8px}
-  .fc-av{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;
-    background:var(--indigo-soft);display:flex;align-items:center;justify-content:center;color:var(--indigo)}
-  .fc-av .badge{position:absolute;right:-3px;top:-3px;width:22px;height:22px;border-radius:50%;background:var(--coral);
-    color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;border:3px solid #fff}
-  .fc-title{margin-top:8px}
 </style>
 </head>
-<body>
-  <div class="board">
 
-    <!-- LEFT -->
-    <div class="col">
-      <div class="card">
-        <div class="churn-head">
-          <span class="lbl">Design coverage</span>
-          <span class="val"><span class="tri"></span>98%</span>
-        </div>
-        <div class="connector"></div>
+<body class="bg-white font-sans text-ink antialiased overflow-x-hidden [text-rendering:optimizeLegibility]">
 
-        <div class="bench-box">
-          <div class="slider"><span class="name">Research</span>
-            <div class="track dash"><span class="knob dot" style="left:78%;background:var(--coral)"></span></div></div>
-          <div class="slider"><span class="name">Design</span>
-            <div class="track dash"><span class="knob" style="left:66%;background:var(--indigo)"></span></div></div>
-          <div class="slider"><span class="name">Build</span>
-            <div class="track you"><span class="knob" style="left:88%"></span></div></div>
-          <div class="slider"><span class="name">Ship</span>
-            <div class="track upper"><span class="knob" style="left:70%"></span></div></div>
-          <div class="note">
-            <span class="ic">✦</span>
-            <p>Every screen <b>pixel-perfect</b>, responsive, and built to scale.</p>
+<!-- ============================== NAV ============================== -->
+<header x-data="{ open:false }"
+        class="sticky top-0 z-[100] bg-white/90 [backdrop-filter:saturate(140%)_blur(8px)] border-b border-dashed border-[#b6b6b6] animate-navDrop motion-reduce:animate-none">
+  <div class="w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] flex items-center justify-between h-[61px] relative">
+    <div class="flex items-center gap-[14px]">
+      <a href="#" aria-label="AdGenSi home" class="w-[31px] h-[30px] rounded-[100px] shrink-0 bg-[url('https://www.figma.com/api/mcp/asset/0a37e104-5585-4f45-a217-4f7a174a1d3d.png')] bg-cover bg-center bg-no-repeat"></a>
+      <span class="font-semibold text-[19px] leading-none whitespace-nowrap">AdGenSi Studio</span>
+    </div>
+    <div class="flex items-center gap-[34px]">
+      <nav x-bind:class="open
+              ? 'max-[820px]:max-h-[70vh] max-[820px]:pt-2 max-[820px]:pb-4 max-[820px]:border-b max-[820px]:border-dashed max-[820px]:border-[#b6b6b6]'
+              : 'max-[820px]:max-h-0'"
+           class="flex items-center gap-[34px] font-normal text-[17px] tracking-[-0.02em]
+                  max-[820px]:absolute max-[820px]:top-[calc(100%+1px)] max-[820px]:right-0 max-[820px]:left-0 max-[820px]:flex-col max-[820px]:items-start max-[820px]:gap-0 max-[820px]:bg-white max-[820px]:px-6 max-[640px]:px-[18px] max-[820px]:max-h-0 max-[820px]:overflow-hidden max-[820px]:text-[18px]
+                  max-[820px]:transition-[max-height,padding] max-[820px]:duration-[350ms] max-[820px]:ease-out motion-reduce:transition-none">
+        <a href="#"        x-on:click="open=false" class="relative transition-colors duration-200 hover:text-red1 after:content-[''] after:absolute after:left-0 after:-bottom-[5px] after:w-0 after:h-[1.5px] after:bg-red1 after:transition-[width] after:duration-[250ms] hover:after:w-full max-[820px]:w-full max-[820px]:py-4 max-[820px]:border-t max-[820px]:border-[#f0f0f0] max-[820px]:first:border-t-0 max-[820px]:after:hidden">Home</a>
+        <a href="#studio"  x-on:click="open=false" class="relative transition-colors duration-200 hover:text-red1 after:content-[''] after:absolute after:left-0 after:-bottom-[5px] after:w-0 after:h-[1.5px] after:bg-red1 after:transition-[width] after:duration-[250ms] hover:after:w-full max-[820px]:w-full max-[820px]:py-4 max-[820px]:border-t max-[820px]:border-[#f0f0f0] max-[820px]:after:hidden">Studio</a>
+        <a href="#work"    x-on:click="open=false" class="relative transition-colors duration-200 hover:text-red1 after:content-[''] after:absolute after:left-0 after:-bottom-[5px] after:w-0 after:h-[1.5px] after:bg-red1 after:transition-[width] after:duration-[250ms] hover:after:w-full max-[820px]:w-full max-[820px]:py-4 max-[820px]:border-t max-[820px]:border-[#f0f0f0] max-[820px]:after:hidden">Work</a>
+        <a href="#"        x-on:click="open=false" class="relative transition-colors duration-200 hover:text-red1 after:content-[''] after:absolute after:left-0 after:-bottom-[5px] after:w-0 after:h-[1.5px] after:bg-red1 after:transition-[width] after:duration-[250ms] hover:after:w-full max-[820px]:w-full max-[820px]:py-4 max-[820px]:border-t max-[820px]:border-[#f0f0f0] max-[820px]:after:hidden">Blog</a>
+        <a href="#contact" x-on:click="open=false" class="relative transition-colors duration-200 hover:text-red1 after:content-[''] after:absolute after:left-0 after:-bottom-[5px] after:w-0 after:h-[1.5px] after:bg-red1 after:transition-[width] after:duration-[250ms] hover:after:w-full max-[820px]:w-full max-[820px]:py-4 max-[820px]:border-t max-[820px]:border-[#f0f0f0] max-[820px]:after:hidden">Contact</a>
+      </nav>
+      <button type="button" x-on:click="open=!open" x-bind:aria-expanded="open" aria-label="Toggle menu"
+              class="w-9 h-[10px] relative cursor-pointer hidden max-[820px]:block shrink-0 bg-transparent border-0 p-0">
+        <span x-bind:class="open ? 'top-1 rotate-45' : 'top-0'" class="absolute left-0 w-9 h-[2px] bg-black rounded-[2px] transition-transform duration-300 motion-reduce:transition-none"></span>
+        <span x-bind:class="open ? 'top-1 -rotate-45' : 'top-2'" class="absolute left-0 w-9 h-[2px] bg-black rounded-[2px] transition-transform duration-300 motion-reduce:transition-none"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================== HERO ============================== -->
+<section x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] text-center pt-[clamp(18px,3vw,52px)]">
+
+  <div class="inline-flex items-center gap-1.5 group-[.in]:animate-rise motion-reduce:animate-none">
+    <span class="w-5 h-5 rounded-[10px] shrink-0 bg-[url('https://www.figma.com/api/mcp/asset/0a37e104-5585-4f45-a217-4f7a174a1d3d.png')] bg-cover bg-center bg-no-repeat"></span>
+    <span class="font-semibold text-[14px] text-[#6e6e6e]">©2026 <b class="text-ink">AdGenSi Studio</b></span>
+  </div>
+
+  <!-- pre-split words (was JS splitWords) -->
+  <h1 class="mt-[clamp(14px,1.8vw,26px)] mx-auto max-w-[834px] font-semibold text-[clamp(2rem,5.2vw,56px)] leading-[1.1] tracking-[-0.05em] [&>span]:inline-block group-[.in]:[&>span]:animate-word group-[.in]:[&>span]:[animation-delay:calc(var(--i)*55ms)] motion-reduce:[&>span]:animate-none">
+    <span class="[--i:0]">Building</span> <span class="[--i:1]">Cinematic</span> <span class="[--i:2] text-red2 font-bold">Ads</span> <span class="[--i:3]">That</span> <span class="[--i:4]">Power,</span> <span class="[--i:5]">Ambitious</span> <span class="[--i:6]">Modern</span> <span class="[--i:7]">Brands</span>
+  </h1>
+
+  <p class="mt-[clamp(16px,1.8vw,24px)] mx-auto max-w-[512px] text-[clamp(15.5px,1.5vw,18.6px)] leading-[1.4] text-[#3d3d3d] px-2 group-[.in]:animate-rise group-[.in]:[animation-delay:300ms] motion-reduce:animate-none">AdGenSi helps brands and agencies concept, produce, and scale high-impact advertising.</p>
+
+  <div class="flex flex-wrap gap-2 justify-center mt-[clamp(24px,2.6vw,36px)] group-[.in]:animate-rise group-[.in]:[animation-delay:450ms] motion-reduce:animate-none">
+    <!-- EXCEPTION 2a: magnetic button (x-data="magnet()") -->
+    <a href="#contact" x-data="magnet()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+       class="group/f h-[45px] px-[26px] rounded-[50px] inline-flex items-center justify-center font-semibold text-[14px] cursor-pointer whitespace-nowrap bg-red1 text-white max-[640px]:flex-1 max-[640px]:min-w-[150px] shadow-[inset_0_4px_12px_rgba(255,255,255,.3),inset_0_-4px_12px_rgba(0,0,0,.1)] hover:shadow-[inset_0_4px_12px_rgba(255,255,255,.3),inset_0_-4px_12px_rgba(0,0,0,.1),0_10px_24px_rgba(255,19,18,.35)] transition-[transform,box-shadow] duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-0.5">
+      <span class="flip-label">
+        <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Start a Project</span>
+        <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Start a Project</span>
+      </span>
+    </a>
+    <a href="#work"
+       class="group/f h-[45px] px-[26px] rounded-[50px] inline-flex items-center justify-center font-semibold text-[14px] cursor-pointer whitespace-nowrap bg-[#fafafa] text-black max-[640px]:flex-1 max-[640px]:min-w-[150px] shadow-[inset_0_4px_12px_rgba(255,255,255,.3),inset_0_-4px_12px_rgba(0,0,0,.1)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5">
+      <span class="flip-label">
+        <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">View Our Work</span>
+        <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">View Our Work</span>
+      </span>
+    </a>
+  </div>
+
+  <!-- EXCEPTION 2b: hero reel pointer tilt (x-data="reelTilt()") -->
+  <div x-data="reelTilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+       class="group/reel mt-[clamp(40px,4.2vw,60px)] relative w-full h-[clamp(430px,44.4vw,640px)] max-[640px]:h-[clamp(360px,88vw,430px)] rounded-2xl max-[640px]:rounded-[14px] overflow-hidden bg-video bg-cover bg-center bg-no-repeat [transform:perspective(1200px)_rotateY(var(--tilt,0deg))] group-[.in]:animate-scaleBack motion-reduce:animate-none">
+    <div class="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[clamp(300px,30vw,432px)] max-[640px]:h-[clamp(280px,72vw,340px)] overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] [-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]">
+      <div class="flex gap-5 h-full w-max pl-4 animate-marquee group-hover/reel:[animation-play-state:paused] motion-reduce:animate-none">
+
+        <!-- reel cards: 4 unique x 2 passes, hardcoded (was built by JS innerHTML) -->
+        <!-- pass 1 -->
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img fetchpriority="high" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/8f6d56fc-19f3-4da4-b126-9ca391b1fa93.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/a53174a3-2654-4476-9c16-d8567216b8d8.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
           </div>
-        </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/6306ba6b-4338-4e0b-ad4a-ccdd6ba7a69a.svg" class="absolute right-6 top-3 w-6 h-6 transition-transform duration-300 group-hover/c:rotate-90 motion-reduce:transition-none">
+          </div>
+        </article>
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img fetchpriority="high" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c8c53153-3b2e-46f2-82a6-f99dfdc0edff.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/a53174a3-2654-4476-9c16-d8567216b8d8.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/6306ba6b-4338-4e0b-ad4a-ccdd6ba7a69a.svg" class="absolute right-6 top-3 w-6 h-6 transition-transform duration-300 group-hover/c:rotate-90 motion-reduce:transition-none">
+          </div>
+        </article>
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img fetchpriority="high" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/f396452c-b6d1-4080-a2a1-2e868753f56a.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/d8d0bec8-05e8-417a-802e-363499a0dda6.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/6306ba6b-4338-4e0b-ad4a-ccdd6ba7a69a.svg" class="absolute right-6 top-3 w-6 h-6 transition-transform duration-300 group-hover/c:rotate-90 motion-reduce:transition-none">
+          </div>
+        </article>
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img fetchpriority="high" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/bb8b0214-437d-4965-85d2-571f55b0f12c.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/d8d0bec8-05e8-417a-802e-363499a0dda6.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+          </div>
+        </article>
+        <!-- pass 2 (loop seam) -->
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1" aria-hidden="true">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/8f6d56fc-19f3-4da4-b126-9ca391b1fa93.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/a53174a3-2654-4476-9c16-d8567216b8d8.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/6306ba6b-4338-4e0b-ad4a-ccdd6ba7a69a.svg" class="absolute right-6 top-3 w-6 h-6 transition-transform duration-300 group-hover/c:rotate-90 motion-reduce:transition-none">
+          </div>
+        </article>
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1" aria-hidden="true">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c8c53153-3b2e-46f2-82a6-f99dfdc0edff.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/a53174a3-2654-4476-9c16-d8567216b8d8.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/6306ba6b-4338-4e0b-ad4a-ccdd6ba7a69a.svg" class="absolute right-6 top-3 w-6 h-6 transition-transform duration-300 group-hover/c:rotate-90 motion-reduce:transition-none">
+          </div>
+        </article>
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1" aria-hidden="true">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/f396452c-b6d1-4080-a2a1-2e868753f56a.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/d8d0bec8-05e8-417a-802e-363499a0dda6.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/6306ba6b-4338-4e0b-ad4a-ccdd6ba7a69a.svg" class="absolute right-6 top-3 w-6 h-6 transition-transform duration-300 group-hover/c:rotate-90 motion-reduce:transition-none">
+          </div>
+        </article>
+        <article class="group/c w-[380px] max-[640px]:w-[78vw] max-[640px]:max-w-[320px] h-full shrink-0 flex flex-col gap-1" aria-hidden="true">
+          <div class="relative flex-1 bg-white rounded-2xl overflow-hidden min-h-0">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/bb8b0214-437d-4965-85d2-571f55b0f12c.png" class="absolute left-6 top-6 w-[120px] h-[112px] rounded-2xl object-cover">
+            <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/d8d0bec8-05e8-417a-802e-363499a0dda6.svg" class="absolute right-6 top-6 w-[120px] h-5 object-contain">
+            <p class="absolute left-6 right-6 bottom-6 text-[15px] leading-[1.49] tracking-[-0.32px] text-[#1d1d1d]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
+          </div>
+          <div class="relative h-12 shrink-0 bg-white rounded-2xl">
+            <b class="absolute left-6 top-1/2 -translate-y-1/2 font-medium text-base">AdGenSi Studio</b>
+          </div>
+        </article>
 
-        <div class="bench-title">
-          <h3>Dashboard Design</h3>
-          <p class="desc">Data-dense analytics dashboards designed for clarity — every metric in the right place, seen at a glance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FEATURED WORK ============================== -->
+<section id="work" x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(80px,12vw,150px)]">
+  <span class="eyebrow">Our Featured Work</span>
+
+  <div class="flex items-end justify-between gap-6 mt-6 mb-[clamp(36px,4vw,56px)] max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-5">
+    <h2 class="font-semibold text-[clamp(28px,4.2vw,46px)] leading-[1.12] tracking-[-0.03em] [&>span]:inline-block group-[.in]:[&>span]:animate-word group-[.in]:[&>span]:[animation-delay:calc(120ms+var(--i)*55ms)] motion-reduce:[&>span]:animate-none">
+      <span class="[--i:0]">How</span> <span class="[--i:1]">Brands</span><br><span class="[--i:2]">Work</span> <span class="[--i:3]">With</span> <span class="[--i:4] font-extrabold italic text-red3">AdGenSi</span>
+    </h2>
+    <!-- EXCEPTION 2a: magnetic button -->
+    <a href="#" x-data="magnet()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+       class="group/f shrink-0 h-[41px] px-[26px] border border-black rounded-[42px] inline-flex items-center justify-center font-semibold text-[14.9px] transition-[transform,box-shadow,background-color,color] duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:bg-black hover:text-white group-[.in]:animate-riseBack group-[.in]:[animation-delay:210ms] motion-reduce:animate-none">
+      <span class="flip-label">
+        <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">View All Projects</span>
+        <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">View All Projects</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-4 max-[1024px]:grid-cols-2 max-[640px]:grid-cols-1 gap-[15px] max-[640px]:gap-[26px] [perspective:1400px]">
+    <!-- EXCEPTION 2c: 3D tilt (x-data="tilt()") — merged with lazy-shimmer state -->
+    <a x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="col-span-2 max-[1024px]:col-span-2 max-[640px]:col-span-1 cursor-pointer relative h-[clamp(240px,27.7vw,399px)] max-[1024px]:h-[clamp(240px,42vw,360px)] max-[640px]:h-[clamp(300px,68vw,420px)] rounded-[22px] overflow-hidden bg-[#101012] group/w
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+              transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+              group-[.in]:animate-riseBack group-[.in]:[animation-delay:240ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/3baa8e43-be2e-4b3a-8e2e-2af37fc05997.png" class="w-full h-full object-cover transition-transform duration-[600ms] [transition-timing-function:cubic-bezier(.2,.7,.2,1)] group-hover/w:scale-105">
+      <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[57px] h-[57px] rounded-full bg-white/80 flex items-center justify-center z-[4] transition-[transform,background-color] duration-[250ms] group-hover/w:scale-110 group-hover/w:bg-white animate-pulseRing motion-reduce:animate-none"><img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c2e42f16-dc38-4f1a-a029-01e46d18d36e.svg" class="w-[14.25px] h-[16.5px]"></span>
+    </a>
+
+    <a x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="col-span-1 max-[1024px]:col-span-2 max-[640px]:col-span-1 cursor-pointer relative h-[clamp(240px,27.7vw,399px)] max-[1024px]:h-[clamp(240px,42vw,360px)] max-[640px]:h-[clamp(300px,68vw,420px)] rounded-[22px] overflow-hidden bg-[#101012] group/w
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+              transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+              group-[.in]:animate-riseBack group-[.in]:[animation-delay:330ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/73cbdba1-ca5c-4045-9594-7ca3dbb87e67.png" class="w-full h-full object-cover transition-transform duration-[600ms] [transition-timing-function:cubic-bezier(.2,.7,.2,1)] group-hover/w:scale-105">
+      <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[57px] h-[57px] rounded-full bg-white/80 flex items-center justify-center z-[4] transition-[transform,background-color] duration-[250ms] group-hover/w:scale-110 group-hover/w:bg-white animate-pulseRing motion-reduce:animate-none"><img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c2e42f16-dc38-4f1a-a029-01e46d18d36e.svg" class="w-[14.25px] h-[16.5px]"></span>
+    </a>
+
+    <a x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="col-span-1 max-[1024px]:col-span-2 max-[640px]:col-span-1 cursor-pointer relative h-[clamp(240px,27.7vw,399px)] max-[1024px]:h-[clamp(240px,42vw,360px)] max-[640px]:h-[clamp(300px,68vw,420px)] rounded-[22px] overflow-hidden bg-[#101012] group/w
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+              transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+              group-[.in]:animate-riseBack group-[.in]:[animation-delay:420ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/d2ea0321-1e82-422b-b881-69ec5aebc7b9.png" class="w-full h-full object-cover transition-transform duration-[600ms] [transition-timing-function:cubic-bezier(.2,.7,.2,1)] group-hover/w:scale-105">
+      <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[57px] h-[57px] rounded-full bg-white/80 flex items-center justify-center z-[4] transition-[transform,background-color] duration-[250ms] group-hover/w:scale-110 group-hover/w:bg-white animate-pulseRing motion-reduce:animate-none"><img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c2e42f16-dc38-4f1a-a029-01e46d18d36e.svg" class="w-[14.25px] h-[16.5px]"></span>
+    </a>
+
+    <a x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="col-span-1 max-[1024px]:col-span-2 max-[640px]:col-span-1 cursor-pointer relative h-[clamp(240px,27.7vw,399px)] max-[1024px]:h-[clamp(240px,42vw,360px)] max-[640px]:h-[clamp(300px,68vw,420px)] rounded-[22px] overflow-hidden bg-[#101012] group/w
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+              transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+              group-[.in]:animate-riseBack group-[.in]:[animation-delay:510ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/769c5715-0e2b-4635-b88c-33436158eaf8.png" class="w-full h-full object-cover transition-transform duration-[600ms] [transition-timing-function:cubic-bezier(.2,.7,.2,1)] group-hover/w:scale-105">
+      <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[57px] h-[57px] rounded-full bg-white/80 flex items-center justify-center z-[4] transition-[transform,background-color] duration-[250ms] group-hover/w:scale-110 group-hover/w:bg-white animate-pulseRing motion-reduce:animate-none"><img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c2e42f16-dc38-4f1a-a029-01e46d18d36e.svg" class="w-[14.25px] h-[16.5px]"></span>
+    </a>
+
+    <a x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="col-span-1 max-[1024px]:col-span-2 max-[640px]:col-span-1 cursor-pointer relative h-[clamp(240px,27.7vw,399px)] max-[1024px]:h-[clamp(240px,42vw,360px)] max-[640px]:h-[clamp(300px,68vw,420px)] rounded-[22px] overflow-hidden bg-[#101012] group/w
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+              transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+              group-[.in]:animate-riseBack group-[.in]:[animation-delay:600ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/04ff7fc9-0799-4b14-bb0f-793a130ae442.png" class="w-full h-full object-cover transition-transform duration-[600ms] [transition-timing-function:cubic-bezier(.2,.7,.2,1)] group-hover/w:scale-105">
+      <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[57px] h-[57px] rounded-full bg-white/80 flex items-center justify-center z-[4] transition-[transform,background-color] duration-[250ms] group-hover/w:scale-110 group-hover/w:bg-white animate-pulseRing motion-reduce:animate-none"><img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c2e42f16-dc38-4f1a-a029-01e46d18d36e.svg" class="w-[14.25px] h-[16.5px]"></span>
+    </a>
+
+    <a x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="col-span-2 max-[1024px]:col-span-2 max-[640px]:col-span-1 cursor-pointer relative h-[clamp(240px,27.7vw,399px)] max-[1024px]:h-[clamp(240px,42vw,360px)] max-[640px]:h-[clamp(300px,68vw,420px)] rounded-[22px] overflow-hidden bg-[#101012] group/w
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+              transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+              group-[.in]:animate-riseBack group-[.in]:[animation-delay:690ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/1d3d0ee5-fc8d-43ae-8e27-8513869b30ea.png" class="w-full h-full object-cover transition-transform duration-[600ms] [transition-timing-function:cubic-bezier(.2,.7,.2,1)] group-hover/w:scale-105">
+      <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[57px] h-[57px] rounded-full bg-white/80 flex items-center justify-center z-[4] transition-[transform,background-color] duration-[250ms] group-hover/w:scale-110 group-hover/w:bg-white animate-pulseRing motion-reduce:animate-none"><img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/c2e42f16-dc38-4f1a-a029-01e46d18d36e.svg" class="w-[14.25px] h-[16.5px]"></span>
+    </a>
+  </div>
+</section>
+
+<!-- ============================== ABOUT STUDIO ============================== -->
+<section id="studio" x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,120px)]">
+  <div class="bg-[#f4f4f4] rounded-3xl p-[clamp(24px,3.2vw,44px)]">
+    <div class="grid grid-cols-2 max-[820px]:grid-cols-1 gap-[clamp(28px,3vw,42px)] items-stretch">
+
+      <div x-data="{ loaded:false }" x-bind:class="loaded && '[&::before]:opacity-0'"
+           class="relative rounded-[26px] overflow-hidden min-h-[360px] max-[820px]:min-h-[320px] bg-[#101012]
+                  before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+                  group-[.in]:animate-clipIn motion-reduce:animate-none">
+        <img loading="lazy" decoding="async" alt="AdGenSi studio" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/a35cfa88-62e7-49fe-97fd-9cab2be82c57.png"
+             class="w-full h-full object-cover absolute inset-0 group-[.in]:animate-ken motion-reduce:animate-none">
+        <span class="absolute left-[31px] bottom-6 z-[4] bg-[#f2f2f2] rounded-[42px] px-5 py-2.5 font-semibold text-[14.9px]">Available for new projects</span>
+      </div>
+
+      <div>
+        <span class="eyebrow group-[.in]:[animation-delay:120ms]">About Studio</span>
+        <p class="font-semibold text-[clamp(20px,2.1vw,29.6px)] leading-[1.26] tracking-[-0.32px] mt-[clamp(20px,2vw,32px)] mb-[clamp(28px,3vw,44px)] group-[.in]:animate-rise group-[.in]:[animation-delay:240ms] motion-reduce:animate-none">AdGenSi is built for brands that want cinematic, credible advertising without the agency overhead. We pair AI speed with human direction to support fast concepting, clear storytelling, and campaigns so potential clients can easily see your work and understand your process.</p>
+        <div class="inline-flex items-center gap-[9px] font-semibold text-[15.6px] text-[#6e6e6e] mb-[22px] before:content-[''] before:w-[9px] before:h-[9px] before:rounded-[5px] before:bg-red4 group-[.in]:animate-rise group-[.in]:[animation-delay:360ms] motion-reduce:animate-none">RESULTS</div>
+        <div class="flex gap-[clamp(24px,4vw,64px)] max-[1100px]:gap-8 flex-wrap">
+          <!-- EXCEPTION 2d: count-up (x-data="countUp(...)") -->
+          <div class="group-[.in]:animate-rise group-[.in]:[animation-delay:480ms] motion-reduce:animate-none">
+            <div x-data="countUp(24,'',' H',false)" x-text="out" class="font-semibold text-[42px] tracking-[-0.84px] leading-[1.1]">24&nbsp;H</div>
+            <div class="font-semibold text-[15px] text-[#6e6e6e] mt-2">Average First Concept</div>
+          </div>
+          <div class="group-[.in]:animate-rise group-[.in]:[animation-delay:600ms] motion-reduce:animate-none">
+            <div x-data="countUp(4,'','K',false)" x-text="out" class="font-semibold text-[42px] tracking-[-0.84px] leading-[1.1]">4K</div>
+            <div class="font-semibold text-[15px] text-[#6e6e6e] mt-2">Cinematic Delivery</div>
+          </div>
+          <div class="group-[.in]:animate-rise group-[.in]:[animation-delay:720ms] motion-reduce:animate-none">
+            <div x-data="countUp(2026,'','',false)" x-text="out" class="font-semibold text-[42px] tracking-[-0.84px] leading-[1.1]">2026</div>
+            <div class="font-semibold text-[15px] text-[#6e6e6e] mt-2">Founded &amp; Ready</div>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="cc-list">
-          <div class="cc-row top">
-            <span class="cc-ic d">◧</span>
-            <div><div class="t">SaaS Platform</div><div class="s"><b>End-to-end</b> product interface design</div></div>
-          </div>
-          <div class="cc-cols">
-            <div class="cc-row" style="margin:0">
-              <span class="cc-ic f">▤</span>
-              <div><div class="t">Web App</div><div class="s">Responsive on every device</div></div>
-            </div>
-            <div class="cc-row" style="margin:0">
-              <span class="cc-ic p">▢</span>
-              <div><div class="t">Mobile App</div><div class="s">iOS &amp; Android <b>ready</b></div></div>
-            </div>
-          </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SERVICES ============================== -->
+<section id="services" x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,90px)]">
+  <!-- EXCEPTION 2e: cursor spotlight (x-data="spot()") -->
+  <div x-data="spot()" x-on:pointermove="move($event)"
+       class="relative bg-black rounded-[26px] py-[clamp(40px,5vw,79px)] px-[clamp(24px,3.5vw,56px)] text-white
+              before:content-[''] before:absolute before:inset-0 before:z-0 before:pointer-events-none before:rounded-[inherit] before:opacity-70 before:transition-opacity before:duration-[400ms] before:bg-[radial-gradient(500px_circle_at_var(--sx,-200px)_var(--sy,-200px),rgba(255,42,32,.18),transparent_55%)] motion-reduce:before:hidden">
+
+    <h2 class="relative z-[1] font-semibold text-[clamp(28px,4.2vw,46px)] tracking-[-0.03em] leading-[1.12] mb-[clamp(30px,4vw,60px)] group-[.in]:animate-blurIn motion-reduce:animate-none">Services</h2>
+
+    <div class="relative z-[1] grid grid-cols-[1fr_480px] max-[1100px]:grid-cols-1 gap-[clamp(24px,4vw,60px)] max-[1100px]:gap-[22px] py-9 border-t border-dashed border-[#4d4d4d] group-[.in]:animate-rise group-[.in]:[animation-delay:150ms] motion-reduce:animate-none">
+      <div>
+        <div class="flex items-center gap-[14px] mb-[22px]">
+          <span class="w-5 h-5 rounded-[10px] bg-red5 text-[#ddd] font-medium text-[12px] flex items-center justify-center shrink-0">1</span>
+          <h3 class="font-semibold text-[26.5px] tracking-[-0.56px] text-[#e5e3dc]">AI Creative</h3>
         </div>
-        <h3>SaaS &amp; App Design</h3>
-        <p class="desc">Full product interfaces — SaaS platforms and web &amp; mobile apps, from first screen to shipped.</p>
+        <div class="svc-tags">
+          <span>Concepts</span><span>Scripts</span><span>Art Direction</span><span>Iterations</span><span>Moodboards</span>
+        </div>
+      </div>
+      <div class="flex flex-col gap-[26px]">
+        <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/9cd15933-d4ff-4e5c-a2d2-7be5c4db68c9.png" class="w-[226px] h-[127px] rounded-2xl object-cover">
+        <p class="text-[15.9px] leading-[1.41] tracking-[-0.32px] text-[#808080] max-w-[418px]">We generate concepts, scripts and visual directions at AI speed, then our creatives curate and refine the strongest ideas into work worth producing.</p>
       </div>
     </div>
 
-    <!-- MIDDLE -->
-    <div class="col">
-      <div class="card">
-        <div class="goal-top">
-          <span class="g">Avg. conversion lift</span>
-          <span class="v">+42%</span>
+    <div class="relative z-[1] grid grid-cols-[1fr_480px] max-[1100px]:grid-cols-1 gap-[clamp(24px,4vw,60px)] max-[1100px]:gap-[22px] py-9 border-t border-dashed border-[#4d4d4d] group-[.in]:animate-rise group-[.in]:[animation-delay:300ms] motion-reduce:animate-none">
+      <div>
+        <div class="flex items-center gap-[14px] mb-[22px]">
+          <span class="w-5 h-5 rounded-[10px] bg-red5 text-[#ddd] font-medium text-[12px] flex items-center justify-center shrink-0">2</span>
+          <h3 class="font-semibold text-[26.5px] tracking-[-0.56px] text-[#e5e3dc]">Video Ads</h3>
         </div>
-        <div class="goal-sub"><span>Wireframe</span><span>Launch ready</span></div>
-        <div class="goal-track">
-          <div class="goal-fill"><span class="kb"></span><span class="goal-dots"><i></i><i></i><i></i></span></div>
-        </div>
-        <div class="goals-title">
-          <h3>Landing Pages</h3>
-          <p class="desc">High-converting, cinematic landing pages that turn visitors into customers.</p>
+        <div class="svc-tags">
+          <span>Hooks</span><span>UGC</span><span>Paid social</span><span>Product</span>
         </div>
       </div>
-
-      <div class="card">
-        <div class="rev-box">
-          <div class="big">240+</div>
-          <div class="cap">Screens shipped this quarter</div>
-          <div class="months"><span>Lo-fi</span><span class="active">Hi-fi</span><span>Interactive</span></div>
-        </div>
-
-        <div class="rating">
-          <div class="rp">Components<b>1,228</b></div>
-          <div class="mid">Flows mapped <b>86</b> &nbsp;·&nbsp; Handoff <b>ready</b></div>
-          <div class="tot">/1,928</div>
-        </div>
-
-        <div class="spark">
-          <b style="height:55%"></b><b style="height:70%"></b><b style="height:45%"></b><b style="height:80%"></b>
-          <b style="height:60%"></b><b style="height:90%"></b><b style="height:50%"></b><b style="height:75%"></b>
-          <b style="height:65%"></b><b style="height:85%"></b><b style="height:40%"></b><b style="height:70%"></b>
-          <b style="height:58%"></b><b style="height:78%"></b><b style="height:48%"></b><b style="height:88%"></b>
-          <b style="height:62%"></b><b style="height:72%"></b><b style="height:52%"></b><b style="height:82%"></b>
-          <b style="height:60%"></b><b style="height:68%"></b><b style="height:44%"></b><b style="height:74%"></b>
-        </div>
-
-        <div class="wave">
-          <span class="marker"></span>
-          <svg viewBox="0 0 320 70" preserveAspectRatio="none">
-            <path d="M0,45 C40,20 70,55 110,42 C150,30 175,10 205,28 C235,46 265,60 320,38"
-              fill="none" stroke="#E7E7EF" stroke-width="2.5"/>
-          </svg>
-        </div>
-
-        <div class="dash-title">
-          <h3>Prototyping &amp; Wireframing</h3>
-          <p class="desc">Clickable prototypes and structured wireframes that validate ideas before a single line of code.</p>
-        </div>
+      <div class="flex flex-col gap-[26px]">
+        <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/60110b9d-38f9-4394-9e64-3903b31c0f6b.png" class="w-[226px] h-[127px] rounded-2xl object-cover">
+        <p class="text-[15.9px] leading-[1.41] tracking-[-0.32px] text-[#808080] max-w-[418px]">Performance-ready video ads with scroll-stopping hooks — plus every cutdown, ratio and variation your paid channels need to convert.</p>
       </div>
     </div>
 
-    <!-- RIGHT -->
-    <div class="col">
-      <div class="card">
-        <div class="stat-row">
-          <div class="stat"><div class="si">⚡</div><div class="sv">40+</div><div class="sc">AI agents built</div></div>
-          <div class="stat"><div class="si">▦</div><div class="sv">18</div><div class="sc">Bot interfaces</div></div>
-          <div class="stat"><div class="si">▷</div><div class="sv">24/7</div><div class="sc">Live on web</div></div>
+    <div class="relative z-[1] grid grid-cols-[1fr_480px] max-[1100px]:grid-cols-1 gap-[clamp(24px,4vw,60px)] max-[1100px]:gap-[22px] py-9 border-t border-dashed border-[#4d4d4d] group-[.in]:animate-rise group-[.in]:[animation-delay:450ms] motion-reduce:animate-none">
+      <div>
+        <div class="flex items-center gap-[14px] mb-[22px]">
+          <span class="w-5 h-5 rounded-[10px] bg-red5 text-[#ddd] font-medium text-[12px] flex items-center justify-center shrink-0">3</span>
+          <h3 class="font-semibold text-[26.5px] tracking-[-0.56px] text-[#e5e3dc]">Cinematic</h3>
         </div>
-
-        <div class="plus-wrap">
-          <div class="plus">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-
-        <div class="tcr">
-          <div class="l">
-            <div class="t">AI response rate</div>
-            <span class="p">98%</span>
-          </div>
-          <div class="bars">
-            <b style="height:40%"></b><b style="height:65%"></b><b class="hi" style="height:100%"></b>
-            <b style="height:55%"></b><b style="height:80%"></b>
-          </div>
-        </div>
-
-        <h3>AI Agents &amp; Bots</h3>
-        <p class="desc">Custom AI agent and chatbot interfaces for web services — conversational UI that feels human.</p>
-      </div>
-
-      <div class="card">
-        <div class="fc-cloud">
-          <div class="chip c1"><i></i>Admin</div>
-          <div class="chip c2"><i></i>Auth</div>
-          <div class="chip c3"><i></i>API</div>
-          <div class="fc-av">
-            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" /></svg>
-            <span class="badge">+</span>
-          </div>
-        </div>
-        <div class="fc-title">
-          <h3>Backend Panels</h3>
-          <p class="desc">Admin dashboards and backend interfaces that make complex systems simple to operate.</p>
+        <div class="svc-tags">
+          <span>Story</span><span>Direction</span><span>Sound</span><span>Grade</span><span>Brand Film</span>
         </div>
       </div>
+      <div class="flex flex-col gap-[26px]">
+        <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/1b6438a2-c62a-4534-b42f-2b4d99a03718.png" class="w-[226px] h-[127px] rounded-2xl object-cover">
+        <p class="text-[15.9px] leading-[1.41] tracking-[-0.32px] text-[#808080] max-w-[418px]">Big-idea brand films with real cinematic craft — story, sound and color grade that make a brand feel inevitable, not advertised.</p>
+      </div>
+    </div>
+
+    <div class="relative z-[1] grid grid-cols-[1fr_480px] max-[1100px]:grid-cols-1 gap-[clamp(24px,4vw,60px)] max-[1100px]:gap-[22px] py-9 border-t border-dashed border-[#4d4d4d] group-[.in]:animate-rise group-[.in]:[animation-delay:600ms] motion-reduce:animate-none">
+      <div>
+        <div class="flex items-center gap-[14px] mb-[22px]">
+          <span class="w-5 h-5 rounded-[10px] bg-red5 text-[#ddd] font-medium text-[12px] flex items-center justify-center shrink-0">4</span>
+          <h3 class="font-semibold text-[26.5px] tracking-[-0.56px] text-[#e5e3dc]">Social</h3>
+        </div>
+        <div class="svc-tags">
+          <span>Reels</span><span>Statics</span><span>Stories</span><span>Calendars</span><span>Content</span>
+        </div>
+        <a href="#contact" class="group/f mt-14 max-[1100px]:hidden bg-[#f1efed] text-black rounded-[144px] px-[30px] py-3 font-semibold text-[14px] inline-flex w-max transition-transform duration-200 hover:-translate-y-0.5">
+          <span class="flip-label">
+            <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Get in touch</span>
+            <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Get in touch</span>
+          </span>
+        </a>
+      </div>
+      <div class="flex flex-col gap-[26px]">
+        <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/29d743c5-6b35-4b15-be58-a02b9c227794.png" class="w-[226px] h-[127px] rounded-2xl object-cover">
+        <p class="text-[15.9px] leading-[1.41] tracking-[-0.32px] text-[#808080] max-w-[418px]">Always-on content systems — a monthly engine of reels, statics and stories delivered in one consistent, unmistakable brand voice.</p>
+      </div>
+      <a href="#contact" class="group/f hidden max-[1100px]:inline-flex w-max mt-2 bg-[#f1efed] text-black rounded-[144px] px-[30px] py-3 font-semibold text-[14px] transition-transform duration-200 hover:-translate-y-0.5">
+        <span class="flip-label">
+          <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Get in touch</span>
+          <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Get in touch</span>
+        </span>
+      </a>
     </div>
 
   </div>
+</section>
+
+<!-- ============================== OUR VALUES ============================== -->
+<section x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,120px)]">
+  <span class="eyebrow">Our Value</span>
+
+  <div class="flex items-end justify-between gap-6 mt-6 mb-[clamp(36px,4vw,56px)] max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-5">
+    <h2 class="font-semibold text-[clamp(28px,4.2vw,46px)] leading-[1.12] tracking-[-0.03em] [&>span]:inline-block group-[.in]:[&>span]:animate-word group-[.in]:[&>span]:[animation-delay:calc(120ms+var(--i)*55ms)] motion-reduce:[&>span]:animate-none">
+      <span class="[--i:0]">How</span> <span class="[--i:1]">we</span> <span class="[--i:2]">think</span><br><span class="[--i:3]">before</span> <span class="[--i:4]">we</span> <span class="[--i:5]">ever</span> <span class="[--i:6]">hit</span> <span class="[--i:7] text-red3 font-bold">Record</span><span class="[--i:8]">.</span>
+    </h2>
+    <!-- EXCEPTION 2a: magnetic button -->
+    <a href="#contact" x-data="magnet()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+       class="group/f shrink-0 h-[41px] px-[26px] border border-black rounded-[42px] inline-flex items-center justify-center font-semibold text-[14.9px] transition-[transform,box-shadow,background-color,color] duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:bg-black hover:text-white group-[.in]:animate-riseBack group-[.in]:[animation-delay:270ms] motion-reduce:animate-none">
+      <span class="flip-label">
+        <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Contact us now</span>
+        <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Contact us now</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-3 max-[1024px]:grid-cols-1 gap-[18px] mt-[clamp(36px,4vw,56px)] [perspective:1400px]">
+    <!-- EXCEPTION 2c: 3D tilt -->
+    <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+         class="bg-[#f2f2f2] rounded-[20px] p-[30px] min-h-[338px] flex flex-col relative overflow-hidden
+                after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+                transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                group-[.in]:animate-riseBack group-[.in]:[animation-delay:240ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/9aa56035-6ac6-45a9-9148-90d9a72b5158.svg" class="w-[54px] h-[54px] mb-auto">
+      <h3 class="font-semibold text-[22.3px] tracking-[-0.24px] mb-[14px]">Clear Vision</h3>
+      <p class="font-semibold text-[15px] leading-[1.4] text-[#3d3d3d]">We begin every campaign with a clear idea, aligning creative decisions with your brand purpose, audience, and the result you actually need.</p>
+    </div>
+
+    <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+         class="bg-[#f2f2f2] rounded-[20px] p-[30px] min-h-[338px] flex flex-col relative overflow-hidden
+                after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+                transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                group-[.in]:animate-riseBack group-[.in]:[animation-delay:390ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/386bed12-e8e9-491d-8303-b6d0b36b05fe.svg" class="w-[54px] h-[54px] mb-auto">
+      <h3 class="font-semibold text-[22.3px] tracking-[-0.24px] mb-[14px]">Quality Partnership</h3>
+      <p class="font-semibold text-[15px] leading-[1.4] text-[#3d3d3d]">We work closely with founders and teams, building open collaboration, honest communication, and a shared commitment to work that gets noticed.</p>
+    </div>
+
+    <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+         class="bg-[#f2f2f2] rounded-[20px] p-[30px] min-h-[338px] flex flex-col justify-start relative overflow-hidden
+                after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+                transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                group-[.in]:animate-riseBack group-[.in]:[animation-delay:540ms] motion-reduce:animate-none">
+      <!-- EXCEPTION 2d: count-up -->
+      <div class="flex items-baseline font-bold text-[64px] tracking-[-2.46px] leading-none"><span x-data="countUp(50,'','',false)" x-text="out">50</span><span class="font-semibold">+</span></div>
+      <div class="font-semibold text-[18.6px] mt-[14px] mb-auto">Ad variations per campaign</div>
+      <div class="relative h-[38px] my-4 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)] [-webkit-mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+        <div class="flex gap-[34px] items-center w-max animate-marquee2 motion-reduce:animate-none [&>img]:h-[26px] [&>img]:opacity-85">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/465f9b04-f36c-4a76-99eb-c1500a0096e8.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/98fe4143-5d78-43d6-bf43-6e0849ab3420.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/465f9b04-f36c-4a76-99eb-c1500a0096e8.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/98fe4143-5d78-43d6-bf43-6e0849ab3420.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/465f9b04-f36c-4a76-99eb-c1500a0096e8.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/98fe4143-5d78-43d6-bf43-6e0849ab3420.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/465f9b04-f36c-4a76-99eb-c1500a0096e8.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/98fe4143-5d78-43d6-bf43-6e0849ab3420.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/465f9b04-f36c-4a76-99eb-c1500a0096e8.svg">
+          <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/98fe4143-5d78-43d6-bf43-6e0849ab3420.svg">
+        </div>
+      </div>
+      <!-- EXCEPTION 2a: magnetic button -->
+      <a href="#studio" x-data="magnet()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+         class="group/f bg-red2 text-white rounded-[42px] px-6 py-2.5 font-semibold text-[15px] w-max transition-transform duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-0.5 relative z-[4]">
+        <span class="flip-label">
+          <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Learn About us</span>
+          <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Learn About us</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SHOWREEL ============================== -->
+<section x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,120px)]">
+  <div x-data="{ loaded:false }" x-bind:class="loaded && '[&::before]:opacity-0'"
+       class="group/s relative rounded-[32px] overflow-hidden h-[clamp(360px,59vw,852px)] bg-[#101012]
+              before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] before:bg-[length:200%_100%] before:animate-shimmer before:transition-opacity before:duration-500 motion-reduce:before:hidden
+              group-[.in]:animate-scaleIn motion-reduce:animate-none">
+    <!-- data-parallax: scroll-based only (permitted custom JS) -->
+    <img data-parallax="26" loading="lazy" decoding="async" alt="Showreel" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/9133e101-383e-4266-ad0c-93d172d88829.png" class="w-full h-full object-cover absolute inset-0">
+    <div class="absolute inset-0 z-[4] flex items-center justify-center gap-5 max-[640px]:flex-col max-[640px]:text-center">
+      <h2 class="text-white font-medium text-[clamp(28px,3.6vw,51.6px)] tracking-[-1.12px] [&>span]:inline-block group-[.in]:[&>span]:animate-word group-[.in]:[&>span]:[animation-delay:calc(var(--i)*40ms)] motion-reduce:[&>span]:animate-none"><span class="[--i:0]">P</span><span class="[--i:1]">l</span><span class="[--i:2]">a</span><span class="[--i:3]">y</span><span class="[--i:4]">&nbsp;</span><span class="[--i:5]">s</span><span class="[--i:6]">h</span><span class="[--i:7]">o</span><span class="[--i:8]">w</span><span class="[--i:9]">r</span><span class="[--i:10]">e</span><span class="[--i:11]">e</span><span class="[--i:12]">l</span></h2>
+      <span class="w-16 h-16 rounded-[32px] bg-black/60 flex items-center justify-center shrink-0 cursor-pointer transition-[transform,background-color] duration-[250ms] group-hover/s:scale-[1.08] group-hover/s:bg-black/75 animate-pulseRingDark motion-reduce:animate-none">
+        <svg viewBox="0 0 24 24" width="20" height="22" aria-hidden="true" class="ml-[3px]"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESULTS & REVIEWS ============================== -->
+<section x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(80px,10vw,130px)] text-center">
+  <span class="mx-auto inline-flex items-center gap-2 font-semibold text-[15px] text-ink before:content-[''] before:w-5 before:h-5 before:rounded-[10px] before:shrink-0 before:bg-[url('https://www.figma.com/api/mcp/asset/0a37e104-5585-4f45-a217-4f7a174a1d3d.png')] before:bg-cover before:bg-center before:bg-no-repeat group-[.in]:animate-rise motion-reduce:animate-none">Result &amp; Review</span>
+
+  <h2 class="font-semibold text-[clamp(28px,4.2vw,46px)] leading-[1.12] tracking-[-0.03em] mt-[22px] [&>span]:inline-block group-[.in]:[&>span]:animate-word group-[.in]:[&>span]:[animation-delay:calc(110ms+var(--i)*55ms)] motion-reduce:[&>span]:animate-none">
+    <span class="[--i:0]">How</span> <span class="[--i:1]">Brands</span><br><span class="[--i:2]">Work</span> <span class="[--i:3]">With</span> <span class="[--i:4] font-bold text-red2">AdGenSi</span>
+  </h2>
+  <p class="max-w-[502px] mx-auto mt-[22px] font-medium text-[18.6px] leading-[1.29] text-[#3d3d3d] group-[.in]:animate-rise group-[.in]:[animation-delay:220ms] motion-reduce:animate-none">See how ambitious brands and founders work with AdGenSi to launch cinematic campaigns that get noticed.</p>
+
+  <div class="grid grid-cols-3 max-[1024px]:grid-cols-1 gap-[18px] mt-[clamp(36px,4vw,56px)] text-left [perspective:1400px]">
+    <!-- EXCEPTION 2c: 3D tilt -->
+    <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::after]:opacity-0'"
+         class="relative h-[clamp(360px,31.7vw,456px)] rounded-[26px] overflow-hidden bg-[#101012]
+                after:content-[''] after:absolute after:inset-0 after:z-[1] after:pointer-events-none after:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] after:bg-[length:200%_100%] after:animate-shimmer after:transition-opacity after:duration-500 motion-reduce:after:hidden
+                before:content-[''] before:absolute before:inset-0 before:z-[3] before:pointer-events-none before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-300 before:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:before:opacity-100
+                transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                group-[.in]:animate-riseBack group-[.in]:[animation-delay:330ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/147473c9-5178-4f3c-a2d0-47cbd25d26db.png" class="w-full h-full object-cover absolute inset-0 group-[.in]:animate-ken18 motion-reduce:animate-none">
+      <div class="absolute inset-0 z-[2] pointer-events-none bg-[linear-gradient(to_top,rgba(3,3,3,.8),rgba(3,3,3,0)_46%)]"></div>
+      <div class="absolute left-0 right-0 bottom-[30px] text-center text-white z-[2]"><div class="font-semibold text-4xl tracking-[-0.84px]">DAYS</div><div class="font-medium text-[15px] mt-1.5">From Brief to first</div></div>
+    </div>
+
+    <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::after]:opacity-0'"
+         class="relative h-[clamp(360px,31.7vw,456px)] rounded-[26px] overflow-hidden bg-[#101012]
+                after:content-[''] after:absolute after:inset-0 after:z-[1] after:pointer-events-none after:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] after:bg-[length:200%_100%] after:animate-shimmer after:transition-opacity after:duration-500 motion-reduce:after:hidden
+                before:content-[''] before:absolute before:inset-0 before:z-[3] before:pointer-events-none before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-300 before:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:before:opacity-100
+                transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                group-[.in]:animate-riseBack group-[.in]:[animation-delay:450ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/35cb670a-bf31-45c7-9a54-5cae96409e9c.png" class="w-full h-full object-cover absolute inset-0 group-[.in]:animate-ken18 motion-reduce:animate-none">
+      <div class="absolute inset-0 z-[2] pointer-events-none bg-[linear-gradient(to_top,rgba(3,3,3,.8),rgba(3,3,3,0)_46%)]"></div>
+      <div class="absolute left-0 right-0 bottom-[30px] text-center text-white z-[2]"><div class="font-semibold text-4xl tracking-[-0.84px]">4K</div><div class="font-medium text-[15px] mt-1.5">Cinematic-grade Delivery</div></div>
+    </div>
+
+    <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()" x-bind:class="loaded && '[&::after]:opacity-0'"
+         class="relative h-[clamp(360px,31.7vw,456px)] rounded-[26px] overflow-hidden bg-[#101012]
+                after:content-[''] after:absolute after:inset-0 after:z-[1] after:pointer-events-none after:bg-[linear-gradient(100deg,#141416_30%,#232327_50%,#141416_70%)] after:bg-[length:200%_100%] after:animate-shimmer after:transition-opacity after:duration-500 motion-reduce:after:hidden
+                before:content-[''] before:absolute before:inset-0 before:z-[3] before:pointer-events-none before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-300 before:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:before:opacity-100
+                transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                group-[.in]:animate-riseBack group-[.in]:[animation-delay:570ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="" x-on:load="loaded=true" src="https://www.figma.com/api/mcp/asset/3e168228-9802-4ca5-8a89-150074a3b8fb.png" class="w-full h-full object-cover absolute inset-0 group-[.in]:animate-ken18 motion-reduce:animate-none">
+      <div class="absolute inset-0 z-[2] pointer-events-none bg-[linear-gradient(to_top,rgba(3,3,3,.8),rgba(3,3,3,0)_46%)]"></div>
+      <div class="absolute left-0 right-0 bottom-[30px] text-center text-white z-[2]"><div class="font-semibold text-4xl tracking-[-0.84px]">1 &rarr; &infin;</div><div class="font-medium text-[15px] mt-1.5">One idea, every format</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section id="faq" x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,120px)]">
+  <span class="eyebrow">FAQ</span>
+  <h2 class="font-semibold text-[clamp(28px,4.2vw,46px)] tracking-[-0.03em] leading-[1.12] mt-6 mb-[clamp(30px,4vw,48px)] group-[.in]:animate-rise group-[.in]:[animation-delay:110ms] motion-reduce:animate-none">Questions</h2>
+
+  <div class="grid grid-cols-[minmax(0,797px)_minmax(0,515px)] max-[1360px]:grid-cols-[minmax(0,1.548fr)_minmax(0,1fr)] max-[1024px]:grid-cols-[minmax(0,1fr)] gap-[clamp(24px,3vw,48px)] max-[1024px]:gap-[clamp(20px,3.4vw,32px)] items-start">
+
+    <div x-data="{ active:0 }" class="flex flex-col gap-[clamp(10px,1.1vw,12px)] min-w-0">
+      <div x-bind:class="active===0 ? 'bg-[#f4f4f4]' : 'bg-[#f2f2f2]'" class="rounded-[clamp(13px,2.4vw,16px)] overflow-hidden cursor-pointer transition-colors duration-300 min-w-0 group-[.in]:animate-rise group-[.in]:[animation-delay:220ms] motion-reduce:animate-none">
+        <button type="button" x-on:click="active = active===0 ? null : 0" x-bind:aria-expanded="active===0 ? 'true' : 'false'" aria-expanded="true"
+                class="flex items-center justify-between gap-[clamp(12px,3vw,20px)] w-full min-h-[56px] px-[clamp(16px,4.2vw,24px)] py-[clamp(15px,3.2vw,21px)] font-semibold text-[clamp(14px,3.9vw,15px)] leading-[1.38] text-ink text-left bg-transparent border-0 cursor-pointer [overflow-wrap:break-word] [-webkit-tap-highlight-color:transparent] [touch-action:manipulation] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red2 focus-visible:[outline-offset:-3px]">
+          Do you work with startups and new brands?
+          <span class="shrink-0 w-6 h-6 relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-[14px] before:h-[2px] before:bg-ink before:rounded-[2px] before:[transform:translate(-50%,-50%)] after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:w-[14px] after:h-[2px] after:bg-ink after:rounded-[2px] after:[transform:translate(-50%,-50%)_rotate(90deg)] after:transition-[transform,opacity] after:duration-[350ms] after:[transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:after:transition-none"
+                x-bind:class="active===0 && 'after:!rotate-0 after:!opacity-0'"></span>
+        </button>
+        <div x-bind:class="active===0 ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" class="grid transition-[grid-template-rows] duration-[400ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none">
+          <div x-bind:class="active===0 ? 'visible [transition-delay:0s]' : 'invisible'" class="overflow-hidden min-h-0 transition-[visibility] [transition-duration:0s] [transition-delay:400ms]">
+            <p class="px-[clamp(16px,4.2vw,24px)] pb-[clamp(16px,3.4vw,22px)] font-medium text-[clamp(14px,3.9vw,15px)] leading-[1.39] text-[#6e6e6e] max-w-[640px] [overflow-wrap:break-word]">Yes. From first-time launches to established brands, we shape the creative to your stage, budget and goal — so the work fits where you actually are.</p>
+          </div>
+        </div>
+      </div>
+
+      <div x-bind:class="active===1 ? 'bg-[#f4f4f4]' : 'bg-[#f2f2f2]'" class="bg-[#f2f2f2] rounded-[clamp(13px,2.4vw,16px)] overflow-hidden cursor-pointer transition-colors duration-300 min-w-0 group-[.in]:animate-rise group-[.in]:[animation-delay:310ms] motion-reduce:animate-none">
+        <button type="button" x-on:click="active = active===1 ? null : 1" x-bind:aria-expanded="active===1 ? 'true' : 'false'" aria-expanded="false"
+                class="flex items-center justify-between gap-[clamp(12px,3vw,20px)] w-full min-h-[56px] px-[clamp(16px,4.2vw,24px)] py-[clamp(15px,3.2vw,21px)] font-semibold text-[clamp(14px,3.9vw,15px)] leading-[1.38] text-ink text-left bg-transparent border-0 cursor-pointer [overflow-wrap:break-word] [-webkit-tap-highlight-color:transparent] [touch-action:manipulation] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red2 focus-visible:[outline-offset:-3px]">
+          How is your pricing structured for a campaign?
+          <span class="shrink-0 w-6 h-6 relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-[14px] before:h-[2px] before:bg-ink before:rounded-[2px] before:[transform:translate(-50%,-50%)] after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:w-[14px] after:h-[2px] after:bg-ink after:rounded-[2px] after:[transform:translate(-50%,-50%)_rotate(90deg)] after:transition-[transform,opacity] after:duration-[350ms] after:[transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:after:transition-none"
+                x-bind:class="active===1 && 'after:!rotate-0 after:!opacity-0'"></span>
+        </button>
+        <div x-bind:class="active===1 ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-[400ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none">
+          <div x-bind:class="active===1 ? 'visible [transition-delay:0s]' : 'invisible'" class="overflow-hidden min-h-0 transition-[visibility] [transition-duration:0s] [transition-delay:400ms]">
+            <p class="px-[clamp(16px,4.2vw,24px)] pb-[clamp(16px,3.4vw,22px)] font-medium text-[clamp(14px,3.9vw,15px)] leading-[1.39] text-[#6e6e6e] max-w-[640px] [overflow-wrap:break-word]">Pricing scales with scope — a single project has a flat rate, while ongoing work runs on a monthly retainer. You always get an exact quote after a short call, with no surprises.</p>
+          </div>
+        </div>
+      </div>
+
+      <div x-bind:class="active===2 ? 'bg-[#f4f4f4]' : 'bg-[#f2f2f2]'" class="bg-[#f2f2f2] rounded-[clamp(13px,2.4vw,16px)] overflow-hidden cursor-pointer transition-colors duration-300 min-w-0 group-[.in]:animate-rise group-[.in]:[animation-delay:400ms] motion-reduce:animate-none">
+        <button type="button" x-on:click="active = active===2 ? null : 2" x-bind:aria-expanded="active===2 ? 'true' : 'false'" aria-expanded="false"
+                class="flex items-center justify-between gap-[clamp(12px,3vw,20px)] w-full min-h-[56px] px-[clamp(16px,4.2vw,24px)] py-[clamp(15px,3.2vw,21px)] font-semibold text-[clamp(14px,3.9vw,15px)] leading-[1.38] text-ink text-left bg-transparent border-0 cursor-pointer [overflow-wrap:break-word] [-webkit-tap-highlight-color:transparent] [touch-action:manipulation] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red2 focus-visible:[outline-offset:-3px]">
+          How fast can we see a first creative concept?
+          <span class="shrink-0 w-6 h-6 relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-[14px] before:h-[2px] before:bg-ink before:rounded-[2px] before:[transform:translate(-50%,-50%)] after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:w-[14px] after:h-[2px] after:bg-ink after:rounded-[2px] after:[transform:translate(-50%,-50%)_rotate(90deg)] after:transition-[transform,opacity] after:duration-[350ms] after:[transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:after:transition-none"
+                x-bind:class="active===2 && 'after:!rotate-0 after:!opacity-0'"></span>
+        </button>
+        <div x-bind:class="active===2 ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-[400ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none">
+          <div x-bind:class="active===2 ? 'visible [transition-delay:0s]' : 'invisible'" class="overflow-hidden min-h-0 transition-[visibility] [transition-duration:0s] [transition-delay:400ms]">
+            <p class="px-[clamp(16px,4.2vw,24px)] pb-[clamp(16px,3.4vw,22px)] font-medium text-[clamp(14px,3.9vw,15px)] leading-[1.39] text-[#6e6e6e] max-w-[640px] [overflow-wrap:break-word]">Typically two to three business days. We move fast on the first direction using AI-assisted concepting, then refine with human craft until it's ready to produce.</p>
+          </div>
+        </div>
+      </div>
+
+      <div x-bind:class="active===3 ? 'bg-[#f4f4f4]' : 'bg-[#f2f2f2]'" class="bg-[#f2f2f2] rounded-[clamp(13px,2.4vw,16px)] overflow-hidden cursor-pointer transition-colors duration-300 min-w-0 group-[.in]:animate-rise group-[.in]:[animation-delay:490ms] motion-reduce:animate-none">
+        <button type="button" x-on:click="active = active===3 ? null : 3" x-bind:aria-expanded="active===3 ? 'true' : 'false'" aria-expanded="false"
+                class="flex items-center justify-between gap-[clamp(12px,3vw,20px)] w-full min-h-[56px] px-[clamp(16px,4.2vw,24px)] py-[clamp(15px,3.2vw,21px)] font-semibold text-[clamp(14px,3.9vw,15px)] leading-[1.38] text-ink text-left bg-transparent border-0 cursor-pointer [overflow-wrap:break-word] [-webkit-tap-highlight-color:transparent] [touch-action:manipulation] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red2 focus-visible:[outline-offset:-3px]">
+          What happens if the project scope changes midway?
+          <span class="shrink-0 w-6 h-6 relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-[14px] before:h-[2px] before:bg-ink before:rounded-[2px] before:[transform:translate(-50%,-50%)] after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:w-[14px] after:h-[2px] after:bg-ink after:rounded-[2px] after:[transform:translate(-50%,-50%)_rotate(90deg)] after:transition-[transform,opacity] after:duration-[350ms] after:[transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:after:transition-none"
+                x-bind:class="active===3 && 'after:!rotate-0 after:!opacity-0'"></span>
+        </button>
+        <div x-bind:class="active===3 ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-[400ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none">
+          <div x-bind:class="active===3 ? 'visible [transition-delay:0s]' : 'invisible'" class="overflow-hidden min-h-0 transition-[visibility] [transition-duration:0s] [transition-delay:400ms]">
+            <p class="px-[clamp(16px,4.2vw,24px)] pb-[clamp(16px,3.4vw,22px)] font-medium text-[clamp(14px,3.9vw,15px)] leading-[1.39] text-[#6e6e6e] max-w-[640px] [overflow-wrap:break-word]">We adjust with you. If the scope shifts, we re-align on deliverables and timeline up front — you approve any change before it affects the quote.</p>
+          </div>
+        </div>
+      </div>
+
+      <div x-bind:class="active===4 ? 'bg-[#f4f4f4]' : 'bg-[#f2f2f2]'" class="bg-[#f2f2f2] rounded-[clamp(13px,2.4vw,16px)] overflow-hidden cursor-pointer transition-colors duration-300 min-w-0 group-[.in]:animate-rise group-[.in]:[animation-delay:580ms] motion-reduce:animate-none">
+        <button type="button" x-on:click="active = active===4 ? null : 4" x-bind:aria-expanded="active===4 ? 'true' : 'false'" aria-expanded="false"
+                class="flex items-center justify-between gap-[clamp(12px,3vw,20px)] w-full min-h-[56px] px-[clamp(16px,4.2vw,24px)] py-[clamp(15px,3.2vw,21px)] font-semibold text-[clamp(14px,3.9vw,15px)] leading-[1.38] text-ink text-left bg-transparent border-0 cursor-pointer [overflow-wrap:break-word] [-webkit-tap-highlight-color:transparent] [touch-action:manipulation] focus-visible:outline focus-visible:outline-2 focus-visible:outline-red2 focus-visible:[outline-offset:-3px]">
+          Is there a minimum budget to start a project?
+          <span class="shrink-0 w-6 h-6 relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-[14px] before:h-[2px] before:bg-ink before:rounded-[2px] before:[transform:translate(-50%,-50%)] after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:w-[14px] after:h-[2px] after:bg-ink after:rounded-[2px] after:[transform:translate(-50%,-50%)_rotate(90deg)] after:transition-[transform,opacity] after:duration-[350ms] after:[transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:after:transition-none"
+                x-bind:class="active===4 && 'after:!rotate-0 after:!opacity-0'"></span>
+        </button>
+        <div x-bind:class="active===4 ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-[400ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] motion-reduce:transition-none">
+          <div x-bind:class="active===4 ? 'visible [transition-delay:0s]' : 'invisible'" class="overflow-hidden min-h-0 transition-[visibility] [transition-duration:0s] [transition-delay:400ms]">
+            <p class="px-[clamp(16px,4.2vw,24px)] pb-[clamp(16px,3.4vw,22px)] font-medium text-[clamp(14px,3.9vw,15px)] leading-[1.39] text-[#6e6e6e] max-w-[640px] [overflow-wrap:break-word]">Every package is shaped to your scope and production needs. Book a call and we'll recommend the smallest sensible starting point for the outcome you want.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXCEPTION 2c: 3D tilt -->
+    <aside x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+           class="bg-[#f2f2f2] rounded-[clamp(16px,2.6vw,20px)] p-[clamp(22px,2.6vw,30px)] self-stretch min-w-0
+                  max-[1024px]:grid max-[1024px]:grid-cols-[auto_minmax(0,1fr)] max-[1024px]:[grid-template-areas:'avatar_head''body_body''btn_btn'] max-[1024px]:gap-x-[clamp(16px,2.4vw,22px)] max-[1024px]:items-center
+                  max-[480px]:grid-cols-[minmax(0,1fr)] max-[480px]:[grid-template-areas:'avatar''head''body''btn']
+                  transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                  group-[.in]:animate-rise group-[.in]:[animation-delay:670ms] motion-reduce:animate-none">
+      <img loading="lazy" decoding="async" alt="AdGenSi team" src="https://www.figma.com/api/mcp/asset/587118b8-7075-4592-a2b3-a06fd0080948.png"
+           class="w-[clamp(52px,11vw,64px)] h-[clamp(52px,11vw,64px)] rounded-[45px] object-cover mb-[clamp(26px,4vw,52px)] max-[1024px]:[grid-area:avatar] max-[1024px]:mb-0 max-[480px]:mb-[clamp(16px,4vw,22px)]">
+      <h3 class="font-semibold text-[clamp(22px,2.1vw,29.6px)] leading-[1.19] tracking-[-0.32px] mb-[18px] max-[1024px]:[grid-area:head] max-[1024px]:mb-0">Have questions?<br>Book a strategy call.</h3>
+      <p class="font-semibold text-[15px] leading-[1.39] text-[#6e6e6e] mb-[clamp(26px,3vw,40px)] max-[1024px]:[grid-area:body] max-[1024px]:mt-[clamp(18px,2.6vw,24px)] max-[1024px]:mb-[clamp(20px,3vw,28px)]"><span class="text-ink">Talk with our team about </span>your product, brand, your campaign, and how we would make it stop the scroll.</p>
+      <a href="#contact" class="group/f inline-flex items-center justify-center text-center max-w-full bg-red2 text-white rounded-[42px] px-[26px] py-2.5 font-semibold text-[14.9px] transition-transform duration-200 [@media(hover:hover)]:hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-ink focus-visible:[outline-offset:3px] max-[1024px]:[grid-area:btn] max-[1024px]:justify-self-start max-[1024px]:min-h-[46px] max-[1024px]:px-[26px] max-[1024px]:py-3 max-[480px]:w-full max-[480px]:justify-self-stretch relative z-[4]">
+        <span class="flip-label">
+          <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Start Conversation</span>
+          <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Start Conversation</span>
+        </span>
+      </a>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================== PRICING ============================== -->
+<section x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,120px)]">
+  <!-- EXCEPTION 2e: cursor spotlight -->
+  <div x-data="spot()" x-on:pointermove="move($event)"
+       class="relative bg-black rounded-[26px] overflow-hidden py-[clamp(40px,6vw,80px)] px-[clamp(24px,4vw,64px)]
+              before:content-[''] before:absolute before:inset-0 before:z-0 before:pointer-events-none before:rounded-[inherit] before:opacity-70 before:transition-opacity before:duration-[400ms] before:bg-[radial-gradient(500px_circle_at_var(--sx,-200px)_var(--sy,-200px),rgba(255,42,32,.18),transparent_55%)] motion-reduce:before:hidden">
+
+    <h2 class="relative z-[1] font-semibold text-white text-[clamp(72px,15vw,222px)] tracking-[-0.022em] leading-none text-center mb-0 [&>span]:inline-block group-[.in]:[&>span]:animate-char group-[.in]:[&>span]:[animation-delay:calc(var(--i)*40ms)] motion-reduce:[&>span]:animate-none"><span class="[--i:0]">P</span><span class="[--i:1]">r</span><span class="[--i:2]">i</span><span class="[--i:3]">c</span><span class="[--i:4]">i</span><span class="[--i:5]">n</span><span class="[--i:6]">g</span></h2>
+
+    <div class="relative z-[2] grid grid-cols-[repeat(2,minmax(0,468px))] max-[1024px]:grid-cols-1 max-[1024px]:max-w-[468px] gap-6 justify-center mt-[clamp(-100px,-6vw,-40px)] max-[1024px]:mt-0 max-[1024px]:mx-auto [perspective:1400px]">
+
+      <!-- EXCEPTION 2c: 3D tilt -->
+      <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+           class="relative rounded-[40px] pt-[33px] px-12 pb-12 bg-[linear-gradient(to_bottom,rgba(0,0,0,.5)_49%,rgba(41,41,41,.7))] [backdrop-filter:blur(8px)] [-webkit-backdrop-filter:blur(8px)] shadow-[inset_0_5px_3px_-3px_rgba(255,255,255,.41),inset_0_4px_20px_-5px_#4e4e4e] text-white
+                  after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+                  transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                  group-[.in]:animate-riseBack group-[.in]:[animation-delay:120ms] motion-reduce:animate-none">
+        <span class="absolute right-12 top-[33px] font-medium text-[14px] tracking-[-0.32px] text-[#b6b6b6] uppercase">Affordable</span>
+        <div class="font-medium text-[29.6px] tracking-[-0.64px] mb-6">Affordable</div>
+        <div class="flex items-start gap-0.5">
+          <span class="font-semibold text-2xl mt-1.5">$</span>
+          <span class="font-semibold text-[60px] tracking-[-0.32px] leading-none bg-[linear-gradient(133deg,#fff,#353535)] [-webkit-background-clip:text] [background-clip:text] text-transparent">1,200</span>
+          <span class="self-end text-[15.6px] text-[#666] mb-2 ml-1.5">/project</span>
+        </div>
+        <ul class="list-none my-[26px] flex flex-col gap-4 [&>li]:flex [&>li]:items-center [&>li]:gap-3 [&>li]:font-medium [&>li]:text-[15.8px] [&>li]:tracking-[-0.32px] [&>li]:text-[#b6b6b6] group-[.in]:[&>li]:animate-rise motion-reduce:[&>li]:animate-none">
+          <li class="group-[.in]:[animation-delay:240ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>AI creative concepts<span class="text-[#707070]">, + 2 Directions</span></span></li>
+          <li class="group-[.in]:[animation-delay:295ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Dedicated <span class="text-[#707070]">creative lead</span></span></li>
+          <li class="group-[.in]:[animation-delay:350ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Average 2–3 day<span class="text-[#707070]"> first concept</span></span></li>
+          <li class="group-[.in]:[animation-delay:405ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Ongoing <span class="text-[#707070]">revisions to final cut</span></span></li>
+          <li class="group-[.in]:[animation-delay:460ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Delivered in every<span class="text-[#707070]">, format you need</span></span></li>
+        </ul>
+        <div class="flex items-center gap-[14px] mt-2 mb-[26px] before:content-[''] before:flex-1 before:border-t before:border-dashed before:border-[#4d4d4d] after:content-[''] after:flex-1 after:border-t after:border-dashed after:border-[#4d4d4d]"><span class="text-base tracking-[-0.32px] text-[#808080] whitespace-nowrap">1-2 week delivery</span></div>
+        <a href="#contact" class="block text-center rounded-[18px] p-[23px] font-medium text-base mb-[22px] bg-white/[.04] text-white shadow-[inset_0_0_7px_rgba(255,255,255,.28),0_16px_20px_rgba(0,0,0,.4)] transition-transform duration-200 hover:-translate-y-0.5 relative z-[4]">Learn more</a>
+        <p class="text-center text-[14px] tracking-[-0.32px] text-[#808080]">Not happy with the concept? No charge.</p>
+      </div>
+
+      <div x-data="tilt()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+           class="relative rounded-[40px] pt-[33px] px-12 pb-12 bg-[linear-gradient(to_bottom,rgba(0,0,0,.5)_49%,rgba(41,41,41,.7))] [backdrop-filter:blur(8px)] [-webkit-backdrop-filter:blur(8px)] shadow-[inset_0_5px_3px_-3px_rgba(255,255,255,.41),inset_0_4px_20px_-5px_#4e4e4e] text-white
+                  after:content-[''] after:absolute after:inset-0 after:z-[3] after:pointer-events-none after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-300 after:bg-[radial-gradient(320px_circle_at_var(--mx,50%)_var(--my,50%),rgba(255,255,255,.28),transparent_60%)] hover:after:opacity-100
+                  transition-[transform,box-shadow] duration-[350ms] [transition-timing-function:cubic-bezier(.22,.61,.36,1)] [transform:perspective(1400px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))] motion-reduce:[transform:none]
+                  group-[.in]:animate-riseBack group-[.in]:[animation-delay:175ms] motion-reduce:animate-none">
+        <span class="absolute right-12 top-[33px] font-medium text-[14px] tracking-[-0.32px] text-[#b6b6b6] uppercase">Popular</span>
+        <div class="font-medium text-[29.6px] tracking-[-0.64px] mb-6">Pro</div>
+        <div class="flex items-start gap-0.5">
+          <span class="font-semibold text-2xl mt-1.5">$</span>
+          <span class="font-semibold text-[60px] tracking-[-0.32px] leading-none bg-[linear-gradient(133deg,#fff,#353535)] [-webkit-background-clip:text] [background-clip:text] text-transparent">3,400</span>
+          <span class="self-end text-[15.6px] text-[#666] mb-2 ml-1.5">/monthly</span>
+        </div>
+        <ul class="list-none my-[26px] flex flex-col gap-4 [&>li]:flex [&>li]:items-center [&>li]:gap-3 [&>li]:font-medium [&>li]:text-[15.8px] [&>li]:tracking-[-0.32px] [&>li]:text-[#b6b6b6] group-[.in]:[&>li]:animate-rise motion-reduce:[&>li]:animate-none">
+          <li class="group-[.in]:[animation-delay:240ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Unlimited campaigns<span class="text-[#707070]">, one at a time</span></span></li>
+          <li class="group-[.in]:[animation-delay:295ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Direct <span class="text-[#707070]">slack channel &amp; fast replies</span></span></li>
+          <li class="group-[.in]:[animation-delay:350ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Priority 48h<span class="text-[#707070]"> turnaround</span></span></li>
+          <li class="group-[.in]:[animation-delay:405ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Cinematic <span class="text-[#707070]">brand film each quarter</span></span></li>
+          <li class="group-[.in]:[animation-delay:460ms]"><span class="w-[18px] h-[18px] shrink-0 rounded-full bg-red5 flex items-center justify-center"><svg viewBox="0 0 12 12" fill="none" class="w-2.5 h-2.5"><path d="M2 6.5L5 9L10 3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Full creative + production<span class="text-[#707070]"> covered</span></span></li>
+        </ul>
+        <div class="flex items-center gap-[14px] mt-2 mb-[26px] before:content-[''] before:flex-1 before:border-t before:border-dashed before:border-[#4d4d4d] after:content-[''] after:flex-1 after:border-t after:border-dashed after:border-[#4d4d4d]"><span class="text-base tracking-[-0.32px] text-[#808080] whitespace-nowrap">Monthly retainer</span></div>
+        <a href="#contact" class="block text-center rounded-[18px] p-[23px] font-medium text-base mb-[22px] bg-[#f8f7f3] text-black shadow-[0_16px_10px_rgba(0,0,0,.4)] transition-transform duration-200 hover:-translate-y-0.5 relative z-[4]">Learn more</a>
+        <p class="text-center text-[14px] tracking-[-0.32px] text-[#808080]">Pause or cancel anytime.</p>
+      </div>
+    </div>
+
+    <p class="relative z-[1] max-w-[477px] mx-auto mt-[clamp(30px,4vw,54px)] text-center font-medium text-[14px] tracking-[-0.32px] text-[#808080] group-[.in]:animate-rise group-[.in]:[animation-delay:360ms] motion-reduce:animate-none">Every package is shaped to your scope, formats and production needs. Prices shown are indicative — book a call for an exact quote.</p>
+  </div>
+</section>
+
+<!-- ============================== CONTACT ============================== -->
+<section id="contact" x-data="reveal()" class="group w-full max-w-site mx-auto px-6 max-[640px]:px-[18px] pt-[clamp(70px,9vw,120px)]">
+  <div class="text-center pb-[33px] border-b border-[#e3e3e3] group-[.in]:animate-blurIn motion-reduce:animate-none">
+    <h2 class="font-semibold text-[clamp(28px,4.2vw,46px)] tracking-[-0.03em] leading-[1.12]">Let’s Talk</h2>
+  </div>
+
+  <div class="bg-[#f5f5f5] rounded-2xl mt-[clamp(28px,3vw,40px)] p-[clamp(28px,3vw,40px)] grid grid-cols-[1fr_1px_1fr] max-[1024px]:grid-cols-1 gap-[clamp(28px,3.5vw,48px)]">
+
+    <div class="group-[.in]:animate-rise group-[.in]:[animation-delay:110ms] motion-reduce:animate-none">
+      <h3 class="font-semibold text-2xl tracking-[-1px] text-[#111] mb-5">Follow us</h3>
+      <div class="flex gap-3 [&>a]:w-[43px] [&>a]:h-12 [&>a]:bg-white [&>a]:rounded-md [&>a]:flex [&>a]:items-center [&>a]:justify-center [&>a]:transition-transform [&>a]:duration-200 [&>a:hover]:-translate-y-0.5 [&_svg]:w-[22px] [&_svg]:h-[22px] [&_svg]:fill-[#111]">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.86s-.01 3.6-.07 4.86c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.9.07s-3.63-.01-4.9-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.22 2.2 12s.01-3.6.07-4.86c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.46 2.21 8.84 2.2 12 2.2zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.7.32-.43.16-.73.36-1.05.68-.32.32-.52.62-.68 1.05-.13.32-.28.8-.32 1.7C3.25 8.86 3.24 9.2 3.24 12s.01 3.14.07 4.38c.04.9.19 1.38.32 1.7.16.43.36.73.68 1.05.32.32.62.52 1.05.68.32.13.8.28 1.7.32 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.7-.32.43-.16.73-.36 1.05-.68.32-.32.52-.62.68-1.05.13-.32.28-.8.32-1.7.06-1.24.07-1.59.07-4.38s-.01-3.14-.07-4.38c-.04-.9-.19-1.38-.32-1.7a2.8 2.8 0 0 0-.68-1.05 2.8 2.8 0 0 0-1.05-.68c-.32-.13-.8-.28-1.7-.32C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 17a4.94 4.94 0 0 1 0-9.88zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28zm5.15-.72a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21H9z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.1 8.1L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.6-8.7L1.7 2h6.8l4.7 6.2L18.9 2zm-1.16 18h1.83L7.3 3.9H5.34z"/></svg></a>
+      </div>
+      <hr class="border-0 border-t border-[#e3e3e3] my-7">
+      <div class="grid grid-cols-[170px_1fr] max-[640px]:grid-cols-1 gap-6 items-start">
+        <img loading="lazy" decoding="async" alt="" src="https://www.figma.com/api/mcp/asset/cba13b31-6c6e-48a7-883e-0b1a5498621a.png" class="w-[170px] max-[640px]:w-full max-[640px]:max-w-[220px] h-[240px] rounded-[4px] object-cover">
+        <div>
+          <h3 class="font-semibold text-2xl tracking-[-1px] text-[#111] mb-[18px]">What we offer</h3>
+          <ul class="list-none flex flex-col gap-4 [&>li]:flex [&>li]:items-center [&>li]:gap-[14px] [&>li]:text-base [&>li]:tracking-[-0.32px] [&>li]:text-[#5d5d5d] [&>li]:before:content-[''] [&>li]:before:w-[6px] [&>li]:before:h-[10px] [&>li]:before:rounded-[2px] [&>li]:before:bg-red6 [&>li]:before:shrink-0">
+            <li>AI Creative</li><li>Video Ads</li><li>Cinematic Films</li><li>Social Systems</li><li>Creative Automation</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-0 border-t border-[#e3e3e3] my-7">
+      <div class="grid grid-cols-2 max-[640px]:grid-cols-1 gap-6">
+        <div><h3 class="font-semibold text-2xl tracking-[-1px] text-[#111] mb-5">E-Mail</h3><div class="font-medium text-[17px] tracking-[-0.32px] text-[#5d5d5d] mt-2">hello@adgensi.com</div></div>
+        <div><h3 class="font-semibold text-2xl tracking-[-1px] text-[#111] mb-5">Office</h3><div class="font-medium text-[17px] tracking-[-0.32px] text-[#5d5d5d] mt-2">Karachi, Pakistan / Working with brands worldwide</div></div>
+      </div>
+    </div>
+
+    <div class="bg-[#e3e3e3] w-px max-[1024px]:hidden"></div>
+
+    <!-- Alpine form: x-model + x-on:submit.prevent -->
+    <form x-data="contactForm()" x-on:submit.prevent="submit()" novalidate class="group-[.in]:animate-rise group-[.in]:[animation-delay:110ms] motion-reduce:animate-none">
+      <h3 class="font-semibold text-2xl tracking-[-1px] text-[#111] mb-1.5">Got a question.</h3>
+      <p class="text-base tracking-[-0.32px] text-[#5d5d5d] pb-6 border-b border-[#e3e3e3] mb-6">Fill out the form — we’ll get back to you shortly.</p>
+      <input x-model="name"    type="text"  placeholder="Full Name"    class="w-full bg-white border border-[#eaeaea] rounded-xl px-5 py-[21px] font-[inherit] text-base text-[#111] mb-3 placeholder:text-[#5d5d5d] focus:outline-none focus:border-red6 focus:shadow-[0_0_0_4px_rgba(243,53,12,.12)] group-[.in]:animate-rise group-[.in]:[animation-delay:220ms] motion-reduce:animate-none">
+      <input x-model="email"   type="email" placeholder="E-Mail"       class="w-full bg-white border border-[#eaeaea] rounded-xl px-5 py-[21px] font-[inherit] text-base text-[#111] mb-3 placeholder:text-[#5d5d5d] focus:outline-none focus:border-red6 focus:shadow-[0_0_0_4px_rgba(243,53,12,.12)] group-[.in]:animate-rise group-[.in]:[animation-delay:290ms] motion-reduce:animate-none">
+      <input x-model="company" type="text"  placeholder="Company name" class="w-full bg-white border border-[#eaeaea] rounded-xl px-5 py-[21px] font-[inherit] text-base text-[#111] mb-3 placeholder:text-[#5d5d5d] focus:outline-none focus:border-red6 focus:shadow-[0_0_0_4px_rgba(243,53,12,.12)] group-[.in]:animate-rise group-[.in]:[animation-delay:360ms] motion-reduce:animate-none">
+      <textarea x-model="message" placeholder="Test Message" class="w-full bg-white border border-[#eaeaea] rounded-xl px-5 py-[21px] font-[inherit] text-base text-[#111] mb-3 min-h-[140px] resize-y placeholder:text-[#5d5d5d] focus:outline-none focus:border-red6 focus:shadow-[0_0_0_4px_rgba(243,53,12,.12)] group-[.in]:animate-rise group-[.in]:[animation-delay:430ms] motion-reduce:animate-none"></textarea>
+      <!-- EXCEPTION 2a: magnetic button -->
+      <button type="submit" x-data="magnet()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+              class="group/f w-full bg-red6 text-white border-0 rounded-xl p-[15px] font-[inherit] font-semibold text-base cursor-pointer transition-[transform,filter] duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:brightness-105 group-[.in]:animate-rise group-[.in]:[animation-delay:500ms] motion-reduce:animate-none">
+        <span class="flip-label">
+          <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Submit</span>
+          <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Submit</span>
+        </span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ============================== FOOTER ============================== -->
+<footer x-data="reveal()" class="group relative bg-[#0a0a0a] text-white rounded-t-2xl mt-[clamp(70px,9vw,120px)] pt-[clamp(60px,7vw,90px)] px-[clamp(24px,3vw,41px)] pb-0 overflow-hidden">
+  <div aria-hidden="true" class="absolute left-1/2 -bottom-[8%] w-[92%] h-[62%] -translate-x-1/2 opacity-0 z-0 pointer-events-none blur-[34px] transition-opacity duration-[1100ms] bg-[radial-gradient(ellipse_at_center,rgba(255,19,18,.20),transparent_62%)] group-[.in]:opacity-50 group-[.in]:animate-footGlow motion-reduce:hidden"></div>
+  <div class="relative z-[1] w-full max-w-site mx-auto">
+    <div class="grid grid-cols-[1fr_auto] max-[1024px]:grid-cols-1 gap-10">
+      <div>
+        <h2 class="font-semibold text-[clamp(28px,4.2vw,46px)] leading-[1.12] tracking-[-0.03em] text-[#6e6e6e] max-w-[560px] [&>span]:inline-block [&>b]:inline-block [&>b]:text-white [&>b]:font-semibold group-[.in]:[&>span]:animate-word group-[.in]:[&>b]:animate-word group-[.in]:[&>span]:[animation-delay:calc(var(--i)*55ms)] group-[.in]:[&>b]:[animation-delay:calc(var(--i)*55ms)] motion-reduce:[&>span]:animate-none motion-reduce:[&>b]:animate-none">
+          <span class="[--i:0]">Let’s</span> <span class="[--i:1]">Create</span> <b class="[--i:2]">Something Worth Stopping For.</b>
+        </h2>
+        <!-- EXCEPTION 2a: magnetic button -->
+        <a href="#contact" x-data="magnet()" x-on:pointermove="move($event)" x-on:pointerleave="leave()"
+           class="group/f relative overflow-hidden mt-7 bg-[#f2f2f2] text-ink rounded-[42px] px-[26px] py-2.5 font-semibold text-[15px] inline-flex w-max transition-transform duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-0.5
+                  after:content-[''] after:absolute after:top-0 after:-left-[70%] after:w-[45%] after:h-full after:pointer-events-none after:[transform:skewX(-20deg)] after:bg-[linear-gradient(120deg,transparent,rgba(255,255,255,.85),transparent)] hover:after:animate-footShine motion-reduce:after:hidden
+                  group-[.in]:animate-rise group-[.in]:[animation-delay:120ms] motion-reduce:animate-none">
+          <span class="flip-label">
+            <span class="group-hover/f:-translate-y-[115%] motion-reduce:group-hover/f:translate-y-0">Start a project</span>
+            <span aria-hidden="true" class="translate-y-[115%] group-hover/f:translate-y-0 motion-reduce:hidden">Start a project</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-[auto_auto] max-[640px]:grid-cols-2 gap-y-9 gap-x-[60px]
+                  [&_h4]:font-semibold [&_h4]:text-[13px] [&_h4]:text-[#9b9b9b] [&_h4]:mb-[14px]
+                  [&_a]:block [&_a]:font-semibold [&_a]:text-[15px] [&_a]:text-white [&_a]:mb-1.5 [&_a]:relative [&_a]:transition-[color,transform] [&_a]:duration-[250ms] [&_a:hover]:text-red1 [&_a:hover]:translate-x-[9px]
+                  [&_a]:before:content-[''] [&_a]:before:absolute [&_a]:before:-left-[14px] [&_a]:before:top-1/2 [&_a]:before:w-0 [&_a]:before:h-[2px] [&_a]:before:rounded-[2px] [&_a]:before:bg-red1 [&_a]:before:-translate-y-1/2 [&_a]:before:transition-[width] [&_a]:before:duration-[250ms] [&_a:hover]:before:w-[9px]
+                  [&_p]:block [&_p]:font-semibold [&_p]:text-[15px] [&_p]:text-white [&_p]:mb-1.5
+                  group-[.in]:[&>div]:animate-rise motion-reduce:[&>div]:animate-none">
+        <div class="group-[.in]:[animation-delay:240ms]"><h4>Social</h4><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Youtube</a></div>
+        <div class="group-[.in]:[animation-delay:330ms]"><h4>Support</h4><a href="mailto:hello@adgensi.com">hello@adgensi.com</a></div>
+        <div class="group-[.in]:[animation-delay:420ms]"><h4>Head Quarter</h4><p>Karachi, Pakistan / Working with brands worldwide</p></div>
+        <div class="group-[.in]:[animation-delay:510ms]"><h4>Utility</h4><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Style Guide</a><a href="#">License</a><a href="#">Change Log</a></div>
+        <div class="group-[.in]:[animation-delay:600ms]"><h4>Company</h4><a href="#studio">About</a><a href="#work">Work</a><a href="#">Services</a><a href="#">FAQ</a><a href="#contact">Contact</a></div>
+      </div>
+    </div>
+
+    <div class="mt-[clamp(40px,5vw,70px)] font-semibold text-[14.9px] text-[#9b9b9b] group-[.in]:animate-rise group-[.in]:[animation-delay:480ms] motion-reduce:animate-none">© 2026 AdGenSi. All rights reserved.</div>
+
+    <div class="group/word font-bold text-[clamp(64px,17.6vw,253px)] tracking-[-0.032em] leading-none text-white text-center mt-2.5 translate-y-[18%] whitespace-nowrap
+                [&>span]:inline-block [&>span]:cursor-default [&>span]:transition-[transform,color] [&>span]:duration-[450ms] [&>span]:[transition-timing-function:cubic-bezier(.34,1.56,.64,1)] [&>span]:[transition-delay:calc(var(--i)*22ms)]
+                group-hover/word:[&>span]:-translate-y-[12%] [&>span:hover]:text-red1
+                group-[.in]:[&>span]:animate-foot group-[.in]:[&>span]:[animation-delay:calc(600ms+var(--i)*40ms)] motion-reduce:[&>span]:animate-none motion-reduce:[&>span]:transition-none">
+      <span class="[--i:0]">A</span><span class="[--i:1]">d</span><span class="[--i:2]">G</span><span class="[--i:3]">e</span><span class="[--i:4]">n</span><span class="[--i:5]">S</span><span class="[--i:6]">i</span>
+    </div>
+  </div>
+</footer>
+
+<!-- scroll progress indicator (permitted custom JS) -->
+<div id="progress" class="fixed top-0 left-0 right-0 h-[3px] scale-x-0 origin-[0_50%] z-[200] pointer-events-none bg-[linear-gradient(90deg,#ff1312,#ff6a3d)] shadow-[0_0_12px_rgba(255,19,18,.5)] motion-reduce:hidden"></div>
+
+<!-- ============================================================
+     Single inline script — Alpine component registrations
+     + the two permitted custom-JS effects (scroll progress, scroll parallax).
+     ============================================================ -->
+<script>
+(function () {
+  var REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  document.addEventListener('alpine:init', function () {
+
+    /* scroll-reveal: adds .in so the group-[.in]: utilities fire. Failsafe at 2600ms. */
+    Alpine.data('reveal', function () {
+      return {
+        init: function () {
+          var el = this.$el, show = function () { el.classList.add('in'); };
+          if (REDUCE || !('IntersectionObserver' in window)) { show(); return; }
+          var io = new IntersectionObserver(function (es) {
+            if (es[0].isIntersecting) { show(); io.disconnect(); }
+          }, { threshold: 0, rootMargin: '0px 0px 140px 0px' });
+          io.observe(el);
+          setTimeout(show, 2600);
+        }
+      };
+    });
+
+    /* EXCEPTION 2c — 3D tilt on hover (also carries the lazy-image `loaded` flag) */
+    Alpine.data('tilt', function () {
+      return {
+        loaded: false,
+        move: function (e) {
+          if (REDUCE || !this.$el.classList.contains('in') && !this.$el.closest('.in')) return;
+          var r = this.$el.getBoundingClientRect(),
+              px = (e.clientX - r.left) / r.width - 0.5,
+              py = (e.clientY - r.top) / r.height - 0.5;
+          this.$el.style.setProperty('--rx', (-py * 7).toFixed(2) + 'deg');
+          this.$el.style.setProperty('--ry', (px * 7).toFixed(2) + 'deg');
+          this.$el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+          this.$el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+        },
+        leave: function () {
+          this.$el.style.setProperty('--rx', '0deg');
+          this.$el.style.setProperty('--ry', '0deg');
+        }
+      };
+    });
+
+    /* EXCEPTION 2e — cursor spotlight on dark panels */
+    Alpine.data('spot', function () {
+      return {
+        move: function (e) {
+          if (REDUCE) return;
+          var r = this.$el.getBoundingClientRect();
+          this.$el.style.setProperty('--sx', (e.clientX - r.left) + 'px');
+          this.$el.style.setProperty('--sy', (e.clientY - r.top) + 'px');
+        }
+      };
+    });
+
+    /* EXCEPTION 2a — magnetic buttons */
+    Alpine.data('magnet', function () {
+      return {
+        move: function (e) {
+          if (REDUCE) return;
+          var r = this.$el.getBoundingClientRect();
+          this.$el.style.transform =
+            'translate(' + ((e.clientX - r.left - r.width / 2) * 0.25) + 'px,' +
+                           ((e.clientY - r.top - r.height / 2) * 0.35) + 'px)';
+        },
+        leave: function () { this.$el.style.transform = ''; }
+      };
+    });
+
+    /* EXCEPTION 2b — hero reel pointer tilt */
+    Alpine.data('reelTilt', function () {
+      return {
+        move: function (e) {
+          if (REDUCE) return;
+          var r = this.$el.getBoundingClientRect();
+          this.$el.style.setProperty('--tilt', (((e.clientX - r.left) / r.width - 0.5) * 4).toFixed(2) + 'deg');
+        },
+        leave: function () { this.$el.style.setProperty('--tilt', '0deg'); }
+      };
+    });
+
+    /* EXCEPTION 2d — count-up numbers */
+    Alpine.data('countUp', function (target, pre, post, comma) {
+      return {
+        out: pre + (comma ? target.toLocaleString('en-US') : target) + post,
+        init: function () {
+          if (REDUCE || !('IntersectionObserver' in window)) return;
+          var self = this, el = this.$el;
+          var io = new IntersectionObserver(function (es) {
+            if (!es[0].isIntersecting) return;
+            io.disconnect();
+            var start = null, dur = 1600;
+            (function tick(t) {
+              if (!start) start = t;
+              var p = Math.min((t - start) / dur, 1), e = 1 - Math.pow(1 - p, 3),
+                  n = Math.round(target * e);
+              self.out = pre + (comma ? n.toLocaleString('en-US') : n) + post;
+              if (p < 1) requestAnimationFrame(tick);
+            })(performance.now());
+          }, { threshold: 0 });
+          io.observe(el);
+        }
+      };
+    });
+
+    /* contact form */
+    Alpine.data('contactForm', function () {
+      return {
+        name: '', email: '', company: '', message: '',
+        submit: function () {
+          /* No endpoint wired — point this at your handler. */
+          console.log({ name: this.name, email: this.email, company: this.company, message: this.message });
+        }
+      };
+    });
+  });
+
+  if (REDUCE) return;
+
+  /* ---- permitted custom JS: scroll progress + scroll-based parallax ---- */
+  var bar = document.getElementById('progress');
+  var pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var st = window.pageYOffset, h = document.documentElement.scrollHeight - innerHeight;
+      if (bar) bar.style.transform = 'scaleX(' + (h > 0 ? st / h : 0) + ')';
+      for (var i = 0; i < pxEls.length; i++) {
+        var el = pxEls[i], depth = parseFloat(el.dataset.parallax) || 0, r = el.getBoundingClientRect();
+        var mid = r.top + r.height / 2 - innerHeight / 2;
+        el.style.transform = 'translate3d(0,' + (-(mid / innerHeight) * depth) + 'px,0) scale(1.06)';
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
 </body>
 </html>
